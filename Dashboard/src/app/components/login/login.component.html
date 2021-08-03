@@ -1,0 +1,28 @@
+<div class="body"> 
+    <div class="login"> 
+        <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
+            <img src="./assets/img/user.png" width="35%">
+            <h1>Inicio de sesión</h1>
+            <mat-error *ngIf="loginInvalid">
+                The username and password were not recognized
+            </mat-error>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" autofocus="on" autocomplete="off" formControlName="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+            <mat-form-field class="ancho" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input matInput autocomplete="off"  formControlName="pass" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+              </mat-form-field>
+            <br>
+            <button type="submit" mat-raised-button class="ancho boton" color="accent" [disabled]="form.invalid">Iniciar sesión</button>
+            <br>
+            <br>
+
+        </form>
+    </div>
+</div>

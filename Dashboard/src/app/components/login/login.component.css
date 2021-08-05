@@ -25,3 +25,7 @@ mat-card {
     margin: 2em auto;
     text-align: center;
   }
+
+.spinner{
+    margin: 0 auto;
+}

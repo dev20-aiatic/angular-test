@@ -1,0 +1,45 @@
+
+<mat-toolbar>
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+ <span style="margin-left: 10px;"> Dashgular App </span>
+ </mat-toolbar>
+
+
+<mat-sidenav-container>
+                 <!-- Menú -->
+  <mat-sidenav class="sidebar" #sidenav mode="over">    
+     <mat-nav-list class="list-container">
+      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard'"> Inicio </a>
+      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/video'"> Video</a>
+      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/history'"> Historia</a>
+      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/profile'"> Perfil</a>
+      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Cerrar sesión</a>
+    </mat-nav-list>
+  </mat-sidenav>
+              <!-- Barra de navegación y contenido -->
+  <mat-sidenav-content>
+     <div style="height: 88vh;">
+      <router-outlet></router-outlet>
+    </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+<!-- <mat-sidenav-container>
+    <mat-sidenav #start [mode]="'side'">
+      Menú
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button mat-icon-button (click)="start.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Dashgular App</span>
+      </mat-toolbar>
+      <p>Main content</p>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+   -->

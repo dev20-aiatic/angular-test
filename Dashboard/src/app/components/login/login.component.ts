@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -9,42 +10,46 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  public loginInvalid = false;
-  private formSubmitAttempt = false;
-  private returnUrl: string;
+  loginForm: FormGroup;
   hide = true;
+  loading=false;
 
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
-  ) {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/home';
-
-    this.form = this.fb.group({
-      email: ['', Validators.email],
+  constructor(private fb: FormBuilder, private _snackbar: MatSnackBar, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
       pass: ['', Validators.required]
-    });
+    })
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
   }
 
-  async onSubmit(): Promise<void> {
-    this.loginInvalid = false;
-    this.formSubmitAttempt = false;
-    if (this.form.valid) {
-      try {
-        const email = this.form.get('email')?.value;
-        const pass = this.form.get('pass')?.value;
-       // await this.authService.login(email, pass);
-      } catch (err) {
-        this.loginInvalid = true;
-      }
-    } else {
-      this.formSubmitAttempt = true;
+  signin(){
+    const email= this.loginForm.value.email;
+    const pass= this.loginForm.value.pass;
+
+      //Validación temporal al home
+    if(email=='jadape@tapi.re' && pass=='1234'){
+      this.loadingSpinner();
+    }else{
+      this.error();
     }
   }
+
+  error(){
+    this._snackbar.open('Usuario o contraseña invalidos','',{
+      duration:5000,
+      horizontalPosition: 'center',
+      verticalPosition:'bottom'
+    })
+  }
+
+  loadingSpinner(){
+    this.loading=true;
+    setTimeout(() => {
+      this.router.navigate(['dashboard']);
+    }, 1500);
+  }
 }
+  
+

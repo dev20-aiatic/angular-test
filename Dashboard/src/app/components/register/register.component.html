@@ -1,29 +1,3 @@
-<div class="body"> 
-    <div class="login"> 
-        <form [formGroup]="loginform" (ngSubmit)="onSubmit()">
-            <h1>Registro de usuario</h1>
-            <mat-form-field class="ancho" appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" autofocus="on" autocomplete="off" formControlName="email">
-                <mat-icon matSuffix>email</mat-icon>
-            </mat-form-field>
-            <mat-form-field class="ancho" appearance="fill">
-                <mat-label>Nombre</mat-label>
-                <input matInput type="text" autocomplete="off" formControlName="name">
-                <mat-icon matSuffix>name</mat-icon>
-            </mat-form-field>
-            <mat-form-field class="ancho" appearance="fill">
-                <mat-label>Contraseña</mat-label>
-                <input matInput autocomplete="off"  formControlName="pass" [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
-                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-              </mat-form-field>
-            <br>
-            <button type="submit" mat-raised-button class="ancho boton" color="accent" [disabled]="form.invalid">Registrarse</button>
-            <br>
-            <br>
-
-        </form>
-    </div>
-</div>
+<p>
+  register works!
+</p>

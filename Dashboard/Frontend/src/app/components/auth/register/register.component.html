@@ -1,0 +1,38 @@
+<div class="body"> 
+  <div class="register"> 
+      <form #registerForm = "ngForm" (ngSubmit)="onSubmit(registerForm)">
+        <img src="./assets/img/user.png" width="35%">
+          <h1>Creación de cuenta</h1>
+          <mat-form-field class="ancho" appearance="fill">
+            <mat-label>Nombres</mat-label>
+            <input class = 'form-control' matInput type="text" autofocus="on" autocomplete="off" name="username" ngModel>
+            <mat-icon matSuffix>name</mat-icon>
+        </mat-form-field>
+          <mat-form-field class="ancho" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input class = 'form-control' matInput type="email" autofocus="on" autocomplete="off" name="email" ngModel>
+              <mat-icon matSuffix>email</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="ancho" appearance="fill">
+              <mat-label>Contraseña</mat-label>
+              <input class = 'form-control' matInput autocomplete="off"  name="password" [type]="hide ? 'password' : 'text'" ngModel> 
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            <br>
+            <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
+          <br>
+          <button type="submit" mat-raised-button class="ancho boton" color="accent" [disabled]="registerForm.invalid">Registrarse</button>
+          <br>
+          <div class="form-group mt-3">
+              <br>
+              <p>
+                ¿Ya tienes cuenta? <a [routerLink]="['/login']"> ¡Inicia sesión! </a>
+              </p>
+            </div>
+          <br>
+
+      </form>
+  </div>
+</div>

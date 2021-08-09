@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { RegisterComponent } from 'src/app/components/auth/register/register.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent},

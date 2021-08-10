@@ -28,9 +28,9 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
-    this.loadingSpinner();
     this.authService.register(this.registerForm.value).subscribe((msg) => {
       console.log(msg);
+      this.loadingSpinner();
       this.router.navigate(["login"]);
     });
   }

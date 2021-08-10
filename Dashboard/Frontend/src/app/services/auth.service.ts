@@ -28,29 +28,48 @@ export class AuthService {
       .post<User>(`${this.url}/register`, user, this.httpOptions)
       .pipe(
         first(),
-        catchError(this.errorHandlerService.handleError<User>("signup"))
+        catchError(this.errorHandlerService.handleError<User>("register"))
       );
   }
 
-  login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<User> {
+  login(
+    email: Pick<User, "email">,
+    password: Pick<User, "password">
+  ): Observable<{
+    token: string;
+    userId: Pick<User, "id">;
+  }> {
     return this.http
-      .post<User>(`${this.url}/login`, email, this.httpOptions)
-      .pipe(
-        first(),
-        catchError(this.errorHandlerService.handleError<User>("login"))
-      );
+    .post<{token:  string, userId: Pick<User, "id">}>(`${this.url}/login`,  { email, password }, this.httpOptions)
+    .pipe(
+    first(),
+    tap((tokenObject: { token: string; userId: Pick<User, "id"> }) => {
+    this.userId = tokenObject.userId;
+    localStorage.setItem('token', tokenObject.token);
+    this.isUserLoggedIn$.next(true);
+    this.router.navigate(["dashboard"]);
+  }),
+  catchError(
+    this.errorHandlerService.handleError<{
+      token: string;
+      userId: Pick<User, "id">;
+    }>("login")
+  )
+  );
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('expires')
+  }
+  
 
-/*   login(email: Pick<User, "email">, password: Pick<User, "password">): Observable<{token:string, userId:Pick<User, "id">; }>
-  {
-     return this.http.post(`${this.url}/login`, { email, password })
-        .pipe(map(user => {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.isUserLoggedIn$.next(user);
-            this.router.navigate(["dashboard"]);
-            return user;
-        }));
-  } */
+  //Verificamos presencia del token en la sesión
 
-}
+  public get logIn(): boolean {
+    return (localStorage.getItem('token') !== null);
+  }
+
+ 
+
+  }

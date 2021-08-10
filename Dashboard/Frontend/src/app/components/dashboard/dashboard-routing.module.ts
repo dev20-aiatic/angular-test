@@ -8,9 +8,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { VideoComponent } from './video/video.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent, children: [
+  { path: '', component: DashboardComponent,  canActivateChild: [AuthGuard], 
+  children: [
     { path: '', component: HomeComponent},
-    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'profile', component: ProfileComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'video', component: VideoComponent },
   ]}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { SocialAuthService } from "angularx-social-login";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-  constructor() { }
+  constructor(private SocialAuthService:SocialAuthService , public authService:AuthService) { }
 
   ngOnInit(): void {
   }
-
+  logout() {
+    this.SocialAuthService.signOut();
+    localStorage.removeItem('token');
+  }
 }

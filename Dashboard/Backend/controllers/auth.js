@@ -56,13 +56,12 @@ exports.login = async (req, res, next) => {
       throw error;
     }
 
-    const token = jwt.sign(
-      {
+    const token = jwt.sign({
         email: storedUser.email,
         userId: storedUser.id,
       },
-      'secretfortoken',
-      { expiresIn: '1h' }
+      'Aquenoadivinaswey',
+      { expiresIn: '30s' }
     );
     res.status(200).json({ token: token, userId: storedUser.id });
   } catch (err) {

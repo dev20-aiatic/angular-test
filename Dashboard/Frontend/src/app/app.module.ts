@@ -7,21 +7,42 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './components/shared/shared.module';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { SocialLoginModule, SocialAuthServiceConfig , FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
-  ],
-  providers: [],
+    SharedModule,
+    SocialLoginModule
+    ],
+    providers: [
+      {
+        provide: 'SocialAuthServiceConfig',
+        useValue: {
+          autoLogin: true,
+          providers: [
+            {
+              id: GoogleLoginProvider.PROVIDER_ID,
+              provider: new GoogleLoginProvider(
+                '936219773721-r8clogsfqnkn8mhoq592kvvk1rr7ccam.apps.googleusercontent.com'
+              )
+            },
+            {
+              id: FacebookLoginProvider.PROVIDER_ID,
+              provider: new FacebookLoginProvider('clientId')
+            }
+          ]
+        } as SocialAuthServiceConfig,
+      }    
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

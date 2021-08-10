@@ -12,10 +12,9 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class AuthInterceptorService implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  
+  intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
+    
     const token = localStorage.getItem("token");
     if (token) {
       const clonedRequest = req.clone({
@@ -25,5 +24,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     } else {
       return next.handle(req);
     }
+    
   }
+  
 }

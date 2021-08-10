@@ -8,12 +8,10 @@ const User = require('../models/user');
 
 const authController = require('../controllers/auth');
 
-router.post(
-  '/register',
+router.post('/register',
   [
     body('name').trim().not().isEmpty(),
-    body('email')
-      .isEmail()
+    body('email').isEmail()
       .withMessage('Por favor ingrese un correo valido.')
       .custom(async (email) => {
         const user = await User.find(email);
@@ -28,5 +26,6 @@ router.post(
 );
 
 router.post('/login', authController.login);
+
 
 module.exports = router;

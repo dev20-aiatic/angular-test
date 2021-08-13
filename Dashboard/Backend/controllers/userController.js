@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'development';
 const { jwt_secret } = require('../config/config.json')[env];
 
 const UserController = {
-    getAll(req, res) {
+    getAll(res) {
         User.findAll({
         })
             .then(users => res.send(users))

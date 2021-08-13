@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { User, Token } = require('../models/indexModel');
 const env = process.env.NODE_ENV || 'development';
-const {  jwt_secret } = require('../config/config.json')[env];
+const {jwt_secret} = require('../config/config.json')[env];
 const validation = async (req, res, next) => {
     try {
         const token = req.headers.authorization; //sacamos el token de los headers

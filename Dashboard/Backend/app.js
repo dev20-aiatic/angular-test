@@ -24,9 +24,9 @@ app.use((req, res, next) => {
     next();
 });
 
-// Health check
+// Prueba de petición GET
 app.get("/", (req, res) => {
-    res.status(200).send("Health Check");
+    res.status(200).send("   Prueba de petición GET realizada correctamente  ");
 });
 
 const PORT = process.env.PORT || 5000;

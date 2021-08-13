@@ -9,13 +9,13 @@
 
 <mat-sidenav-container>
                  <!-- Menú -->
-  <mat-sidenav class="sidebar" #sidenav mode="over">    
+  <mat-sidenav class="sidebar" #sidenav mode="over">
      <mat-nav-list class="list-container">
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard'"> Inicio </a>
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/video'"> Video</a>
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/history'"> Historia</a>
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/profile'"> Perfil</a>
-      <a mat-list-item (click)="logout()" [routerLink]="'/login'" *ngIf="authService.logIn" mat-list-item>Cerrar sesión</a>
+      <a mat-list-item (click)="logout()" *ngIf="auth.getUser()" mat-list-item>Cerrar sesión</a>
     </mat-nav-list>
   </mat-sidenav>
               <!-- Barra de navegación y contenido -->

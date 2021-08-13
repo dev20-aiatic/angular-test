@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, SocialUser  } from "angularx-social-login";
+import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
 
+export interface DialogData {
+  message: string;
+  dialogState: number
+}
 
 @Component({
   selector: 'app-login',
@@ -11,54 +18,64 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialUser  } from "angular
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  socialUser!: SocialUser;
-  isLoggedin!: boolean;  
-  
+  pageTitle = 'Inicio de sesión | Dashgular';
+  loading = false;
   hide = true;
-  loading=false;
+  fieldTextType: boolean;
+  loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private socialAuthService: SocialAuthService, private authService: AuthService) {
+  submitted: boolean = false;
+  public loadingMsg = 'Autenticando...Por favor espere';
+  Msg: any;
+
+
+  socialUser!: SocialUser;
+
+
+  constructor(private title: Title, private fb: FormBuilder, public authService: AuthService, private router: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log("")
+    this.title.setTitle(this.pageTitle);
+    //Inicializamos el formulario de inicio de sesión
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });   
-    this.socialAuthService.authState.subscribe((user) => {
-    this.socialUser = user;
-    this.isLoggedin = (user != null);
-    console.log(this.socialUser);
-  });
-}
+      email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
+      password: [null, Validators.required],
+    });
+  }
+
+  //Obtener form controls
+  get form() {
+    return this.loginForm.controls;
+  }
+
+  //Toggle show password
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   login() {
-    const val = this.loginForm.value;
-    if (val.email && val.password) {
-       this.loadingSpinner();
-        this.authService.login(val.email, val.password)
-            .subscribe(
-                () => {
-                    console.log("Sesión iniciada");                }
-            );
-    }
-}
-loginWithGoogle(): void {
-  this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-}
-
-loginWithFB(): void {
-  this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
-}
-
-refreshToken(): void {
-  this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
-}
-  loadingSpinner(){
-    this.loading=true;
-    setTimeout(() => 150);
+    this.loading = true;
+    this.Msg = '';
+    this.authService.login({email: this.loginForm.value.email, password: this.loginForm.value.password})
+      .subscribe(
+        (res: HttpResponse<any>) => {
+          this.Msg = res['message'];
+          this.loading = false;
+          setTimeout(() => this.Msg = "", 2500);
+          this.authService.setUser(res['user']);
+          this.authService.setToken(res['token']);
+          localStorage.setItem('authToken', res['token']);
+          setTimeout(() => {
+            this.router.navigate(['dashboard'])
+          })
+        },
+        (error: HttpErrorResponse) => {
+          this.Msg = error.error.message
+          this.loading = false;
+          setTimeout(() => this.Msg = "", 2500);
+        }
+      )
   }
 }
-  
-

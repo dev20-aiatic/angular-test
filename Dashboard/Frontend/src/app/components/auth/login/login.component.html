@@ -1,6 +1,9 @@
-<div class="body"> 
-    <div class="login"> 
+<div class="body">
+    <div class="login">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div *ngIf="Msg" class="text-danger text-left errorMsg pt-3">
+            <p>{{Msg}}</p>
+          </div>
             <img src="./assets/img/user.png" width="35%">
             <h1>Inicio de sesión</h1>
             <mat-form-field class="ancho" appearance="fill">
@@ -10,7 +13,7 @@
             </mat-form-field>
             <mat-form-field class="ancho" appearance="fill">
                 <mat-label>Contraseña</mat-label>
-                <input matInput autocomplete="off"  formControlName="password" [type]="hide ? 'password' : 'text'"> 
+                <input matInput autocomplete="off"  formControlName="password" [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -25,24 +28,13 @@
                   ¿Aún no tienes cuenta? <a [routerLink]="['/register']"> ¡Regístrate Ahora! </a>
                 </p>
             </div>
-            <div class="inline-buttons">
+            <!--<div class="inline-buttons">
               <button type="button" (click)="loginWithGoogle()"  style="margin: 10px" mat-fab color="warn"><i class="fab fa-google"></i></button>
               <button type="button" (click)="loginWithFB()"  style="margin: 10px" mat-fab color="primary"><i class="fab fa-facebook"></i></button>
 
-            </div>
+            </div>-->
             <br>
 
         </form>
-        <div *ngIf="isLoggedin===true">
-          <div class="form-group">
-            <label for="firstname">First Name</label>
-            <input type="text" class="form-control" id="firstname" [value]="socialUser.firstName" readonly >
-          </div>          <div class="form-group">
-            <label for="lastname">Last Name</label>
-            <input type="text" class="form-control" id="lastname" [value]="socialUser.lastName" readonly >
-          </div>          <div class="form-group">
-            <label for="email2">Email</label>
-            <input type="text" class="form-control" id="email" [value]="socialUser.email" readonly >
-          </div>
     </div>
 </div>

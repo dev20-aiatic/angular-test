@@ -1,24 +1,22 @@
 import { Injectable } from "@angular/core";
-import { Router, CanActivate, ActivatedRouteSnapshot,RouterStateSnapshot, CanActivateChild, UrlTree } from '@angular/router';
-
-import { Observable } from "rxjs";
-import { AuthService } from "./auth.service";
+import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router} from '@angular/router';
+import {AuthService} from "./auth.service";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivateChild  {
-  
-  constructor(private authService: AuthService, private router: Router) {}
 
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (!this.authService.logIn) {
-      alert('No tienes permitido ver esta página');
-      this.router.navigate(["login"]);
-      return false;
+    const currentUser = this.auth.getUser();
+    if (currentUser) {
+      return true;
     }
-    return true;
+    this.router.navigate(['/login']);
+    return false;
   }
 }

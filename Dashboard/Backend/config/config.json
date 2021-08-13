@@ -1,6 +1,27 @@
 {
-    "host": "localhost",
-    "user": "root",
+  "development": {
+    "username": "root",
+    "password": null,
     "database": "dashgular",
-    "password": ""
+    "host": "localhost",
+    "dialect": "mysql",
+    "operatorsAliases": 0,
+    "jwt_secret":"secreto"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "dashgular",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "dashgular",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  }
 }

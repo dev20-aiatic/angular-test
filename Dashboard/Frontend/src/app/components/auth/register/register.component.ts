@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import {SocialUser} from "angularx-social-login";
 
 @Component({
   selector: 'app-register',
@@ -10,34 +11,51 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  socialUser!: SocialUser;
   hide = true;
-  loading=false;
-  
-  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
-    this.registerForm = this.fb.group({
-      name: new FormControl("", [Validators.required, Validators.minLength(2)]),
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [
-        Validators.required,
-        Validators.minLength(7),
-      ]),
-    });
+  submitted: boolean = false;
+  loading = false;
+  fieldTextType: boolean;
+  Msg: any;
+
+
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,) {
   }
 
   ngOnInit() {
-  }
-
-  register(): void {
-    this.authService.register(this.registerForm.value).subscribe((msg) => {
-      console.log(msg);
-      this.loadingSpinner();
-      this.router.navigate(["login"]);
+    this.registerForm = this.fb.group({
+      name: [null, [Validators.required, Validators.minLength(5)]],
+      email: [null, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+      password: [null, [Validators.required, Validators.minLength(8),]],
+      confirmPassword: [null, [Validators.required, Validators.minLength(8),]]
     });
   }
 
-  loadingSpinner(){
-    this.loading=true;
-    setTimeout(() => 1500);
+  //get form controls
+  get form() {
+    return this.registerForm.controls;
   }
 
+  register() {
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+      this.Msg = 'las contraseñas no coinciden';
+    } else {
+      this.loading = true;
+      this.authService
+        .signup({
+          name: this.registerForm.value.name,
+          email: this.registerForm.value.email,
+          password: this.registerForm.value.password,
+        })
+        .subscribe(
+          res => {
+            console.log(res);
+            this.Msg = res.message;
+            setTimeout(() => this.Msg = "", 2500);
+          },
+          err => console.error(err)
+        )
+      this.loading = false;
+    }
+  }
 }

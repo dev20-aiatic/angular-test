@@ -1,11 +1,14 @@
-<div class="body"> 
-  <div class="register"> 
-      <form [formGroup]="registerForm" (ngSubmit)="register()">
+<div class="body">
+  <div class="register">
+    <div class="card-header text-center">
+      <p *ngIf="Msg" class="text-danger text-left">{{Msg}}</p>
+    </div>
+      <form [formGroup]= "registerForm" (ngSubmit)="register()">
         <img src="./assets/img/user.png" width="35%">
           <h1>Creación de cuenta</h1>
           <mat-form-field class="ancho" appearance="fill">
-            <mat-label>Nombres</mat-label>
-            <input matInput type="email" autofocus="on" autocomplete="off" formControlName="name">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput type="text" autofocus="on" autocomplete="off" formControlName="name">
             <mat-icon matSuffix>name</mat-icon>
         </mat-form-field>
           <mat-form-field class="ancho" appearance="fill">
@@ -15,11 +18,18 @@
           </mat-form-field>
           <mat-form-field class="ancho" appearance="fill">
               <mat-label>Contraseña</mat-label>
-              <input matInput autocomplete="off"  formControlName="password" [type]="hide ? 'password' : 'text'"> 
+              <input matInput autocomplete="off"  formControlName="password" [type]="hide ? 'password' : 'text'">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </mat-form-field>
+        <mat-form-field class="ancho" appearance="fill">
+          <mat-label>Confirmar contraseña</mat-label>
+          <input matInput autocomplete="off"  formControlName="confirmPassword" [type]="hide ? 'confirmPassword' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
             <br>
             <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
           <br>

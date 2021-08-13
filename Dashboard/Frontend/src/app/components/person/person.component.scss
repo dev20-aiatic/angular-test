@@ -1,0 +1,89 @@
+@import '../../../styles.scss';
+
+main {
+  display: grid;
+  grid-template-columns: 125px 1fr;
+
+  .sidebar {
+    background-color: $colorGrey;
+    max-width: 170px;
+    border-right: 1px solid rgb(189, 189, 189);
+
+    .sidebar-sticky {
+      padding: 20px;
+      height: 100vh;
+
+      .categories {
+        width: 90px;
+
+        .nav-item {
+          border-bottom: 1px solid rgb(189, 189, 189);
+          font-weight: 500;
+          margin: 8px 0;
+          padding: 5px 0;
+        }
+      }
+
+      .categories:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .container-fluid {
+    grid-template-rows: 100px;
+
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 25px 15px 0 15px;
+
+      form {
+        height: 75px;
+
+        .form-control {
+          padding-left: 10px;
+        }
+      }
+    } 
+  }
+
+  .divProducts {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 160px);
+    margin: 0.9em 15px;
+    grid-gap: 10px;
+    justify-content: center;
+
+    .card {
+      width: 10rem;
+      height: 16rem;
+
+      .card-img-top {
+        height: 175px;
+      }
+  
+      .card-body {
+        //height: 10px;
+        display: inline-flex;
+        align-items: flex-start;
+        //padding: 0 0 0 5px;
+        overflow: hidden;
+      }
+    }
+
+    .card:hover {
+      cursor: pointer;
+    }
+  }
+
+  button {
+    width: 100%;
+    background-color: $colorOrange;
+  }
+
+  button:hover {
+    opacity: 0.75;
+  }
+}

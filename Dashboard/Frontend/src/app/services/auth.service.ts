@@ -1,75 +1,60 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Router } from "@angular/router";
-
-import { Observable, BehaviorSubject } from "rxjs";
-import { first, catchError, tap, map } from "rxjs/operators";
-
-import { User } from "../models/User";
-import { ErrorHandlerService } from "./error-handler.service";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthService {
-  private url = "http://localhost:3000/auth";
+  private token: string = "";
+  private user: object = {};
 
-  isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
-  userId!: Pick<User, "id">;
 
-  httpOptions: { headers: HttpHeaders } = {
-    headers: new HttpHeaders({ "Content-Type": "application/json" }),
-  };
+  constructor(public httpClient: HttpClient) { }
 
-  constructor(private http: HttpClient,private errorHandlerService: ErrorHandlerService, private router: Router) {}
-
-  register(user: Omit<User, "id">): Observable<User> {
-    return this.http
-      .post<User>(`${this.url}/register`, user, this.httpOptions)
-      .pipe(
-        first(),
-        catchError(this.errorHandlerService.handleError<User>("register"))
-      );
+  getAll() {
+    return this.httpClient.get('http://localhost:5000/api/users')
   }
 
-  login(
-    email: Pick<User, "email">,
-    password: Pick<User, "password">
-  ): Observable<{
-    token: string;
-    userId: Pick<User, "id">;
-  }> {
-    return this.http
-    .post<{token:  string, userId: Pick<User, "id">}>(`${this.url}/login`,  { email, password }, this.httpOptions)
-    .pipe(
-    first(),
-    tap((tokenObject: { token: string; userId: Pick<User, "id"> }) => {
-    this.userId = tokenObject.userId;
-    localStorage.setItem('token', tokenObject.token);
-    this.isUserLoggedIn$.next(true);
-    this.router.navigate(["dashboard"]);
-  }),
-  catchError(
-    this.errorHandlerService.handleError<{
-      token: string;
-      userId: Pick<User, "id">;
-    }>("login")
-  )
-  );
+  /** Método registrar usuario */
+  signup(user: object): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/auth/register', user);
   }
 
+  /**Metodo  iniciar sesión*/
+
+  login(user: object): Observable<any> {
+    return this.httpClient.post('http://localhost:5000/api/auth/login', user);
+  }
+
+  /**Metodo  cerrar sesión*/
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires')
-  }
-  
-
-  //Verificamos presencia del token en la sesión
-
-  public get logIn(): boolean {
-    return (localStorage.getItem('token') !== null);
+localStorage.clear()
   }
 
- 
 
+  setToken(token: string): void {
+    this.token = token;
   }
+
+  /**Metodo  obtener token **/
+  getToken(): string {
+    // return localStorage.getItem('authToken');
+
+    return this.token;
+  }
+
+  setUser(user: object): void {
+    this.user = user;
+  }
+
+  getUser(): object {
+    return this.user;
+  }
+
+  getInfo(token) {
+    return this.httpClient.get('http://localhost:5000/api/users/info', {
+      headers: { authorization: token }
+    })
+  }
+}

@@ -8,29 +8,31 @@ import {HttpClient} from "@angular/common/http";
 export class AuthService {
   private token: string = "";
   private user: object = {};
-
+  api = 'http://localhost:5000/api/';
 
   constructor(public httpClient: HttpClient) { }
+  
 
   getAll() {
-    return this.httpClient.get('http://localhost:5000/api/users')
+    return this.httpClient.get(this.api + 'users')
   }
 
   /** Método registrar usuario */
   signup(user: object): Observable<any> {
-    return this.httpClient.post('http://localhost:5000/api/auth/register', user);
+    return this.httpClient.post(this.api +'auth/register', user);
   }
 
   /**Metodo  iniciar sesión*/
 
   login(user: object): Observable<any> {
-    return this.httpClient.post('http://localhost:5000/api/auth/login', user);
+    return this.httpClient.post(this.api + 'auth/login', user);
   }
 
   /**Metodo  cerrar sesión*/
   logout() {
-localStorage.clear()
+  localStorage.removeItem('authToken')
   }
+
 
 
   setToken(token: string): void {
@@ -53,7 +55,7 @@ localStorage.clear()
   }
 
   getInfo(token) {
-    return this.httpClient.get('http://localhost:5000/api/users/info', {
+    return this.httpClient.get(this.api + 'users/info', {
       headers: { authorization: token }
     })
   }

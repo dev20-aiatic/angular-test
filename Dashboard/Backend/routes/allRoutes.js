@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Referenciamos la ruta de usuario
 const usersRoute = require("./user");
-router.use("/api/auth", usersRoute);
+router.use("/api", usersRoute);
 
 
 //Referenciamos la ruta de persona
@@ -13,7 +13,7 @@ router.use("/api/person", personRoute);
 
 //Referenciamos la ruta de habilidades
 const skillsRoute = require("./skills");
-router.use("/api/skilla", skillsRoute);
+router.use("/api/skills", skillsRoute);
 
 
 

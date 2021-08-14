@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router} from '@angular/router';
-import {AuthService} from "./auth.service";
+import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router, UrlTree} from '@angular/router';
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -8,15 +7,16 @@ import {Observable} from "rxjs";
 })
 export class AuthGuard implements CanActivateChild  {
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private router: Router) {}
 
   canActivateChild(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    const currentUser = this.auth.getUser();
-    if (currentUser) {
-      return true;
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      this.router.navigate(['login']);
+      return false
     }
-    this.router.navigate(['/login']);
-    return false;
+    return true
+    }
   }
-}
+

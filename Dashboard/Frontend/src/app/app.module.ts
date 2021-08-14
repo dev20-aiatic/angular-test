@@ -1,3 +1,4 @@
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,6 +16,7 @@ import { SocialLoginModule, SocialAuthServiceConfig , FacebookLoginProvider, Goo
     AppComponent,
     LoginComponent,
     RegisterComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

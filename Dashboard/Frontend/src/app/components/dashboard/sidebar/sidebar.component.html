@@ -15,7 +15,7 @@
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/video'"> Video</a>
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/history'"> Historia</a>
       <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/profile'"> Perfil</a>
-      <a mat-list-item (click)="logout()" *ngIf="auth.getUser()" mat-list-item>Cerrar sesión</a>
+      <a mat-list-item (click)="logout()" *ngIf="auth.getInfo('token')" mat-list-item>Cerrar sesión</a>
     </mat-nav-list>
   </mat-sidenav>
               <!-- Barra de navegación y contenido -->

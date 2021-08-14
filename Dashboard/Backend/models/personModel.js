@@ -1,24 +1,35 @@
 module.exports = (sequelize, DataTypes) => {
-    const Person = sequelize.define('Person', {
+  /**
+   * Este modelo  sequelize se encarga de definir los atributos de la tabla 'person' para el ORM
+   * 
+   * @module Person
+   * 
+   * 
+   */
+  const Person = sequelize.define("Person", {
+      // Los atributos del modelo son definidos a partir de aquí
       name: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       lastname: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
-      birthdate: DataTypes.STRING,
+      natIdCard: DataTypes.BIGINT,
+      birthdate: DataTypes.DATE,
       city: DataTypes.STRING,
-      deparment:DataTypes.STRING,
+      deparment: DataTypes.STRING,
       country: DataTypes.STRING,
       postalcode: DataTypes.STRING,
       career: DataTypes.STRING,
       Skill_Id: DataTypes.STRING,
-      description: DataTypes.STRING,
-    }, {});
-    Person.associate = function (models) {
+      description: DataTypes.TEXT,
+    }, {}
+  );
+   // Se define la relacion de llaves presente entre las tablas 'skills' y 'person'
+  Person.associate = function (models) {
     Person.belongsTo(models.Skill);
-    };
-    return Person;
   };
+  return Person;
+};

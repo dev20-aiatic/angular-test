@@ -2,20 +2,8 @@ const jwt = require('jsonwebtoken');
 const { User, Token } = require('../models/indexModel');
 const env = process.env.NODE_ENV || 'development';
 const {jwt_secret} = require('../config/config.json')[env];
-
-
-
-        /**
-         * Función para validar el token con su respectivo usuario 
-         * @param {any} token - Token que será validado con el token alojado en el header
-         * @param {any} jwt_secret - Palabra secreta usada para la generación del token
-         * @param {any} user - usuario extraido de la base de datos
-         */
-
-
 const validation = async (req, res, next) => {
     try {
-        
         const token = req.headers['authorization']; //sacamos el token de los headers
         const payload = jwt.verify(token, jwt_secret); //sacamos el payload del token
         const user = await User.findByPk(payload.id); //buscamos el usuario en la base de datos con el id del payload
@@ -30,8 +18,8 @@ const validation = async (req, res, next) => {
                 error
             })
         }
-        req.user = user; // ponemos el usuario en el objeto request
-        next(); //pasamos a la función controladora o al  middleware
+        req.user = user; //aquí seteamos el usuario en el objeto request
+        next(); //pasamos a la función controladora o al siguiente middleware
     } catch (error) {
         res.status(401).send({
             message: 'No estas autorizado',

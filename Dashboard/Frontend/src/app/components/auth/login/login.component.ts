@@ -24,10 +24,7 @@ export class LoginComponent implements OnInit {
   fieldTextType: boolean;
   loginForm: FormGroup;
 
-  submitted: boolean = false;
-  public loadingMsg = 'Autenticando...Por favor espere';
   Msg: any;
-
 
   socialUser!: SocialUser;
 
@@ -56,8 +53,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loading = true;
     this.Msg = '';
+  
+    this.loading = true;
+
     this.authService.login({email: this.loginForm.value.email, password: this.loginForm.value.password})
       .subscribe(
         (res: HttpResponse<any>) => {

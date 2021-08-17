@@ -34,12 +34,20 @@ export class AuthService {
   }
 
 
+  /**Metodo validar logueo */
+  isAuthenticated() {
+    if (localStorage.getItem('authToken')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   setToken(token: string): void {
     this.token = token;
   }
 
-  /**Metodo  obtener token **/
+  /**Metodo  obtener token **/ 
   getToken(): string {
     // return localStorage.getItem('authToken');
 

@@ -1,7 +1,7 @@
 const {Product, Skill, Sequelize} = require('../models/indexModel.js');
 const Op = Sequelize.Op;
 
-const PersonController = {
+const ProfileController = {
     getAll(res) {
         Person.findAll({
                 include: [Skill],
@@ -84,4 +84,4 @@ const PersonController = {
     }
 }
 
-module.exports = PersonController;
+module.exports = ProfileController;

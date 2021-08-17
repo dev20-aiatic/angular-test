@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const PersonController = require('../controllers/PersonController.js');
+const ProfileController = require('../controllers/ProfileController.js');
 
-router.get('/', PersonController.getAll);
-router.get('/:personId', PersonController.getByPK);
-router.get('/byQuery/:query', PersonController.getByQuery);
-router.get('/skill/:skillId', PersonController.getBySkill);
-router.post('/', PersonController.insert);
-router.put('/:id', PersonController.modify);
-router.delete('/:id', PersonController.delete);
+router.get('/', ProfileController.getAll);
+router.get('/:personId', ProfileController.getByPK);
+router.get('/byQuery/:query', ProfileController.getByQuery);
+router.get('/skill/:skillId', ProfileController.getBySkill);
+router.post('/', ProfileController.insert);
+router.put('/:id', ProfileController.modify);
+router.delete('/:id', ProfileController.delete);
 
 module.exports = router;

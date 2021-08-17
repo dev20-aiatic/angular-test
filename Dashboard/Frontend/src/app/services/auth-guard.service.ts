@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from "@angular/core";
 import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router, UrlTree} from '@angular/router';
 import {Observable} from "rxjs";
@@ -7,12 +8,12 @@ import {Observable} from "rxjs";
 })
 export class AuthGuard implements CanActivateChild  {
 
-  constructor(private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const token = localStorage.getItem('authToken');
-    if (!token) {
+    const user = this.auth.isAuthenticated;
+    if (!user) {
       this.router.navigate(['login']);
       return false
     }

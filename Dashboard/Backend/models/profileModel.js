@@ -6,12 +6,8 @@ module.exports = (sequelize, DataTypes) => {
    * 
    * 
    */
-  const Person = sequelize.define("Person", {
+  const Profile = sequelize.define("Profile", {
       // Los atributos del modelo son definidos a partir de aquí
-      name: {
-        allowNull: false,
-        type: DataTypes.STRING,
-      },
       lastname: {
         allowNull: false,
         type: DataTypes.STRING,
@@ -28,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {}
   );
    // Se define la relacion de llaves presente entre las tablas 'skills' y 'person'
-  Person.associate = function (models) {
-    Person.belongsTo(models.Skill);
+   Profile.associate = function (models) {
+    Profile.belongsTo(models.Skill);
   };
-  return Person;
+  return Profile;
 };

@@ -9,11 +9,11 @@ export class PersonService {
 
   constructor(public httpClient: HttpClient) { }
 
-  getAll() {
+  getAll(): Observable<any> {
     return this.httpClient.get('http://localhost:3000/person')
   }
-  getPersonBySkill(categoryId) {
-    return this.httpClient.get('http://localhost:3000/person/category/' + categoryId)
+  getPersonBySkill(skill_Id) {
+    return this.httpClient.get('http://localhost:3000/person/category/' + skill_Id)
   }
   getPersonByQuery(query) {
     return this.httpClient.get('http://localhost:3000/person/byQuery/' + query)

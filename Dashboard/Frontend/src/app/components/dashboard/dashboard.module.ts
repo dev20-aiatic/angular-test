@@ -7,14 +7,15 @@ import { DashboardComponent } from './dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
-
+import { PersonComponent } from './person/person.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProfileComponent,
+    PersonComponent,
     SidebarComponent,
-    HomeComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,

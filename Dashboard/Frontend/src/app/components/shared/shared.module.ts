@@ -14,6 +14,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTableModule} from '@angular/material/table'; 
 
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatTableModule
   ],
   exports: [
     CommonModule,
@@ -54,6 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    MatTableModule
   ]
 })
 export class SharedModule { }

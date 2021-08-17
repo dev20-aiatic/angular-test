@@ -7,14 +7,28 @@ module.exports = (sequelize, DataTypes) => {
    * 
    */
     const User = sequelize.define('User', {
-        name: DataTypes.STRING,
+        userId: {
+            autoIncrement:true,
+            primaryKey:true,
+            type: DataTypes.NUMBER
+        },
+        name: {
+            allowNull: false,
+            type: DataTypes.STRING,
+          },
         password: DataTypes.STRING,
         email: DataTypes.STRING,
+        profileId: {
+            require:true,
+            type: DataTypes.NUMBER
+        },
     }, {
         //Deshabilitamos los timestamps para evitar los campos createdAt y updateAt
         timestamps: false
     });
+
     User.associate = function(models) {
+    User.hasMany(models.Profile);
 
     };
     return User;

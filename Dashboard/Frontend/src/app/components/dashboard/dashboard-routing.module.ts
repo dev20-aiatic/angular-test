@@ -1,3 +1,4 @@
+import { PersonComponent } from './person/person.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/services/auth-guard.service';
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'video', component: VideoComponent },
+    { path: 'person', component: PersonComponent}
   ]}
 ];
 

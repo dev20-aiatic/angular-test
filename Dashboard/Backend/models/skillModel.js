@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING
     }, {});
     Skill.associate = function (models) {
-        Skill.hasMany(models.Person)
+        Skill.hasMany(models.Profile)
     };
     return Skill;
   };

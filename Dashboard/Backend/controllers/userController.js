@@ -1,4 +1,4 @@
-const { User, Token } = require('../models/indexModel');
+const { User, Profile, Token } = require('../models/indexModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
@@ -22,7 +22,7 @@ const UserController = {
             const email = await User.findOne({
                 where: {
                     email: req.body.email
-                }
+                }, 
             })
             console.log(email);
             if (email) {
@@ -36,6 +36,12 @@ const UserController = {
                 createdAt : null,
                 password,
             });
+
+            //Definimos la instrucción que efectua registro de user Id en la tabla profile
+            const profile = await Profile.create({
+                user_Id	: user.id
+            });
+           
             res.status(201).send({
                 user,
                 message: 'Usuario creado con éxito'
@@ -61,7 +67,7 @@ const UserController = {
                 where: {
                     email: req.body.email
                 }
-            })
+            });
             console.log(user);
             if (!user) {
                 return res.status(400).send({

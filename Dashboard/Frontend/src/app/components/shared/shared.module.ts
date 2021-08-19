@@ -10,11 +10,16 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDividerModule} from '@angular/material/divider';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table'; 
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatOptionModule} from '@angular/material/core';
+
 
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatDividerModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -38,7 +44,10 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   exports: [
     CommonModule,
@@ -48,6 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatDividerModule,
     MatSnackBarModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -56,7 +66,10 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatOptionModule
   ]
 })
 export class SharedModule { }

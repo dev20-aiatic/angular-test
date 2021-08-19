@@ -23,13 +23,15 @@ export class LoginComponent implements OnInit {
   hide = true;
   fieldTextType: boolean;
   loginForm: FormGroup;
-
   Msg: any;
 
-  socialUser!: SocialUser;
+
+  //Variables social login
+  isLoggedin: boolean;  
+  socialUser: SocialUser;
 
 
-  constructor(private title: Title, private fb: FormBuilder, public authService: AuthService, private router: Router) {
+  constructor(private title: Title, private fb: FormBuilder, public authService: AuthService, private socialAuthService: SocialAuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,6 +42,24 @@ export class LoginComponent implements OnInit {
       email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
       password: [null, Validators.required],
     });
+
+    //Inicializamos login de Google o Facebook
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.isLoggedin = (user != null);
+      console.log(this.socialUser);
+    });
+    
+  }
+
+  // login metodo google
+  loginWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  // login metodo facebook
+  loginWithFacebook(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
   //Obtener form controls
@@ -56,6 +76,7 @@ export class LoginComponent implements OnInit {
     this.Msg = '';
   
     this.loading = true;
+
 
     this.authService.login({email: this.loginForm.value.email, password: this.loginForm.value.password})
       .subscribe(
@@ -77,4 +98,5 @@ export class LoginComponent implements OnInit {
         }
       )
   }
+
 }

@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING
     }, {});
     Skill.associate = function (models) {
-        Skill.hasMany(models.Profile)
+      Skill.belongsTo(models.Profile, {
+        foreignKey: {
+          name: 'skill_Id',
+          allowNull: true,
+        },
+      });
     };
     return Skill;
   };

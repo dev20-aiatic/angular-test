@@ -21,7 +21,7 @@
 }
 
 mat-card {
-    max-width: 400px;
+    max-width: auto;
     margin: 2em auto;
     text-align: center;
   }
@@ -35,3 +35,15 @@ mat-card {
     display: inline-block;
     text-align: center !important; 
 }
+
+.mat-raised-button.mat-red{
+    background-color: #ff5252;
+    color: white;
+ }
+
+
+ .mat-raised-button.mat-blue{
+    background-color: #42a5f5;
+    color: white;
+ }
+    

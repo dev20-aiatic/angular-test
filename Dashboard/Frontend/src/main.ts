@@ -4,7 +4,7 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-//Including Library in order to get Material Gesture
+//Incluimos esta libreria para habilitar los gestos táctiles de Material
 import 'hammerjs';
 
 if (environment.production) {

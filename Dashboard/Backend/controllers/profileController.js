@@ -1,4 +1,4 @@
-const {Product, Skill, Sequelize} = require('../models/indexModel.js');
+const {User, Profile,  Skill, Sequelize} = require('../models/indexModel.js');
 const Op = Sequelize.Op;
 
 const ProfileController = {
@@ -42,7 +42,7 @@ const ProfileController = {
     },
     insert(req, res) {
         Person.create({
-                ...req.body
+            include: [User],
             })
             .then(person => res.send({
                 person,

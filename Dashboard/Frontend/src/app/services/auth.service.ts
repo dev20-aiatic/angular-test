@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
+import { SocialAuthService } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root',

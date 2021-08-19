@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import {SocialUser} from "angularx-social-login";
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -37,10 +38,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
-      this.Msg = 'las contraseñas no coinciden';
-    } else {
-      this.loading = true;
+    this.loading = true;
       this.authService
         .signup({
           name: this.registerForm.value.name,
@@ -48,14 +46,19 @@ export class RegisterComponent implements OnInit {
           password: this.registerForm.value.password,
         })
         .subscribe(
-          res => {
-            console.log(res);
-            this.Msg = res.message;
+          (res: HttpResponse<any>) => {
+            this.Msg = res['message'];
+            this.loading = false;
             setTimeout(() => this.Msg = "", 2500);
+            setTimeout(() => {
+              this.router.navigate(['login'])
+            })
           },
-          err => console.error(err)
+          (error: HttpErrorResponse) => {
+            this.Msg = error.error.message
+            this.loading = false;
+            setTimeout(() => this.Msg = "", 2500);
+          }
         )
-      this.loading = false;
-    }
-  }
-}
+        }
+      }

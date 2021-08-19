@@ -1,0 +1,38 @@
+
+.form-card .mat-card-content {
+  margin-left:50px;
+  
+}
+
+.detail {
+  width: 58%;
+}
+.card-container form > * {
+  margin: 5px 15px;
+}
+
+.card-container{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-card {
+  max-width: 800px;
+}
+
+
+.card-container  {
+  height: calc(100vh - 98px);
+  border-radius: 10px;
+  margin: 16px;
+  margin-left: 100px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 4rem;
+  color: lightgray;
+}

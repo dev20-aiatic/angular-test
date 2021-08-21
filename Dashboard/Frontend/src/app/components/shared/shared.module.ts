@@ -11,6 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
@@ -18,8 +19,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table'; 
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
-import {MatOptionModule} from '@angular/material/core';
-
+import {MatOptionModule, MatNativeDateModule} from '@angular/material/core';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
 
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -47,7 +50,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatRadioModule,
     MatSelectModule,
-    MatOptionModule
+    MatNativeDateModule, 
+    MatOptionModule,
+    MatGridListModule,
+    MatMenuModule
   ],
   exports: [
     CommonModule,
@@ -59,6 +65,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDividerModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -69,7 +76,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     MatRadioModule,
     MatSelectModule,
-    MatOptionModule
+    MatNativeDateModule,
+    MatOptionModule,
+    MatGridListModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

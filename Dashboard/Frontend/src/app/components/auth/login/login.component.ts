@@ -22,13 +22,19 @@ export class LoginComponent implements OnInit {
   loading = false;
   hide = true;
   fieldTextType: boolean;
-  loginForm: FormGroup;
   Msg: any;
 
 
   //Variables social login
   isLoggedin: boolean;  
   socialUser: SocialUser;
+
+  //Definimos login form
+  loginForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  })
+
 
 
   constructor(private title: Title, private fb: FormBuilder, public authService: AuthService, private socialAuthService: SocialAuthService, private router: Router) {
@@ -37,11 +43,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     console.log("")
     this.title.setTitle(this.pageTitle);
-    //Inicializamos el formulario de inicio de sesión
-    this.loginForm = this.fb.group({
-      email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
-      password: [null, Validators.required],
-    });
+    
 
     //Inicializamos login de Google o Facebook
     this.socialAuthService.authState.subscribe((user) => {
@@ -52,20 +54,16 @@ export class LoginComponent implements OnInit {
     
   }
 
-  // login metodo google
+  /**Funcion que trae el modal de login con google */
   loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-
-  // login metodo facebook
+  
+  /**Funcion que trae el modal de login con Facebook */
   loginWithFacebook(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-  //Obtener form controls
-  get form() {
-    return this.loginForm.controls;
-  }
 
   //Toggle show password
   toggleFieldTextType() {

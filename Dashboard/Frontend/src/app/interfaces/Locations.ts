@@ -1,4 +1,4 @@
-export interface City {
+export interface Locations {
     region: string;
     c_digo_dane_del_departamento: number;
     departamento: string;

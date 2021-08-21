@@ -1,90 +1,30 @@
 
-<div class="container" color=#00000>
-    <mat-toolbar>
-        <span style="margin-left: 50%;">Perfil</span>
-    </mat-toolbar>
-</div> 
 
+  <mat-toolbar>
+      <span class="span">Perfil</span>
+  </mat-toolbar>
 
-<div class="card-container">
-    <mat-card class="form-card">
-        <mat-card-content>
-                 <form [formGroup]="profile">
-                <br>
-                <br>
-                    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                    <mat-label>Nombre</mat-label>
-                    <input matInput placeholder="Simple placeholder">
-                     </mat-form-field>
-            
-                    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                      <mat-label>Apellido</mat-label>
-                      <input matInput placeholder="Simple placeholder">
-                    </mat-form-field>
-            
-                    <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                        <mat-label>Cédula</mat-label>
-                        <input matInput placeholder="Simple placeholder">
-                      </mat-form-field>
-            
-                      <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                        <mat-label>Fecha de nacimiento</mat-label>
-                        <input required matInput placeholder="Simple placeholder">
-                      </mat-form-field>
-            
-                      <mat-form-field appearance="fill"
-                      [hideRequiredMarker]="hideRequiredControl.value"
-                      [floatLabel]="floatLabelControl.value">
-                    <mat-select required>
-                      <mat-option>-- Sin seleccionar --</mat-option>
-                      <mat-option value="option">Option</mat-option>
-                    </mat-select>
-                    <mat-label><mat-icon>book</mat-icon> Ciudad</mat-label>
-                  </mat-form-field>
-                
-                  <mat-form-field appearance="fill"
-                  [hideRequiredMarker]="hideRequiredControl.value"
-                  [floatLabel]="floatLabelControl.value">
-                <mat-select required>
-                  <mat-option>-- Sin seleccionar --</mat-option>
-                  <mat-option value="option">Option</mat-option>
-                </mat-select>
-                <mat-label><mat-icon>book</mat-icon> Departamento</mat-label>
-              </mat-form-field>
-            
-                      <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                        <mat-label>País</mat-label>
-                        <input matInput placeholder="Simple placeholder">
-                      </mat-form-field>
-            
-                      <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                        <mat-label>Código Postal</mat-label>
-                        <input matInput placeholder="Simple placeholder">
-                      </mat-form-field>
-            
-                      <mat-form-field appearance="fill" [floatLabel]="floatLabelControl.value">
-                        <mat-label>Profesión</mat-label>
-                        <input matInput placeholder="Simple placeholder">
-                      </mat-form-field>
-            
-                    <mat-form-field appearance="fill"
-                        [hideRequiredMarker]="hideRequiredControl.value"
-                        [floatLabel]="floatLabelControl.value">
-                      <mat-select >
-                        <mat-option>-- Ninguna --</mat-option>
-                        <mat-option value="option">Option</mat-option>
-                      </mat-select>
-                      <mat-label><mat-icon>book</mat-icon> Habilidad</mat-label>
-                    </mat-form-field>
+<div class="grid-container">
 
-                    <mat-form-field class="detail" appearance="fill">
-                      <mat-label>Descripción</mat-label>
-                      <textarea matInput placeholder="Ej. Empresario desde hace 12 años..."></textarea>
-                    </mat-form-field>
-
-                  </form>
-          
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expandir</button>
+              <button mat-menu-item>Remover</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Card Content</div>
         </mat-card-content>
       </mat-card>
-  
-  </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

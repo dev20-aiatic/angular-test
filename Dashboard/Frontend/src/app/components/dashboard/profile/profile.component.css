@@ -1,38 +1,39 @@
-
-.form-card .mat-card-content {
-  margin-left:50px;
-  
+.grid-container {
+  margin: 20px;
 }
 
-.detail {
-  width: 58%;
-}
-.card-container form > * {
-  margin: 5px 15px;
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
 }
 
-.card-container{
-  height: 100vh;
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+  flex-grow: 1;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   max-height: 100%;
+   justify-content: center;
+   align-items: stretch;
+}
+
+mat-card {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
-.form-card {
-  max-width: 800px;
-}
-
-
-.card-container  {
-  height: calc(100vh - 98px);
-  border-radius: 10px;
-  margin: 16px;
-  margin-left: 100px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 4rem;
-  color: lightgray;
+span {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
 }

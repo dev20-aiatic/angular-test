@@ -1,27 +1,35 @@
+<div class="container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <h1 class="app-name">Dashgular App</h1>
+  </mat-toolbar>
 
-<mat-toolbar>
-  <button mat-icon-button (click)="sidenav.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
- <span style="margin-left: 10px;"> Dashgular App </span>
- </mat-toolbar>
-
-
-<mat-sidenav-container>
-                 <!-- Menú -->
-  <mat-sidenav class="sidebar" #sidenav mode="over">
-     <mat-nav-list class="list-container">
-      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard'"> Inicio </a>
-      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/video'"> Video</a>
-      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/history'"> Historia</a>
-      <a mat-list-item (click)="sidenav.toggle()"[routerLink]="'/dashboard/profile'"> Perfil</a>
+  <mat-sidenav-container class="sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list class="list-container">
+      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard'"> Inicio </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/video'"> Video</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/history'"> Historia</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/profile'"> Perfil</a>
+      <mat-divider></mat-divider>
       <a mat-list-item (click)="logout()" *ngIf="auth.getInfo('token')" mat-list-item>Cerrar sesión</a>
     </mat-nav-list>
-  </mat-sidenav>
-              <!-- Barra de navegación y contenido -->
-  <mat-sidenav-content>
-     <div style="height: 88vh;">
+    </mat-sidenav>
+
+    <mat-sidenav-content>
       <router-outlet></router-outlet>
-    </div>
     </mat-sidenav-content>
-</mat-sidenav-container>
+  </mat-sidenav-container>
+</div>
+
+
+
+
+
+  
+  

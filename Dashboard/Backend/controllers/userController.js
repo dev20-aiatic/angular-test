@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
 const { jwt_secret } = require('../config/config.json')[env];
 
+let profile = {};
+
 const UserController = {
     getAll(res) {
         User.findAll({
@@ -54,6 +56,40 @@ const UserController = {
         }
     },
 
+    getProfile(req, res) {
+        
+        Profile.findOne({
+            where: {
+                user_Id:'1'
+            }
+        })
+            .then(profile => res.send({
+                profile,
+            }))
+            .catch(err => res.send({
+                message: 'Hubo un problema para consultar el registro'
+            }))
+    }, 
+
+    
+   modifyProfile(req, res) {f
+        Profile.update({
+            include: [User],
+                ...req.body
+            }, {
+                where: {
+                    user_Id: req.params.User_Id
+                }
+            })
+            .then(profile => res.send({
+                profile,
+                message: 'Registro modificado exitosamente'
+            }))
+            .catch(err => res.send({
+                message: 'Hubo un problema para modificar el registro'
+            }))
+    }, 
+
 
     /**Función encargada de gestionar el inicio de sesión
    * @param {string} email - Correo del usuario
@@ -103,5 +139,6 @@ const UserController = {
     getInfo(req,res){
         res.send(req.user);
     }
+    
 }
 module.exports = UserController;

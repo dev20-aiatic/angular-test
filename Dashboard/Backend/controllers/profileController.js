@@ -3,49 +3,49 @@ const Op = Sequelize.Op;
 
 const ProfileController = {
     getAll(res) {
-        Person.findAll({
-                include: [Skill],
+        Profile.findAll({
+                include: [User],
                 order: [
-                    ['name', 'ASC']
+                    ['lastname', 'ASC']
                 ]
             })
-            .then(person => res.send(person))
+            .then(profile => res.send(profile))
     },
     getByPK(req, res) {
-        Person.findAll({
-                include: [Skill],
+        Profile.findAll({
+                include: [User],
                 where: {
-                    id: req.params.personId
+                    User_Id: req.params.profile_Id
                 }
             })
-            .then(person => res.send(person))
+            .then(profile => res.send(profile))
     },
     getByQuery(req, res) {
-        Person.findAll({
-                include: [Skill],
+        Profile.findAll({
+                include: [User],
                 where: {
                     name: {
                         [Op.like]: '%'+ req.params.query +'%'
                     }
                 }
             })
-            .then(person => res.send(person))
+            .then(profile => res.send(profile))
     },
     getBySkill(req, res) {
-        Person.findAll({
-                include: [Skill],
+        Profile.findAll({
+                include: [User],
                 where: {
-                    Skill_Id: req.params.Skill_Id
+                    User_Id: req.params.User_Id
                 }
             })
-            .then(person => res.send(person))
+            .then(profile => res.send(profile))
     },
     insert(req, res) {
-        Person.create({
+        Profile.create({
             include: [User],
             })
-            .then(person => res.send({
-                person,
+            .then(profile => res.send({
+                profile,
                 message: 'Registro creado con éxito'
             }))
             .catch(err => res.send({
@@ -53,15 +53,15 @@ const ProfileController = {
             }))
     },
     modify(req, res) {
-        Person.update({
+        Profile.update({
                 ...req.body
             }, {
                 where: {
                     id: req.params.id
                 }
             })
-            .then(person => res.send({
-                person,
+            .then(profile => res.send({
+                profile,
                 message: 'Registro modificado exitosamente'
             }))
             .catch(err => res.send({
@@ -69,13 +69,13 @@ const ProfileController = {
             }))
     },
     delete(req, res) {
-        Person.destroy({
+        Profile.destroy({
                 where: {
                     id: req.params.id
                 }
             })
-            .then(person => res.send({
-                person,
+            .then(profile => res.send({
+                profile,
                 message: 'Registro eliminado con éxito'
             }))
             .catch(err => res.send({

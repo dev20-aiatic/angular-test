@@ -4,27 +4,142 @@
       <span class="span">Perfil</span>
   </mat-toolbar>
 
-<div class="grid-container">
+  <div class="grid-container">
+  
+  <mat-grid-list [cols]="1 "rowHeight = "300px" (window:resize)="onResize($event)">
+    <mat-grid-tile>
+    <mat-card class="dashboard-card">
+      <form [formGroup]="profile" novalidate>
+      <mat-card-header>
+        <mat-card-title>
+          Profile
+          <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>Expandir</button>
+            <button mat-menu-item>Remover</button>
+          </mat-menu>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+      
+            <div class="mainContainer">
+      
+     <!-- Campo de nombre del usuario -->
 
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expandir</button>
-              <button mat-menu-item>Remover</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+              <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Ej. Pepito" formControlName="name">
+              </mat-form-field>
+      
+      <!-- Campo de apellido del usuario -->
+      <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+        <mat-label>Apellido</mat-label>
+        <input matInput ngModel required [(ngModel)]="profile.lastname" placeholder="Ej. Perez" formControlName="lastname">
+      </mat-form-field>
+      
+      <!-- Campo de cédula del usuario -->
+      <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+        <mat-label>Cédula</mat-label>
+        <input matInput #natIdCard maxlength="13" placeholder="Ej. 44785210" type="number" formControlName="natIdCard">
+      </mat-form-field>
+
+            </div>
+
+            <div class="mainContainer">
+
+<!-- Campo de Fecha de nacimiento del usuario -->
+
+    <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput formControlName="DoB" [matDatepicker]="DateofBirth" class="form-control">
+      <mat-datepicker-toggle matSuffix [for]="DateofBirth"></mat-datepicker-toggle>
+      <mat-datepicker touchUi #DateofBirth ></mat-datepicker>
+    </mat-form-field>
+
+
+    <!-- Campo de Profesión -->
+
+  <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+    <mat-label>Profesión</mat-label>
+    <input matInput placeholder="Ej. Abogado" formControlName="career">
+  </mat-form-field>
+
+<!-- Campo de Habilidad -->
+  <mat-form-field class="mid-width" appearance="fill"
+  [floatLabel]="floatLabelControl.value">
+<mat-select formControlName="skill_Id">
+  <mat-option>-- Sin seleccionar --</mat-option>
+  <mat-option value="option">Option</mat-option>
+</mat-select>
+<mat-label><mat-icon>pen</mat-icon>Habilidad</mat-label>
+</mat-form-field>
+  </div>
+
+   <div class="mainContainer">
+    
+
+  <!-- Campo de País -->
+
+
+ <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+  <mat-label>País</mat-label>
+  <input matInput placeholder="Ej. Perez" formControlName="country">
+</mat-form-field>
+
+<!-- Campo de departamento -->
+
+<mat-form-field class="mid-width" appearance="fill"
+        [floatLabel]="floatLabelControl.value">
+      <mat-select formControlName="state">
+        <mat-option>-- Sin seleccionar --</mat-option>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+      <mat-label><mat-icon>face</mat-icon> Departamento</mat-label>
+    </mat-form-field>
+
+<!-- Campo de ciudad -->
+<mat-form-field class="mid-width" appearance="fill"
+[floatLabel]="floatLabelControl.value">
+<mat-select formControlName="city">
+<mat-option>-- Sin seleccionar --</mat-option>
+<mat-option value="option">Option</mat-option>
+</mat-select>
+<mat-label><mat-icon>book</mat-icon> Municipio</mat-label>
+</mat-form-field>
 </div>
+
+      </mat-card-content>
+      </form>
+    </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile >
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title>
+          Comentario
+          <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item>Expandir</button>
+            <button mat-menu-item>Remover</button>
+          </mat-menu>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <div>
+        <mat-form-field class="full-width" appearance="fill">
+          <!-- Campo de Descripción -->
+          <mat-label>Descripción</mat-label>
+          <textarea matInput placeholder="Ej. Empresario desde hace 12 años..."></textarea>
+        </mat-form-field>
+      
+        </div>
+      
+      </mat-card-content>
+    </mat-card>
+    </mat-grid-tile>
+ </mat-grid-list>

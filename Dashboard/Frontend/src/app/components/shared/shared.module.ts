@@ -26,6 +26,7 @@ import {MatMenuModule} from '@angular/material/menu';
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [],
@@ -53,6 +54,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule, 
     MatOptionModule,
     MatGridListModule,
+    FlexLayoutModule,
     MatMenuModule
   ],
   exports: [
@@ -79,6 +81,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatNativeDateModule,
     MatOptionModule,
     MatGridListModule,
+    FlexLayoutModule,
     MatMenuModule
   ]
 })

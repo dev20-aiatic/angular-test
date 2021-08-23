@@ -7,8 +7,8 @@ router.use("/api", usersRoute);
 
 
 //Referenciamos la ruta de persona
-const personRoute = require("./person");
-router.use("/api/person", personRoute);
+const profileRoute = require("./profile");
+router.use("/api/profile", profileRoute);
 
 
 //Referenciamos la ruta de habilidades

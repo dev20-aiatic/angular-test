@@ -1,31 +1,63 @@
-import { Component } from '@angular/core';
+import { ProfileService } from './../../../services/profile.service';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpResponse } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
-  /** Based on the screen size, switch from standard to one column per row */
-  cards = this.breakpointObserver.observe(Breakpoints.XSmall).pipe(
-    map(({ matches }) => {
-      if (matches) {
-        return [
-          { title: 'Información detallada', cols: 1, rows: 1 },
-          { title: 'Tú perfil', cols: 1, rows: 1 },
-          { title: 'Comentario Adicional', cols: 1, rows: 1 }
-        ];
-      }
+export class ProfileComponent implements OnInit {
+  public profile;
+  public skills;
 
-      return [
-        { title: 'Card 1', cols: 1, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 2 },
-        { title: 'Card 3', cols: 1, rows: 1 }
-      ];
-    })
-  );
+  profileForm = this.fb.group({
+    name: [null, Validators.required],
+    lastname: [null, Validators.required],
+    natIdCard: [null, Validators.required],
+    DoB: [null, Validators.required],
+    city: [null, Validators.required],
+    state: [null, Validators.required],
+    country:[null, Validators.required],
+    postalcode: [null, Validators.compose([
+      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+    ],
+    career:[null, Validators.required],
+    skill_Id:[null, Validators.required],
+    description:['free', Validators.required],
+    shipping: ['free', Validators.required]
+  });
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+  breakpoint: number;
+  
+
+  constructor(private fb: FormBuilder, private profileService:ProfileService) {
+
+  }
+
+
+  ngOnInit(): void {
+    this.getAll();
+
+    this.profileService.getAll()
+    .subscribe(res => { this.skills = res; },
+      error => console.error(error));
+  }
+
+  getAll() {
+    return this.profileService.getAll()
+      .subscribe(res => { this.profile = res; },
+        error => console.error(error));
+  }
+  
+onResize(event) {
+  this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
+}
 }

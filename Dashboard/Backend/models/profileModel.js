@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       natIdCard: DataTypes.BIGINT,
       DoB: DataTypes.DATE,
       city: DataTypes.STRING,
-      state: DataTypes.STRING,
+      deparment: DataTypes.STRING,
       country: DataTypes.STRING,
       postalcode: DataTypes.STRING,
       career: DataTypes.STRING,

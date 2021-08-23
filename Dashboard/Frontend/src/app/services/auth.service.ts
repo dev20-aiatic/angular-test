@@ -35,6 +35,11 @@ export class AuthService {
   }
 
 
+   /**Metodo  modificar perfil */
+   getProfile(user: object): Observable<any> {
+    return this.httpClient.post(this.api + 'auth/user/profile', user);
+  }
+
   /**Metodo validar logueo */
   isAuthenticated() {
     if (localStorage.getItem('authToken')) {

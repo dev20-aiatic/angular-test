@@ -32,8 +32,12 @@ export class SidebarComponent implements OnInit{
 
 
   logout() {
-    this.auth.logout();
-    this.socialAuthService.signOut();
-    this.route.navigateByUrl('/login')
+    if(localStorage){
+      this.auth.logout();
+      this.route.navigateByUrl('/login')
+    }else{
+      this.socialAuthService.signOut();
+      this.route.navigateByUrl('/login')
+    }
   }
 }

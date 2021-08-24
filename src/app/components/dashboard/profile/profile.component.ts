@@ -1,19 +1,24 @@
-import { ProfileService } from './../../../services/profile.service';
+import { Locations } from './../../../interfaces/Locations';
+import { WebService } from './../../../services/web.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpResponse } from '@angular/common/http';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  public profile;
-  public skills;
+  
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+  breakpoint: number;
 
   profileForm = this.fb.group({
     name: [null, Validators.required],
@@ -21,43 +26,72 @@ export class ProfileComponent implements OnInit {
     natIdCard: [null, Validators.required],
     DoB: [null, Validators.required],
     city: [null, Validators.required],
-    state: [null, Validators.required],
-    country:[null, Validators.required],
-    postalcode: [null, Validators.compose([
-      Validators.required, Validators.minLength(5), Validators.maxLength(5)])
+    department: [null, Validators.required],
+    country: [null, Validators.required],
+    postalcode: [
+      null,
+      Validators.compose([
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(5),
+      ]),
     ],
-    career:[null, Validators.required],
-    skill_Id:[null, Validators.required],
-    description:['free', Validators.required],
-    shipping: ['free', Validators.required]
+    career: [null, Validators.required],
+    skill_Id: [null, Validators.required],
+    description: ['free', Validators.required],
+    shipping: ['free', Validators.required],
   });
 
 
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto');
-  breakpoint: number;
-  
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private webService: WebService
+  ) {}
 
-  constructor(private fb: FormBuilder, private profileService:ProfileService) {
+  public skills;
+  public user_id=1;
+  profiles: any = [];
 
+  departments: any = [];
+  city;
+  cities: any = [];
+  department;
+
+  async ngOnInit() {
+    this.profiles = await this.authService.getProfile(this.user_id);
+    this.departments = await this.webService.getDepartments();
+    console.log(this.profiles);
   }
 
-
-  ngOnInit(): void {
-    this.getAll();
-
-    this.profileService.getAll()
-    .subscribe(res => { this.skills = res; },
-      error => console.error(error));
+  /* getProfile() {
+    return this.authService.getProfile().subscribe(
+      (res) => {
+        this.profiles = res;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+ */
+  //Declaramos función para alternar los select de los material select input "deparment" "city"
+  deparmentChangeAction(department) {
+    this.city = '';
+    let dropDownData = this.departments.find(
+      (data: any) => data.region === department
+    );
+    if (dropDownData) {
+      this.cities = dropDownData.cities;
+      if (this.cities) {
+        this.city = this.cities[0];
+      }
+    } else {
+      this.cities = [];
+    }
   }
 
-  getAll() {
-    return this.profileService.getAll()
-      .subscribe(res => { this.profile = res; },
-        error => console.error(error));
+  onResize(event) {
+    this.breakpoint = event.target.innerWidth <= 400 ? 1 : 4;
   }
-  
-onResize(event) {
-  this.breakpoint = (event.target.innerWidth <= 400) ? 1 : 4;
-}
 }

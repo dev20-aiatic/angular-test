@@ -1,3 +1,5 @@
+import { Profile } from './../interfaces/Profile';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient} from "@angular/common/http";
@@ -9,35 +11,41 @@ import { SocialAuthService } from 'angularx-social-login';
 export class AuthService {
   private token: string = "";
   private user: object = {};
-  api = 'http://localhost:5000/api/';
+  
+  api = 'http://localhost:5000/api';
 
   constructor(public httpClient: HttpClient) { }
   
 
   getAll() {
-    return this.httpClient.get(this.api + 'users')
+    return this.httpClient.get(`${this.api}/users`)
   }
 
   /** Método registrar usuario */
   signup(user: object): Observable<any> {
-    return this.httpClient.post(this.api +'auth/register', user);
+    return this.httpClient.post(`${this.api}/auth/register`, user);
   }
 
   /**Metodo  iniciar sesión*/
 
   login(user: object): Observable<any> {
-    return this.httpClient.post(this.api + 'auth/login', user);
+    return this.httpClient.post(`${this.api}/auth/login`, user);
   }
 
   /**Metodo  cerrar sesión*/
   logout() {
-  localStorage.removeItem('authToken')
+  localStorage.clear();
   }
 
 
-   /**Metodo  modificar perfil */
-   getProfile(user: object): Observable<any> {
-    return this.httpClient.post(this.api + 'auth/user/profile', user);
+   /**Metodo  encontrar perfil por id de usuario */
+   /* getProfile(): Observable<any> {
+    return this.httpClient.get(`${this.api}/user/profile/`);
+  }
+ */
+
+  public getProfile(user_id): Promise<Profile>{
+    return this.httpClient.get<Profile>(`${this.api}/user/profile/user_id`).toPromise();
   }
 
   /**Metodo validar logueo */
@@ -69,7 +77,7 @@ export class AuthService {
   }
 
   getInfo(token) {
-    return this.httpClient.get(this.api + 'users/info', {
+    return this.httpClient.get(`${this.api}/user/info`, {
       headers: { authorization: token }
     })
   }

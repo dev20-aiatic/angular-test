@@ -15,8 +15,7 @@ const {jwt_secret} = require('../config/config.json')[env];
 
 const validation = async (req, res, next) => {
     try {
-        
-        const token = req.headers['authorization']; //sacamos el token de los headers
+        const token = req.headers['Authorization']; //sacamos el token de los headers
         const payload = jwt.verify(token, jwt_secret); //sacamos el payload del token
         const user = await User.findByPk(payload.id); //buscamos el usuario en la base de datos con el id del payload
         const tokenFound = await Token.findOne({

@@ -3,15 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
 const { jwt_secret } = require('../config/config.json')[env];
+const { profile } = require('console');
 
-let profile = {};
 
 const UserController = {
-    getAll(res) {
-        User.findAll({
-        })
-            .then(users => res.send(users))
-    },
 
      /**Función encargada de gestionar el registro de usuario
       * @param {string} name - Nombre completo del usurio
@@ -21,29 +16,37 @@ const UserController = {
     async register(req, res) {
         try {
             const password = await bcrypt.hash(req.body.password, 9);
-            const email = await User.findOne({
+            const localUser = await User.findOne({
                 where: {
                     email: req.body.email
                 }, 
             })
-            console.log(email);
-            if (email) {
+            console.log(localUser);
+            if (localUser) {
                 return res.status(400).send({
-                    message: 'La dirección de correo ya se encuentra registrada'
+                    message: 'La dirección de correo ya ha sido usada'
                 })
             }
+/**
+            /**
+             * Registrar un nuevo usuario
+             * @class
+             */
             const user = await User.create({
                 name: req.body.name,
                 email: req.body.email,
                 createdAt : null,
                 password,
             });
+             /**
+            * Asignamos un perfil correspondiente al usuario
+            * @class
+            */
 
-            //Definimos la instrucción que efectua registro de user Id en la tabla profile
-            const profile = await Profile.create({
-                user_Id	: user.id
-            });
-           
+           const profile = await Profile.create({
+               user_Id	: user.id
+           });
+          
             res.status(201).send({
                 user,
                 message: 'Usuario creado con éxito'
@@ -56,39 +59,32 @@ const UserController = {
         }
     },
 
-    getProfile(req, res) {
-        
-        Profile.findOne({
-            where: {
-                user_Id:'1'
-            }
-        })
-            .then(profile => res.send({
-                profile,
-            }))
-            .catch(err => res.send({
-                message: 'Hubo un problema para consultar el registro'
-            }))
-    }, 
+    async getProfile(req, res) {
+        const {id} = req.params;
 
-    
-   modifyProfile(req, res) {
-        Profile.update({
-            include: [User],
-                ...req.body
-            }, {
-                where: {
-                    user_Id: req.params.User_Id
-                }
-            })
-            .then(profile => res.send({
+        try {
+            const user = await User.findOne({id});
+            console.log(user);
+/**
+            /**
+             * Obtenemos perfil enlazado con usuario
+             * @class
+             */
+            const user_Id = user.id
+            const profile = await Profile.findOne({
+                where:{
+                    user_Id},
+                });
+            res.status(201).send({
                 profile,
-                message: 'Registro modificado exitosamente'
-            }))
-            .catch(err => res.send({
-                message: 'Hubo un problema para modificar el registro'
-            }))
-    }, 
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({
+                message: 'Hubo un problema al tratar de consultar el usuario'
+            });
+        }
+    },
 
 
     /**Función encargada de gestionar el inicio de sesión

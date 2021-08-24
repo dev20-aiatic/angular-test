@@ -6,7 +6,7 @@
     "host": "localhost",
     "dialect": "mysql",
     "operatorsAliases": 0,
-    "jwt_secret":"secreto"
+    "jwt_secret":"aquenoadivinaswey"
   },
   "test": {
     "username": "root",
@@ -17,10 +17,10 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "dashgular",
-    "host": "127.0.0.1",
+    "username": "csrdbkcknsqslgtq",
+    "password": "xq2yawr025up0osk",
+    "database": "vfke2jsokbjq2djh",
+    "host": "g84t6zfpijzwx08q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "operatorsAliases": 0
   }

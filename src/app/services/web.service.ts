@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Locations } from '../interfaces/Locations';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 const headerOption = {
@@ -14,18 +14,18 @@ const headerOption = {
 })
 export class WebService {
 
-  private location: Locations = { region: "",  c_digo_dane_del_departamento: 68, departamento: "", c_digo_dane_del_municipio: 68, municipio: ""}
-  private locationsUrl= "https://www.datos.gov.co/resource/xdk5-pm3f.json"; //Url Json Locations
-
- 
+  locationsUrl:string;
 
 constructor(private http: HttpClient) {
+  //this.locationsUrl= "https://www.datos.gov.co/resource/xdk5-pm3f.json"; //Url Json Municipios y Departamentos Colombia
+  this.locationsUrl = "https://raw.githubusercontent.com/valer0ck/departamentos-ciudades-colombia/master/ciudades.json" //Url Json Municipios y Departamentos Colombia
+}
+
+ //Definimos un método get para extraer los datos del json
+
+ public getDepartments(): Promise<Locations>{
+   return this.http.get<Locations>(`${this.locationsUrl}`).toPromise();
  }
 
- //Definimos un método get para extraer los datos del json en github
-
- public getLocation(): Observable<Locations>{
-   return this.http.get<Locations>(this.locationsUrl);
- }
 
 }

@@ -1,19 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Profile } from '../interfaces/Profile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  constructor(public httpClient: HttpClient) { }
+  profiles: Profile[];
+  api = 'http://localhost:5000/api'
+
+  constructor(public httpClient: HttpClient) { 
+  }
 
   getAll(): Observable<any> {
-    return this.httpClient.get('http://localhost:3000/profile')
+    return this.httpClient.get('http://localhost:3000/api/profile')
   }
-  getProfileBySkill(skill_Id) {
-    return this.httpClient.get('http://localhost:3000/profile/skill/' + skill_Id)
+
+  /**Metodo  encontrar perfil por id de usuario */
+
+  getProfile(id: string | number){
+    return this.httpClient.get(`${this.api}/user/profile/user_Id=${id}`)
+  }
+  getProfileByUser(user_id) {
+    return this.httpClient.get('http://localhost:3000/profile/user/' + user_id)
   }
   getProfileByQuery(query) {
     return this.httpClient.get('http://localhost:3000/profile/byQuery/' + query)

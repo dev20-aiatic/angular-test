@@ -4,12 +4,13 @@
       <span class="span">Perfil</span>
   </mat-toolbar>
 
-  <div class="grid-container">
+  <div class="grid-container"> 
+
   
-  <mat-grid-list [cols]="1 "rowHeight = "300px" (window:resize)="onResize($event)">
+  <mat-grid-list [cols]="1 "rowHeight = "400px" (window:resize)="onResize($event)" *ngFor="let profile of profiles">
     <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <form [formGroup]="profile" novalidate>
+      <form [formGroup]="profileForm" novalidate>
       <mat-card-header>
         <mat-card-title>
           Profile
@@ -36,7 +37,7 @@
       <!-- Campo de apellido del usuario -->
       <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
         <mat-label>Apellido</mat-label>
-        <input matInput ngModel required [(ngModel)]="profile.lastname" placeholder="Ej. Perez" formControlName="lastname">
+        <input matInput placeholder="Ej." formControlName="lastname">
       </mat-form-field>
       
       <!-- Campo de cédula del usuario -->
@@ -78,11 +79,7 @@
   </div>
 
    <div class="mainContainer">
-    
-
   <!-- Campo de País -->
-
-
  <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
   <mat-label>País</mat-label>
   <input matInput placeholder="Ej. Perez" formControlName="country">
@@ -92,9 +89,9 @@
 
 <mat-form-field class="mid-width" appearance="fill"
         [floatLabel]="floatLabelControl.value">
-      <mat-select formControlName="state">
-        <mat-option>-- Sin seleccionar --</mat-option>
-        <mat-option value="option">Option</mat-option>
+      <mat-select [(ngModel)]="department"  formControlName="department" (selectionChange)="deparmentChangeAction(department)" >
+        <mat-option value="0">-- Sin seleccionar --</mat-option>
+        <mat-option value="{{department.region}}" *ngFor="let department of departments">{{department.region}}</mat-option>
       </mat-select>
       <mat-label><mat-icon>face</mat-icon> Departamento</mat-label>
     </mat-form-field>
@@ -102,9 +99,9 @@
 <!-- Campo de ciudad -->
 <mat-form-field class="mid-width" appearance="fill"
 [floatLabel]="floatLabelControl.value">
-<mat-select formControlName="city">
-<mat-option>-- Sin seleccionar --</mat-option>
-<mat-option value="option">Option</mat-option>
+<mat-select name="city" formControlName="city">
+<mat-option >-- Sin seleccionar --</mat-option>
+<mat-option value="{{city}}" *ngFor="let city of cities">{{city.city}}</mat-option>
 </mat-select>
 <mat-label><mat-icon>book</mat-icon> Municipio</mat-label>
 </mat-form-field>

@@ -2,25 +2,28 @@
 
 /** Interfaz de usuario */
 export interface User {
-    id: Number,
-    name: String;
-    email: String;
+    id: number,
+    name: string;
+    email: string;
 }
 
+
 /** Interfaz de Perfil */
+/* 
 export interface Profile {
-    id: Number,
-    user_Id:Number,
-    lastname?:String,
-    natID?:Number,
+    id: number,
+    user_Id:number,
+    lastname?:string,
+    natID?:number,
     birthdate:Date,
-    city?:String,
-    deparment?:String,
-    country?:String,
-    postalcode?:Number,
-    career?:String,
-    skills?:Number,
-    description?:String,
+    city?:string,
+    deparment?:string,
+    country?:string,
+    postalcode?:number,
+    career?:string,
+    skills?:number,
+    description?:string,
     createdat?:Date,
     updatedat?:Date
 }
+ */

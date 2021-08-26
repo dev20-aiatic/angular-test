@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 

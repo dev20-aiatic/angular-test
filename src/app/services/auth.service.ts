@@ -1,3 +1,4 @@
+import { TokenResponse } from './../interfaces/User';
 import { Profile } from './../interfaces/Profile';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
@@ -11,7 +12,8 @@ import { SocialAuthService } from 'angularx-social-login';
 export class AuthService {
   private token: string = "";
   private user: object = {};
-  
+  private luser: (TokenResponse); 
+
   api = 'http://localhost:5000/api';
 
   constructor(public httpClient: HttpClient) { }
@@ -66,7 +68,7 @@ export class AuthService {
   }
 
   getUser() {
-    return this.user;
+    return {... this.luser};
   }
 
   getInfo(token) {

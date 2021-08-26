@@ -59,9 +59,10 @@ const UserController = {
             }
             );
 
-            res.status(200).send({
+            res.status(200).json({
                 auth:true,
                 token:token,
+                user: user,
                 message:'¡Gracias por su registro!'
             });
         } catch (error) {
@@ -111,9 +112,10 @@ const UserController = {
             }
             );
             //status es 200 by default
-            res.status(200).send({
+            res.status(200).json({
                 auth:true,
                 token:token,
+                user:user,
                 message: 'Bienvenido de nuevo' + user.name
             });
         } catch (error) {

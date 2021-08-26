@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit {
   department;
 
   async ngOnInit() {
-    this.profiles = await this.auth.getUser();
+    this.profiles = await this.auth.getAll();
     this.departments = await this.webService.getDepartments();
     console.log(this.profiles);
   }

@@ -25,13 +25,13 @@
       </mat-card-header>
       <mat-card-content class="dashboard-card-content">
       
-            <div class="mainContainer" *ngFor="let profile of profiles">
+            <div class="mainContainer">
       
      <!-- Campo de nombre del usuario -->
 
               <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Ej. Pepito" formControlName="name">{{profile.name}}
+                <input matInput placeholder="Ej. Pepito" formControlName="name">{{profiles.name}}
               </mat-form-field>
       
       <!-- Campo de apellido del usuario -->

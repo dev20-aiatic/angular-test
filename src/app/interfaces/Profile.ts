@@ -1,7 +1,6 @@
 
 export class Profile {
-    id: number;
-    user_Id:number;
+    profile_Id: number;
     lastname:string;
     natID:number;
     birthdate:Date;
@@ -10,13 +9,13 @@ export class Profile {
     country:string;
     postalcode:number;
     career:string;
-    skills:number;
+    skill_Id:number;
     description:string;
     createdat:Date;
     updatedat:Date;
 
     constructor(
-    pId: number, puser_Id:number,
+    pprofile_Id: number,
     pLastname:string,
     pNatID:number,
     pBirthdate:Date,
@@ -25,10 +24,10 @@ export class Profile {
     pCountry:string,
     pPostalcode:number,
     pCareer:string,
-    pSkills:number,
+    pskill_Id:number,
     pDescription:string,
     ){
-        this.id = pId;
+        this.profile_Id = pprofile_Id;
         this.lastname = pLastname;
         this.natID = pNatID;
         this.birthdate = pBirthdate;
@@ -37,7 +36,7 @@ export class Profile {
         this.country = pCountry;
         this.postalcode = pPostalcode;
         this.career = pCareer;
-        this.skills = pSkills;
+        this.skill_Id = pskill_Id;
         this.description = pDescription;
     }
 }

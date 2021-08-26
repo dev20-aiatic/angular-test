@@ -1,18 +1,22 @@
-
+/** Interfaz para obtener usuario */
+export interface TokenResponse {
+    auth: boolean;
+    token: string;
+    user: User;
+}
 
 /** Interfaz de usuario */
 export interface User {
     id: number,
     name: string;
     email: string;
+    profile_Id: number;
 }
 
 
 /** Interfaz de Perfil */
-/* 
 export interface Profile {
-    id: number,
-    user_Id:number,
+    profile_Id: number,
     lastname?:string,
     natID?:number,
     birthdate:Date,
@@ -21,9 +25,9 @@ export interface Profile {
     country?:string,
     postalcode?:number,
     career?:string,
-    skills?:number,
+    skill_Id?:number,
     description?:string,
-    createdat?:Date,
-    updatedat?:Date
+    createdAt?:Date,
+    updatedAt?:Date
 }
- */
+ 

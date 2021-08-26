@@ -1,3 +1,7 @@
-<p>
-  video works!
-</p>
+<mat-toolbar>
+    <span class="span">Video Incrustado</span>
+</mat-toolbar>
+
+<div class="container">
+      <iframe [src]="getVideoIframe('https://www.youtube.com/watch?v=8cgp2WNNKmQ')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="video"></iframe>
+</div>

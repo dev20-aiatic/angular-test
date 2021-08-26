@@ -1,23 +1,22 @@
 
     <mat-toolbar>
-        <span class="span">Inicio</span>
+        <span class="span">MINIONS UNAB</span>
     </mat-toolbar>
 
-<div class="card-container">
-    <mat-card class="example-card">
-        <img mat-card-image src="https://www.mvps.net/docs/wp-content/uploads/2019/03/hello-world.png" alt="Photo of a Shiba Inu">
-        <mat-card-content>
-          <p>
-            Este dashboard fue realizado en el marco de la primera semana de practicas.  A continuación encontrará los datos del autor. 
-        </p>
-        <p>Nombre: Daniel Pacheco</p>
-        <p>Correo: dev20@aiatic.com</p>
-        </mat-card-content>
-      </mat-card>
+      <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
+        <mat-card *ngFor="let member of members" fxFlex="calc(50%-25px)" fxFlex.sm="calc(50%-25px)" >
+          <img mat-card-image class="photo" [src]="member.photo" alt="Photo of {{member.title}}">
+          <mat-card-content>
+            <mat-card-title>{{member.title}}</mat-card-title>
+            <mat-card-subtitle>{{member.subtitle}}</mat-card-subtitle>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-</div>
-
-
+      <div class="container uni">
+              <img class="logo" src="../../../../assets/img/logo_unab.png" alt="LOGO UNAB">
+            <h1 class="texto">Prácticas Semestre II 2021</h1>
+    </div>
 
 
 

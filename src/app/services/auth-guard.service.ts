@@ -1,23 +1,24 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Injectable } from "@angular/core";
-import {ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, Router, UrlTree} from '@angular/router';
-import {Observable} from "rxjs";
+import { Router, CanActivate, ActivatedRouteSnapshot,RouterStateSnapshot, CanActivateChild, UrlTree } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivateChild  {
+  
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private auth: AuthService, private router: Router) {}
 
   canActivateChild(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const user = this.auth.isAuthenticated;
-    if (!user) {
-      this.router.navigate(['login']);
-      return false
+    state: RouterStateSnapshot): boolean {
+    if (!localStorage.getItem('token')) {
+      Swal.fire('Error','Debe iniciar sesión para acceder a este contenido', 'error');
+      this.router.navigate(["login"]);
+      return false;
     }
-    return true
-    }
+    return true;
   }
+}
 

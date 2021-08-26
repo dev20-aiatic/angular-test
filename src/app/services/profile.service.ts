@@ -21,7 +21,10 @@ export class ProfileService {
   /**Metodo  encontrar perfil por id de usuario */
 
   getProfile(id: string | number){
+
     return this.httpClient.get(`${this.api}/user/profile/user_Id=${id}`)
+
+    
   }
   getProfileByUser(user_id) {
     return this.httpClient.get('http://localhost:3000/profile/user/' + user_id)

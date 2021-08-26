@@ -1,6 +1,4 @@
-
-const user = require("./userModel");
-
+'use strict';
 
 module.exports = (sequelize, DataTypes) => {
   /**
@@ -12,10 +10,12 @@ module.exports = (sequelize, DataTypes) => {
    */
   const Profile = sequelize.define("Profile", {
       // Los atributos del modelo son definidos a partir de aquí
-      lastname: {
-        allowNull: true,
-        type: DataTypes.STRING,
+      profile_Id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
       },
+      lastname: DataTypes.STRING,
       natIdCard: DataTypes.BIGINT,
       DoB: DataTypes.DATE,
       city: DataTypes.STRING,
@@ -23,27 +23,29 @@ module.exports = (sequelize, DataTypes) => {
       country: DataTypes.STRING,
       postalcode: DataTypes.STRING,
       career: DataTypes.STRING,
-      skill_Id: DataTypes.STRING,
+      skill_Id: DataTypes.INTEGER,
       description: DataTypes.TEXT,
-      user_Id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'User', // Hacemos referencia a la tabla users definida en el modelo Usre
-          key: 'id', // 'id' hacemos refeencia a la clave primaria de la tabla users
-        },
+      createdAt: {
+        type: 'TIMESTAMP',
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
+      },
+    updatedAt:{
+        type: 'TIMESTAMP',
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+        allowNull: false
       },
     }, {        
-      timestamps: false
     });
    // Se define la relacion de llaves presente entre las tablas 'skills' y 'person'
    Profile.associate = function (models) {
-   Profile.belongsTo(models.User,{foreignKey: 'user_Id'});
-   Profile.hasMany(models.Skill, {
-    foreignKey: {
-      name: 'skill_Id',
-      allowNull: true
-    },
-  });
+   Profile.hasOne(models.User, {foreignKey: {
+    name: 'profile_Id',
+    allowNull: true
+  },
+});
+Profile.belongsTo(models.Skill, {foreignKey: 'skill_Id'})
+
   };
   return Profile;
 };

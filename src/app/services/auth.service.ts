@@ -37,20 +37,14 @@ export class AuthService {
   localStorage.clear();
   }
 
-
-   /**Metodo  encontrar perfil por id de usuario */
-   /* getProfile(): Observable<any> {
-    return this.httpClient.get(`${this.api}/user/profile/`);
-  }
- */
-
-  public getProfile(user_id): Promise<Profile>{
-    return this.httpClient.get<Profile>(`${this.api}/user/profile/user_id`).toPromise();
+  /**Metodo  formulario user */
+  updateProfile(user: object, id: number): Observable<any> {
+    return this.httpClient.post(`${this.api}/user/profile/${id}`, user)
   }
 
   /**Metodo validar logueo */
   isAuthenticated() {
-    if (localStorage.getItem('authToken')) {
+    if (localStorage.getItem('x-access-token')) {
       return true;
     } else {
       return false;
@@ -58,13 +52,12 @@ export class AuthService {
   }
 
   setToken(token: string): void {
-    this.token = token;
+    localStorage.setItem('token', token);
   }
 
   /**Metodo  obtener token **/ 
   getToken(): string {
     // return localStorage.getItem('authToken');
-
     return this.token;
   }
 
@@ -72,13 +65,13 @@ export class AuthService {
     this.user = user;
   }
 
-  getUser(): object {
+  getUser() {
     return this.user;
   }
 
   getInfo(token) {
     return this.httpClient.get(`${this.api}/user/info`, {
-      headers: { authorization: token }
+      headers: {Authorization: token }
     })
   }
 }

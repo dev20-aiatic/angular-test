@@ -7,7 +7,7 @@
   <div class="grid-container"> 
 
   
-  <mat-grid-list [cols]="1 "rowHeight = "400px" (window:resize)="onResize($event)" *ngFor="let profile of profiles">
+  <mat-grid-list [cols]="1 "rowHeight = "400px" (window:resize)="onResize($event)">
     <mat-grid-tile>
     <mat-card class="dashboard-card">
       <form [formGroup]="profileForm" novalidate>
@@ -25,13 +25,13 @@
       </mat-card-header>
       <mat-card-content class="dashboard-card-content">
       
-            <div class="mainContainer">
+            <div class="mainContainer" *ngFor="let profile of profiles">
       
      <!-- Campo de nombre del usuario -->
 
               <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Ej. Pepito" formControlName="name">
+                <input matInput placeholder="Ej. Pepito" formControlName="name">{{profile.name}}
               </mat-form-field>
       
       <!-- Campo de apellido del usuario -->

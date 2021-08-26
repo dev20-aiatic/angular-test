@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private auth: AuthService,
     private webService: WebService
   ) {}
 
@@ -59,10 +59,11 @@ export class ProfileComponent implements OnInit {
   department;
 
   async ngOnInit() {
-    this.profiles = await this.authService.getProfile(this.user_id);
+    this.profiles = await this.auth.getUser();
     this.departments = await this.webService.getDepartments();
     console.log(this.profiles);
   }
+  
 
   /* getProfile() {
     return this.authService.getProfile().subscribe(

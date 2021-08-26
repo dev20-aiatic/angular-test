@@ -11,13 +11,20 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { HistoryComponent } from './history/history.component';
+import { VideoComponent } from './video/video.component';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ProfileComponent,
     SidebarComponent,
-    HomeComponent
+    HomeComponent,
+    VideoComponent,
+    HistoryComponent,
+  ],
+  exports: [
+    DashboardComponent
   ],
   imports: [
     CommonModule,

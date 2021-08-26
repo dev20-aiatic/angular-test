@@ -6,6 +6,7 @@ import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider, SocialUser  } from "angularx-social-login";
 import {HttpErrorResponse, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
+import Swal from 'sweetalert2';
 
 export interface DialogData {
   message: string;
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
   hide = true;
   fieldTextType: boolean;
   Msg: any;
-
 
   //Variables social login
   isLoggedin: boolean;  
@@ -64,7 +64,6 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 
-
   //Toggle show password
   toggleFieldTextType() {
     this.fieldTextType = !this.fieldTextType;
@@ -75,18 +74,18 @@ export class LoginComponent implements OnInit {
   
     this.loading = true;
 
-
     this.authService.login({email: this.loginForm.value.email, password: this.loginForm.value.password})
       .subscribe(
         (res: HttpResponse<any>) => {
           this.Msg = res['message'];
+          Swal.fire( 'Mensaje', this.Msg, 'success');
           this.loading = false;
           setTimeout(() => this.Msg = "", 2500);
           this.authService.setUser(res['user']);
           this.authService.setToken(res['token']);
           localStorage.setItem('authToken', res['token']);
           setTimeout(() => {
-            this.router.navigate(['dashboard'])
+            this.router.navigateByUrl('/dashboard')
           })
         },
         (error: HttpErrorResponse) => {

@@ -2,6 +2,7 @@ const {User, Profile,  Skill, Sequelize} = require('../models/indexModel.js');
 const Op = Sequelize.Op;
 
 const ProfileController = {
+
     getAll(res) {
         Profile.findAll({
                 include: [User],
@@ -12,10 +13,11 @@ const ProfileController = {
             .then(profile => res.send(profile))
     },
     getByPK(req, res) {
-        Profile.findAll({
+        id = req.userId
+        Profile.findOne({
                 include: [User],
                 where: {
-                    User_Id: req.params.profile_Id
+                    profile_Id: id
                 }
             })
             .then(profile => res.send(profile))
@@ -53,11 +55,13 @@ const ProfileController = {
             }))
     },
     modify(req, res) {
-        Profile.update({
-                ...req.body
-            }, {
+        id = req.userId
+    
+        Profile.update(
+            req.body
+            , {
                 where: {
-                    id: req.params.id
+                    profile_Id: id
                 }
             })
             .then(profile => res.send({

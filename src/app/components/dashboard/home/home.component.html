@@ -3,6 +3,8 @@
         <span class="span">MINIONS UNAB</span>
     </mat-toolbar>
 
+    Bienvenido <p>{{userData.user.id}}</p>
+
       <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="space-around center" fxLayoutGap="10px">
         <mat-card *ngFor="let member of members" fxFlex="calc(50%-25px)" fxFlex.sm="calc(50%-25px)" >
           <img mat-card-image class="photo" [src]="member.photo" alt="Photo of {{member.title}}">

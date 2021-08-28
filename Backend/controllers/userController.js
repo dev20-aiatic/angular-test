@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
 const { jwt_secret } = require('../config/config.json')[env];
+const { profile } = require('console');
 
 
 const UserController = {
@@ -16,6 +17,7 @@ const UserController = {
         try {
             const password = await bcrypt.hash(req.body.password, 9);
             const findUser = await User.findOne({
+                include:[{model:Profile,}],
                 where: {
                     email: req.body.email
                 }, 
@@ -25,19 +27,20 @@ const UserController = {
                     message: 'La dirección de correo ya está en uso'
                 })
             }
-
             
              /**
-            * Creamos un perfil vacio que será asignado posteriormente al usuario
+            * Inicialmente guardamos el perfil 
             * @class
             */
            const profile = await Profile.create();
-
+/**
             /**
-             * Registramos el nuevo usuario
+             * Posteriormente asigmanos el perfil al nuevo usuario
              * @class
              */
-            const user = await User.create({
+
+
+            const newUser = await User.create({
                 name: req.body.name,
                 email: req.body.email,
                 password,
@@ -46,28 +49,28 @@ const UserController = {
             /*
             * Asignamos el perfil previamente creado al nuevo usuario  
             */
-            await profile.setUser(user);
+           await profile.setUser(newUser);
 
-             // Asignamos el token registro de usuario
+            // Generamos el token para el usuario encontrado
              const token = jwt.sign({
-                id:user.user_Id,
-                name:user.name,
-                email:user.email
+                id:newUser.user_Id,
+                name:newUser.name,
             }, jwt_secret,
             {
                 expiresIn:'2h'
             }
             );
 
-            res.status(200).json({
+            res.status(200).send({
                 auth:true,
+                user: newUser,
                 token:token,
-                user: user,
                 message:'¡Gracias por su registro!'
             });
         } catch (error) {
             console.log(error);
             res.status(500).send({
+                auth:false,
                 message: 'Hubo un problema al tratar de crear el usuario'
             });
         }
@@ -82,6 +85,9 @@ const UserController = {
     async login(req, res) {
         try {
             const user = await User.findOne({
+                include: [{
+                    require:true,
+                    model:Profile}],
                 where: {
                     email: req.body.email
                 }
@@ -105,18 +111,17 @@ const UserController = {
             const token = jwt.sign({
                 id:user.user_Id,
                 name:user.name,
-                email:user.email
             }, jwt_secret,
             {
                 expiresIn:'2h'
             }
             );
             //status es 200 by default
-            res.status(200).json({
+            res.status(200).send({
                 auth:true,
                 token:token,
-                user:user,
-                message: 'Bienvenido de nuevo' + user.name
+                user,
+                message: 'Bienvenido de nuevo ' + user.name
             });
         } catch (error) {
             console.log(error);
@@ -135,37 +140,28 @@ const UserController = {
              * Buscamos el perfil del usuario mediante EagerLoading
              * @class
              */
-            const findUser = await User.findOne({
-                include:[{
-                    require:true,
-                    model:Profile,
-                }],
-                where: {
-                    user_Id: id
-                }
-            });
-            console.log(findUser);
-
-            const profileId = findUser.profile_Id;
+                //Obtenemos profile Id de user
                         //Método actualizar
-           Profile.update({
-                    ...req.body
-                },{
-                    where: {
-                    profile_Id: profileId
-                }
-            })
-            .then(profile => res.send({
-                profile,
-                message: 'Registro modificado exitosamente'
-            }))
-            .catch(err => res.send({
-                message: 'Hubo un problema para modificar el registro'
-            }))
+
+            const profile = await Profile.findOne({
+                include:[{
+                    model:User,
+                }],
+                where: {profile_Id: id}
+            });
+
+            profile.update(req.body)
+
+            return res.status(200).send({
+                auth: true,
+                user: profile,
+                message: 'Cambios efectuados correctamente'
+            });
             
         } catch (error) {
             console.log(error);
             res.status(500).send({
+                auth: false,
                 message: 'Algo salió mal'
             });
         }
@@ -187,7 +183,20 @@ const UserController = {
             message: 'Hubo un problema al encontrar el usuario'
         });
     }
-}
+},
+
+    getByPK(req, res) {
+    const {user} = req;
+    User.findOne({
+            include: [{
+                require:true,
+                model:Profile}],
+            where: {
+                user_Id:user
+            }
+        })
+        .then(user => res.send(user))
+},
       
 }
 module.exports = UserController;

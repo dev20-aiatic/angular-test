@@ -23,7 +23,7 @@ const validation =  (req, res, next) => {
       }
       try {
         const payload = jwt.verify(token, jwt_secret);
-        req.user = payload.id
+        req.userId = payload.id
     } catch (error) {
         return res.status(500).json({
             auth: false,

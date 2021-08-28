@@ -74,26 +74,29 @@ export class LoginComponent implements OnInit {
   
     this.loading = true;
 
-    this.authService.login({email: this.loginForm.value.email, password: this.loginForm.value.password})
+    const { email, password } = this.loginForm.value;
+
+
+
+    this.authService.login({email, password})
       .subscribe(
-        (res: HttpResponse<any>) => {
-          this.Msg = res['message'];
+        res => {
+          this.Msg = res.message;
           Swal.fire( 'Mensaje', this.Msg, 'success');
           this.loading = false;
           setTimeout(() => this.Msg = "", 2500);
-          this.authService.setUser(res['user']);
-          this.authService.setToken(res['token']);
-          localStorage.setItem('authToken', res['token']);
+          this.authService.setUser(res);
+          this.authService.setToken(res.token);
           setTimeout(() => {
             this.router.navigateByUrl('/dashboard')
           })
         },
-        (error: HttpErrorResponse) => {
-          this.Msg = error.error.message
+        err => {
+          this.Msg = err.error.message
           this.loading = false;
           setTimeout(() => this.Msg = "", 2500);
         }
-      )
+      );
   }
 
 }

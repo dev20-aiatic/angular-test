@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Profile } from '../interfaces/Profile';
+import { ProfileDetails } from '../interfaces/Profile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
 
-  profiles: Profile[];
-  api = 'http://localhost:5000/api'
+  profiles: ProfileDetails[];
+  api = 'http://localhost:5000/api/profile'
 
   constructor(public httpClient: HttpClient) { 
   }
@@ -20,12 +20,13 @@ export class ProfileService {
 
   /**Metodo  encontrar perfil por id de usuario */
 
-  getProfile(id: string | number){
-
-    return this.httpClient.get(`${this.api}/user/profile/user_Id=${id}`)
-
-    
+  getProfile(token){
+    return this.httpClient.get(`${this.api}/get`, {
+      headers: {Authorization:token }
+    })
   }
+
+
   getProfileByUser(user_id) {
     return this.httpClient.get('http://localhost:3000/profile/user/' + user_id)
   }

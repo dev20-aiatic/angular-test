@@ -1,5 +1,30 @@
-<p>
-  history works!
-</p>
 
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+  <ng-container matColumnDef="ID">
+    <mat-header-cell *matHeaderCellDef> ID. </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.user_Id}} </mat-cell>
+  </ng-container>
 
+  <ng-container matColumnDef="Nombre">
+    <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Correo">
+    <mat-header-cell *matHeaderCellDef> Correo </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Creado">
+    <mat-header-cell *matHeaderCellDef> Creado </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.createdAt | date: 'MMM d, y, h:mm:ss a'}} </mat-cell>
+  </ng-container>
+
+ <ng-container matColumnDef="Mod">
+    <mat-header-cell *matHeaderCellDef> Última modificación </mat-header-cell>
+    <mat-cell *matCellDef="let item"> {{item.updatedAt | date: 'MMM d, y, h:mm:ss a'}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

@@ -6,14 +6,13 @@
 
   <div class="grid-container"> 
 
-  
   <mat-grid-list [cols]="1 "rowHeight = "400px" (window:resize)="onResize($event)">
     <mat-grid-tile>
     <mat-card class="dashboard-card">
       <form [formGroup]="profileForm" novalidate>
       <mat-card-header>
         <mat-card-title>
-          Profile
+          Profile de <p class="form-control-static">{{userInfo.user.id}</p>
           <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -31,7 +30,7 @@
 
               <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
                 <mat-label>Nombre</mat-label>
-                <input matInput placeholder="Ej. Pepito" formControlName="name">{{profiles.name}}
+                <input matInput placeholder="Ej. Pepito" formControlName="name">
               </mat-form-field>
       
       <!-- Campo de apellido del usuario -->

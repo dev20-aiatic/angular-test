@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Referenciamos la ruta de usuario
 const usersRoute = require("./user");
-router.use("/api", usersRoute);
+router.use("/api/auth", usersRoute);
 
 
 //Referenciamos la ruta de persona

@@ -1,4 +1,6 @@
 'use strict';
+
+
 module.exports = (sequelize, DataTypes) => {
 
     /**
@@ -21,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING,
         email: DataTypes.STRING,
         profile_Id: DataTypes.INTEGER,
+        googleauth: {
+          type: DataTypes.BOOLEAN,
+          defaultValue: false,
+        },
         createdAt: {
             type: 'TIMESTAMP',
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),

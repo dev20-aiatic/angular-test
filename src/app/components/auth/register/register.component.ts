@@ -36,26 +36,20 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-      this.authService
-        .signup({
-          name: this.registerForm.value.name,
-          email: this.registerForm.value.email,
-          password: this.registerForm.value.password,
-        })
+    const { name, email, password } = this.registerForm.value;
+
+      this.authService.signup(name, email, password)
         .subscribe(
-          (res: HttpResponse<any>) => {
+          res => {
             this.Msg = res['message'];
             Swal.fire('Estimado usuario', this.Msg, 'success');
             this.loading = false;
-            this.authService.setUser(res['user']);
-             this.authService.setToken(res['token']);
-            localStorage.setItem('authToken', res['token']);
             setTimeout(() => this.Msg = "", 2500);
             setTimeout(() => {
               this.router.navigateByUrl('/dashboard')
             })
           },
-          (error: HttpErrorResponse) => {
+          error => {
             this.Msg = error.error.message
             this.loading = false;
             setTimeout(() => this.Msg = "", 2500);

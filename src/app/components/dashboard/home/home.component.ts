@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
    /**Metodo que me devuelve la información del usuario */
    get userData() {
-    return this.auth.user
+    return this.auth.userlogged;
   }
 
  

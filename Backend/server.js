@@ -1,7 +1,7 @@
-
 const express = require('express');
 const morgan = require('morgan');
 const cors = require("cors");
+require('dotenv').config()
 
 // Initialize express app
 const app = express();
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     res.status(200).send("   Prueba de petición GET realizada correctamente  ");
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
     console.log(`Se está ejecutando server en puerto ${PORT} `);

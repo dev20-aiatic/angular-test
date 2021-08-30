@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   isLoggedin: boolean;  
   socialUser: SocialUser;
 
-  //Definimos login form
+  //Definimos el formulario del Login
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
     password: ['', [Validators.required, Validators.minLength(8)]]
@@ -41,10 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("")
+      //Asignamos nombre a la vista de login
     this.title.setTitle(this.pageTitle);
     
-
     //Inicializamos login de Google o Facebook
     this.socialAuthService.authState.subscribe((user) => {
       this.socialUser = user;
@@ -56,12 +55,24 @@ export class LoginComponent implements OnInit {
 
   /**Funcion que trae el modal de login con google */
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      (user) =>{
+        this.socialUser = user;
+        this.isLoggedin = true;
+        this.router.navigateByUrl('/dashboard')
+      }
+    );
   }
   
   /**Funcion que trae el modal de login con Facebook */
   loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      (user) =>{
+        this.socialUser = user;
+        this.isLoggedin = true;
+        this.router.navigateByUrl('/dashboard')
+      }
+    );
   }
 
   //Toggle show password
@@ -77,16 +88,13 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
 
 
-
-    this.authService.login({email, password})
+    this.authService.login(email, password)
       .subscribe(
         res => {
+          this.loading = false;
           this.Msg = res.message;
           Swal.fire( 'Mensaje', this.Msg, 'success');
-          this.loading = false;
           setTimeout(() => this.Msg = "", 2500);
-          this.authService.setUser(res);
-          this.authService.setToken(res.token);
           setTimeout(() => {
             this.router.navigateByUrl('/dashboard')
           })

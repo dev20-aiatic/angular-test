@@ -3,8 +3,8 @@
 export interface obtResponse {
     auth: boolean;
     token: string;
-    message:string;
     user: UserDetails;
+    message:string;
 }
 
 /** Interfaz de información del token usuario */

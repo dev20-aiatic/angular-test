@@ -5,7 +5,7 @@ import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: 'web',
-   loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)},
+   loadChildren: () => import('./components/auth/auth.module').then(x => x.AuthModule)},
   { path: 'dashboard',
    loadChildren: () => import('./components/dashboard/dashboard.module').then(x => x.DashboardModule), canActivateChild:[AuthGuard]},
   { path: '**', redirectTo: 'web'}

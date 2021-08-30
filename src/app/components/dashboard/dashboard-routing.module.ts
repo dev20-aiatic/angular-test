@@ -14,6 +14,7 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'video', component: VideoComponent },
+    {path: ':user_Id', component: DashboardComponent},
     { path:'**', redirectTo:'' }
   ]}
 ];

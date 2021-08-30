@@ -25,7 +25,7 @@ export class HistoryComponent implements OnInit {
   }
   
   get user() {
-   return this.auth.user
+   return this.auth.userlogged
   }
 
 

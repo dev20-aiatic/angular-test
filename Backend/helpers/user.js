@@ -1,4 +1,4 @@
-import {User} from "../models/userModel"
+const { User } = require('../models/indexModel');
 
 module.exports = {
     userData:function(localUser=User) {

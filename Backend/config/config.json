@@ -5,8 +5,7 @@
     "database": "dashgular",
     "host": "localhost",
     "dialect": "mysql",
-    "operatorsAliases": 0,
-    "jwt_secret":"aquenoadivinaswey"
+    "operatorsAliases": 0
   },
   "test": {
     "username": "root",
@@ -14,8 +13,7 @@
     "database": "dashgular",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": 0,
-    "jwt_secret":"aquenoadivinaswey"
+    "operatorsAliases": 0
   },
   "production": {
     "username": "csrdbkcknsqslgtq",
@@ -23,7 +21,6 @@
     "database": "vfke2jsokbjq2djh",
     "host": "g84t6zfpijzwx08q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
-    "operatorsAliases": 0,
-    "jwt_secret":"aquenoadivinaswey"
+    "operatorsAliases": 0
   }
 }

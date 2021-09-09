@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HistoryComponent } from './history/history.component';
 import { VideoComponent } from './video/video.component';
+import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { VideoComponent } from './video/video.component';
     HomeComponent,
     VideoComponent,
     HistoryComponent,
+    BlogComponent
   ],
   exports: [
     DashboardComponent

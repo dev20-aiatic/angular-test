@@ -16,26 +16,21 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
           },
-        name: {
-            allowNull: false,
-            type: DataTypes.STRING,
-          },
+        name: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,
         profile_Id: DataTypes.INTEGER,
         googleauth: {
           type: DataTypes.BOOLEAN,
-          defaultValue: false,
+          defaultValue: 0,
         },
         createdAt: {
             type: 'TIMESTAMP',
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false
           },
         updatedAt:{
             type: 'TIMESTAMP',
             defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
-            allowNull: false
           },
     }, {
     });

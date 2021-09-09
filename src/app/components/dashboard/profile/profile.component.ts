@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   profileForm = this.fb.group({
     name: ['', Validators.required],
     lastname: ['', Validators.required],
-    natIdCard: ['', Validators.required],
+    natIdCard: ['', [Validators.required, Validators.minLength(9), Validators.pattern(/^[0-9]\d*$/)]],
     DoB: ['', Validators.required],
     city: ['', Validators.required],
     department: ['', Validators.required],
@@ -87,7 +87,11 @@ export class ProfileComponent implements OnInit {
       this.cities = [];
     }
   }
-
+  
+/**Metodo que me devuelve la información del usuario */
+get userData() {
+  return this.auth.userlogged;
+}
   onResize(event) {
     this.breakpoint = event.target.innerWidth <= 400 ? 1 : 4;
   }

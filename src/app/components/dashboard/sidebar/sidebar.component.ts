@@ -30,6 +30,10 @@ export class SidebarComponent implements OnInit{
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
+  /**Metodo que me devuelve la información del usuario */
+  get userData() {
+    return this.auth.userlogged;
+  }
 
   logout(): void {
     this.auth.logout();

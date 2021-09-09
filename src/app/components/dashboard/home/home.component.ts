@@ -21,11 +21,5 @@ export class HomeComponent implements OnInit {
     {title: 'Daniel Pacheco', subtitle: 'Estudiante Ing. Sistemas', photo: '../../../../assets/img/daniel.jpg'},
     {title: 'Mauricio Barva', subtitle: 'Estudiante Ing. Sistemas', photo: '../../../../assets/img/mauricio.jpg'},
   ];
-
-   /**Metodo que me devuelve la información del usuario */
-   get userData() {
-    return this.auth.userlogged;
-  }
-
  
 }

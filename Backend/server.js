@@ -29,7 +29,10 @@ app.get("/", (req, res) => {
     res.status(200).send("   Prueba de petición GET realizada correctamente  ");
 });
 
-//Asignamos el puerto de tal manera que sea utilizable por el deploy de heroku
-app.listen(process.env.PORT || 3000, function() {
-    console.log(`Se está ejecutando server en puerto ${PORT} `);
+/**Definimos puerto del servidor */
+app.set('PORT', process.env.PORT || 3000);
+
+/**Asignamos el puerto de tal manera que sea utilizable por el deploy de heroku */
+app.listen(app.get('PORT'), () => {
+    console.log(`Se está ejecutando server en puerto ${app.get('PORT')} `);
 });

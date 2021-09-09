@@ -1,5 +1,5 @@
 import { ProfileDetails } from './../interfaces/Profile';
-import { obtResponse, Profile } from './../interfaces/Auth';
+import { obtResponse, Profile, UserDetails } from './../interfaces/Auth';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -45,18 +45,10 @@ export class AuthService {
       );
   }
 
+ 
   /**Metodo  logueo con Google*/
-  googleIn() {
-    return this.httpClient
-      .post<obtResponse>(`${this.api}/auth/google`, this.token)
-      .pipe(
-        map((res) => {
-          this.setTokenAndUser(res);
-          this.loggedIn = true;
-          return res.auth;
-        }),
-        catchError((err) => of(err.error.msg))
-      );
+  loginSocial(socialData:any) {
+    return this.httpClient.post(`${this.api}/auth/google`, socialData);
   }
 
   /** Método que trae los datos del usuario logueado */
@@ -64,6 +56,10 @@ export class AuthService {
     return { ...this.userin };
   }
 
+  /**Getter status login google y facebook*/
+  get isLoggedIn() {
+  return this.loggedIn;
+  }
   /**Metodo para cerrar sesión*/
   logout() {
     this.loggedIn = false;
@@ -73,7 +69,7 @@ export class AuthService {
 
  /**Metodo encargado de validar y renovar el token jwt*/
  validateToken(): Observable<boolean> {
-  const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+  const headers = new HttpHeaders().set('x-access-token', localStorage.getItem('token') || '');
     return this.httpClient.get<obtResponse>(`${this.api}/auth/renew`, {headers})
     .pipe(
       map(res => {
@@ -102,6 +98,12 @@ export class AuthService {
 setTokenAndUser(res: obtResponse) {
   localStorage.setItem('token', res.token);
   this.userin = res;
+}
+
+/**Metodo para obtener listado de usuarios*/
+
+getUsers(): Observable<any> {
+  return this.httpClient.get(`${this.api}/auth/users`)
 }
 
   getInfo(token) {

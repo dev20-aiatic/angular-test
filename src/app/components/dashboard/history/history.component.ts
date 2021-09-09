@@ -1,5 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/interfaces/User';
+import { MatTableDataSource } from '@angular/material/table';
 
 
 @Component({
@@ -9,25 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryComponent implements OnInit {
   displayedColumns: string[] = ['ID', 'Nombre', 'Correo', 'Creado', 'Mod'];
-  dataSource;
-
+  dataSource = new MatTableDataSource<User>();
+  private users;
   breakpoint: number;
 
   constructor( private auth: AuthService) {
   }
 
   async ngOnInit()  {
+    this.auth.getUsers().subscribe(users=>{
+      this.users = users;
+      this.dataSource.data = this.users;
+    })
   }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  
-  get user() {
-   return this.auth.userlogged
-  }
-
 
   onResize(event) {
     this.breakpoint = event.target.innerWidth <= 400 ? 1 : 4;

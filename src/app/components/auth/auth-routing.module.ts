@@ -7,6 +7,7 @@ import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { AuthComponent } from './auth.component';
 import { HomeComponent } from '../dashboard/home/home.component';
 import { VideoComponent } from '../dashboard/video/video.component';
+import { BlogComponent } from '../dashboard/blog/blog.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path:'register',component:RegisterComponent},
       {path:'home',component:HomeComponent},
       {path:'video',component:VideoComponent},
+      {path:'blog',component:BlogComponent},
       { path:'**',redirectTo:''}
     ]}
 ];

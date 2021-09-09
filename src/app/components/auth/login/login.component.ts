@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   //Variables social login
   isLoggedin: boolean;  
-  socialUser: SocialUser;
+  user: SocialUser;
 
   //Definimos el formulario del Login
   loginForm: FormGroup = this.fb.group({
@@ -44,35 +44,46 @@ export class LoginComponent implements OnInit {
       //Asignamos nombre a la vista de login
     this.title.setTitle(this.pageTitle);
     
-    //Inicializamos login de Google o Facebook
+    //Definimos observable para verifcar sesión iniciada de Google o Facebook
     this.socialAuthService.authState.subscribe((user) => {
-      this.socialUser = user;
+      this.user = user;
       this.isLoggedin = (user != null);
-      console.log(this.socialUser);
+      console.log(this.user);
     });
     
   }
 
   /**Funcion que trae el modal de login con google */
   loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
-      (user) =>{
-        this.socialUser = user;
-        this.isLoggedin = true;
-        this.router.navigateByUrl('/dashboard')
-      }
-    );
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialAuthService.authState.subscribe((user) =>{
+      this.authService.loginSocial({name:user.firstName, lastname:user.lastName, email:user.email, photo:user.photoUrl}).subscribe((res)=>{
+        if(res['success']){
+          this.user = user;
+          this.isLoggedin = true;
+          this.router.navigateByUrl('/dashboard')
+        }else{
+          console.log('No se logueó correctamente')
+        }
+      })
+        
+      })
   }
   
   /**Funcion que trae el modal de login con Facebook */
   loginWithFacebook(): void {
-    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
-      (user) =>{
-        this.socialUser = user;
-        this.isLoggedin = true;
-        this.router.navigateByUrl('/dashboard')
-      }
-    );
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.socialAuthService.authState.subscribe((user) =>{
+      this.authService.loginSocial({name:user.firstName, lastname:user.lastName, email:user.email, photo:user.photoUrl}).subscribe((res)=>{
+        if(res['success']){
+          this.user = user;
+          this.isLoggedin = true;
+          this.router.navigateByUrl('/dashboard')
+        }else{
+          console.log('No se logueó correctamente')
+        }
+      })   
+   })
   }
 
   //Toggle show password

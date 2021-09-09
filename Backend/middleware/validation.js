@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
-const {jwt_secret} = require('../config/config.json')[env];
+const jwt_secret = process.env.JWT_SECRET || "development";
 
 
 

@@ -27,19 +27,19 @@ import { SharedModule } from './components/shared/shared.module';
           providers: [
             {
               id: GoogleLoginProvider.PROVIDER_ID,
-              provider: new GoogleLoginProvider(
-                '936219773721-r8clogsfqnkn8mhoq592kvvk1rr7ccam.apps.googleusercontent.com'
+              provider: new GoogleLoginProvider('936219773721-r8clogsfqnkn8mhoq592kvvk1rr7ccam.apps.googleusercontent.com'
               )
             },
             {
               id: FacebookLoginProvider.PROVIDER_ID,
-              provider: new FacebookLoginProvider(
-                '948547592388825')
+              provider: new FacebookLoginProvider('948547592388825')
             }
-          ]
+          ],
+          onError: (err) => {
+            console.error(err);
+          }
         } as SocialAuthServiceConfig,
-      }    
-    ],
+      }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,15 +5,19 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0" [hasBackdrop]="true">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" >
+     <mat-toolbar class="protoolbar" *ngIf="userData">
+        <img class="avatar mat-elevation-z8" src="https://civicspaceeastafrica.com/wp-content/themes/gwangi/assets/images/avatars/user-avatar.png" />
+      <p class="username">{{userData.user.name}}</p>
+      </mat-toolbar> 
       <mat-nav-list class="list-container">
       <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard'"> Inicio </a>
       <mat-divider></mat-divider>
       <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/video'"> Video</a>
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/history'"> Historia</a>
+      <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/history'"> Registros </a>
       <mat-divider></mat-divider>
       <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/profile'"> Perfil</a>
       <mat-divider></mat-divider>

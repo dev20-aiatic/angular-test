@@ -1,0 +1,42 @@
+@media only screen and (max-width: 600px) {
+    .mainItems {
+      grid-template-columns: auto;
+    }
+  }
+  
+  .spancentered {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .card-holder {
+    height: calc(75vh, 200px);
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 1em auto;
+    border-radius: 10px;
+    padding: 1em;
+    align-items: center;
+    color: lightgray;
+  }
+  .card {
+    max-width:max-content; 
+    margin-bottom: 0.5%;
+    display: block;
+    }
+    
+    mat-card-subtitle{
+    font-size:15px;
+    }
+    
+    mat-card-title{
+    color:rgb(26, 27, 26);
+    font-size:20px;
+    }

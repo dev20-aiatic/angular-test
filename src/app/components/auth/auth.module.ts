@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
     AuthComponent,
     LoginComponent,
      RegisterComponent, 
-     MenuComponent
+     MenuComponent,
     ],
   imports: [
     AuthRoutingModule,

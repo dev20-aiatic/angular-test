@@ -1,12 +1,65 @@
-@media only screen and (max-width: 600px) {
-    .mainItems {
-      grid-template-columns: auto;
-    }
+@media screen and (min-width: 40em) {
+  .card-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
-  
-  span {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
+
+  .card {
+    max-width: calc(50% - 1em);
   }
-  
+}
+
+@media screen and (min-width: 60em) {
+  .card-holder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card {
+    max-width: calc(25% - 1em);
+  }
+}
+
+
+@media screen and (min-width: 52em) {
+  .card-holder {}
+}
+
+.spancentered {
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-holder {
+  border-radius: 10px;
+  padding: 1em;
+  align-items: center;
+  color: lightgray;
+}
+
+.card {
+  flex: 0 1 calc(25% - 1em);
+  box-sizing: border-box;
+  margin: 1rem .25em;
+}
+
+.header-image {
+  background-size: cover;
+}
+
+mat-card-subtitle {
+  font-size: 15px;
+}
+
+mat-card-title {
+  color: rgb(26, 27, 26);
+  font-size: 20px;
+}

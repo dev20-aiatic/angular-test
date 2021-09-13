@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <span class="spancentered">Blog</span>
+</mat-toolbar>
+
+<div class="container">
+  <div class="card-holder">
+    <mat-grid-list cols="1" rowHeight="fit" gutterSize="1px">
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-card-title >{{postDetail?.title.rendered}}</mat-card-title>
+          <mat-card-subtitle>{{postDetail?.date_gmt| date }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image *ngIf="postDetail?._embedded['wp:featuredmedia']"
+          [src]="postDetail?._embedded['wp:featuredmedia']['0'].source_url">
+
+        <mat-card-content>
+          <div [innerHTML]="postDetail?.content.rendered"></div>
+        </mat-card-content>
+        <div class="actions" layout="row" layout-align="end center">
+          <button mat-button  [routerLink]="'/web/'+'posts'" >Volver</button>
+        </div>
+      </mat-card>
+    </mat-grid-list>
+  </div>
+</div>

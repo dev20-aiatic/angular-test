@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { VideoComponent } from './video/video.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlognewComponent } from './blognew/blognew.component';
+import { BlogloginComponent } from './bloglogin/bloglogin.component';
   
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     {path:'post/:id',component:BlogdetailComponent},
     {path:'posts',component:BlogComponent},
     {path:'newpost',component:BlognewComponent},
+    {path:'post/login', component:BlogloginComponent},
     {path: ':user_Id', component: DashboardComponent},
     { path:'**', redirectTo:'' }
   ]}

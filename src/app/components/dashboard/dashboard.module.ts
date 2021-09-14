@@ -15,6 +15,8 @@ import { VideoComponent } from './video/video.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { BlognewComponent } from './blognew/blognew.component';
+import { BlogloginComponent } from './bloglogin/bloglogin.component';
+import { BlogeditComponent } from './blogedit/blogedit.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { BlognewComponent } from './blognew/blognew.component';
     HistoryComponent,
     BlogComponent,
     BlogdetailComponent,
-    BlognewComponent
+    BlognewComponent,
+    BlogloginComponent,
+    BlogeditComponent
   ],
   exports: [
     DashboardComponent

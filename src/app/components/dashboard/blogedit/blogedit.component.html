@@ -1,0 +1,24 @@
+<div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
+  <h1 mat-dialog-title>Editar Post</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="editPost" (ngSubmit)="save()">
+      <mat-error *ngIf="Msg">
+        <p>{{Msg}}</p>
+      </mat-error>
+          <mat-form-field>
+              <input matInput formControlName="title"  type="text" placeholder="Titulo">{{postEdit?.title.rendered}}
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput formControlName="excerpt"  type="text" placeholder="Resumen">{{postEdit?.excerpt.rendered}}
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput formControlName="content"  type="text" placeholder="Contenido">{{postEdit?.content.rendered}}
+        </mat-form-field>
+        </form>
+  </div>
+  <div mat-dialog-actions>
+      <button mat-button (click)="close()">Cancelar</button>
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Confirmar</button>
+  </div>

@@ -27,11 +27,17 @@
     color: lightgray;
   }
   .card {
-    max-width:max-content; 
+    max-width:max-content;
     margin-bottom: 0.5%;
     display: block;
     }
     
+
+    figure img {
+      width: 10%;
+      height: 10%;
+    }
+
     mat-card-subtitle{
     font-size:15px;
     }

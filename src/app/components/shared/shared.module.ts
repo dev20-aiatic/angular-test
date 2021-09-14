@@ -23,6 +23,7 @@ import {MatOptionModule, MatNativeDateModule} from '@angular/material/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -57,7 +58,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   exports: [
     CommonModule,
@@ -85,7 +87,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     FlexLayoutModule,
     MatMenuModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ]
 })
 export class SharedModule { }

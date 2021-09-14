@@ -10,6 +10,8 @@ import { HomeComponent } from '../dashboard/home/home.component';
 import { VideoComponent } from '../dashboard/video/video.component';
 import { BlogComponent } from '../dashboard/blog/blog.component';
 import { BlogdetailComponent } from '../dashboard/blogdetail/blogdetail.component';
+import { BlogloginComponent } from '../dashboard/bloglogin/bloglogin.component';
+import { BlogGuard } from 'src/app/services/blog-guard.service';
 
 
 const routes: Routes = [
@@ -23,7 +25,8 @@ const routes: Routes = [
       {path:'video',component:VideoComponent},
       {path:'post/:id',component:BlogdetailComponent},
       {path:'posts',component:BlogComponent},
-      {path:'newpost',component:BlognewComponent},
+      {path:'wp-login', component:BlogloginComponent},
+      {path:'newpost',component:BlognewComponent, canActivate: [BlogGuard]},
       { path:'**',redirectTo:''}
     ]}
 ];

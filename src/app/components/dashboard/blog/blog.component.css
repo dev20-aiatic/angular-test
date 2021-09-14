@@ -32,7 +32,6 @@
   display: inline-block;
   width: 100%;
 }
-
 .container {
   display: flex;
   justify-content: center;
@@ -49,10 +48,22 @@
   flex: 0 1 calc(25% - 1em);
   box-sizing: border-box;
   margin: 1rem .25em;
+  cursor: pointer;
+}
+
+.add-button{
+  position: relative;
+  right: 0%;
 }
 
 .header-image {
   background-size: cover;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 0px;
 }
 
 mat-card-subtitle {

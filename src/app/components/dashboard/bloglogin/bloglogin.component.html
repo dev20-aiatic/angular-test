@@ -1,0 +1,39 @@
+<div class="form-wraper">
+  <div class="form-container card">
+    <div class="form-body">
+      <div style="Text-align:center" class="form-header">
+        <img src="./assets/img/wordpress.png" width="20%">
+        <h4 class="form-title">Inicio de sesión</h4>
+      </div>
+      <form [formGroup]="wpLoginForm" (ngSubmit)="Auth()">
+        <mat-error *ngIf="Msg">
+          <p>{{Msg}}</p>
+        </mat-error>
+        <mat-form-field class="justifier">
+          <input matInput placeholder="Nombre de usuario"  formControlName="username" text="username" class="form-input">
+          <mat-error>
+            Es necesario el nombre de usuario
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="justifier">
+          <input matInput autocomplete="off" placeholder="Contraseña"  formControlName="password" text="password" [type]="hide ? 'password' : 'text'" class="form-input">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error>
+            Debe ingresar una contraseña
+          </mat-error>
+        </mat-form-field>
+        <div class="form-footer">
+          <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
+          <br>
+          <button type="submit" mat-raised-button class="btn custom-btn" [disabled]="wpLoginForm.invalid">
+            Iniciar sesión
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>

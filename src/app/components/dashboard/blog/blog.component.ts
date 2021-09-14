@@ -1,6 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
-import { Blog } from 'src/app/interfaces/Blog';
+import { ActivatedRoute, Router } from '@angular/router';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { WP_User } from 'src/app/interfaces/WP_User';
+import { Observable } from 'rxjs';
+import { BlogeditComponent } from '../blogedit/blogedit.component';
 
 @Component({
   selector: 'app-blog',
@@ -8,12 +12,18 @@ import { Blog } from 'src/app/interfaces/Blog';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  @Input() blog: Blog;
-  // declaramos como any nuestra variable feed
+  @Input() token;
+
   Posts: any = null;
   postCount = null;
+  postDeleted: any;
+  id = 528;
   page = 1;
-  next() {
+  isLoggedIn$: Observable<boolean>;   
+  public user$;
+
+
+ /*  next() {
     this.blogService.nextPage(this.page += 1).subscribe(data => {
       console.log(data);
       if (data) {
@@ -30,13 +40,14 @@ export class BlogComponent implements OnInit {
         }
       });
     }
-  }
+  } */
   loading = false;
 
-  constructor( private blogService: BlogService) {}
+  constructor( public blogService: BlogService, private router: Router, public dialog: MatDialog,private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getPosts();
+    this.isLoggedIn$ = this.blogService.isLoggedIn;
   }
 
   getPosts() {
@@ -45,5 +56,54 @@ export class BlogComponent implements OnInit {
         this.Posts = res;
       });
     }
+  /**Metodo que me devuelve la información del usuario */
+    get userData() {
+      return this.blogService.getUser;
+  }
+    logout(): void {
+      this.blogService.logout();
+      this.router.navigateByUrl('web/posts');
+  }
+
+  /* openEdit(): void {
+    let dialogRef = this.dialog.open(BlogeditComponent, {
+      width: '800px',
+      height: '400px',
+      panelClass: 'my-centered-dialog',
+      data:{id:this.id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+     */
+   openEdit() {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.data={id:528}
+    this.dialog.open(BlogeditComponent, dialogConfig);
+
+    const dialogRef =   this.dialog.open(BlogeditComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(() => {
+      data => console.log('Dialog output', data);
+    })
+} 
+
+deletePost(id:number) {
+  if (confirm("¿Realmente desea borrar el post?")) {
+    this.blogService.deletepost(id)
+      .subscribe((res) => {
+        this.postDeleted = res;
+        console.log(this.postDeleted);
+      });
+  }
+    
 }
+ 
+}
+
+
+
 

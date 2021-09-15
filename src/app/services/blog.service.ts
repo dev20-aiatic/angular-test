@@ -1,10 +1,10 @@
+import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { WP_User } from '../interfaces/WP_User';
 import * as moment from "moment";
-import { environment } from 'src/environments/environment';
 import { Wp_Category } from '../interfaces/WP_Category';
 
 @Injectable({
@@ -13,7 +13,7 @@ import { Wp_Category } from '../interfaces/WP_Category';
 export class BlogService {
   
   // URL del blog que vamos a trabajar con su REST API
-  private API: string = environment.wpAPI;
+  API: string = environment.wpAPI;
   //Opciones de blog
   allPosts = null;
   pages: any;

@@ -10,18 +10,21 @@ import { map } from 'rxjs/operators';
 import { WP_Token } from '../interfaces/WP_Token';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WPAuthService {
-   //La ruta de autenticación del plugin wordpress
-   private TOKENIZER: string = environment.wpAuth;
-
+  //La ruta de autenticación del plugin wordpress
+  TOKENIZER: string = environment.wpAuth;
   user: WP_User;
   isAuthenticated = false;
   token: string;
   authStatusListener = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router, private notificationService: NotificationService) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   getIsAuth() {
     return this.isAuthenticated;
@@ -35,36 +38,40 @@ export class WPAuthService {
     return this.authStatusListener.asObservable();
   }
 
-  Login(username:string, password:string) {
-    this.http.post<WP_User>(`${this.TOKENIZER}`, {username, password}).subscribe(response => {
-      const _user = response; 
-      if (response.token) {
-        localStorage.setItem('wp-token', response.token);
-        this.isAuthenticated = true;
-        this.token = response.token;
-        this.user = response;
-        this.authStatusListener.next(true);
-        Swal.fire( 'Hola de nuevo', this.user.user_display_name , 'success');
-        setTimeout(() => {
-          this.router.navigateByUrl('/web/posts')
-        })
-      }
-    },
-      error => {
-        this.notificationService.warn('¡Credenciales incorrectas, intente de nuevo!');
-        this.authStatusListener.next(false);
-      }
-    );
+  Login(username: string, password: string) {
+    this.http
+      .post<WP_User>(`${this.TOKENIZER}`, { username, password })
+      .subscribe(
+        (response) => {
+          const _user = response;
+          if (response.token) {
+            localStorage.setItem('wp-token', response.token);
+            this.isAuthenticated = true;
+            this.token = response.token;
+            this.user = response;
+            this.authStatusListener.next(true);
+            Swal.fire('Hola de nuevo', this.user.user_display_name, 'success');
+            setTimeout(() => {
+              this.router.navigateByUrl('/web/posts');
+            });
+          }
+        },
+        (error) => {
+          this.notificationService.warn(
+            '¡Credenciales incorrectas, intente de nuevo!'
+          );
+          this.authStatusListener.next(false);
+        }
+      );
   }
 
   /**Getter del usuario logueado*/
   get userIN() {
-    return { ... this.user }
+    return { ...this.user };
   }
 
-
   autoAuthUser() {
-    if ((localStorage.getItem('wp-token'))) {
+    if (localStorage.getItem('wp-token')) {
       this.isAuthenticated = true;
       this.authStatusListener.next(true);
     }
@@ -73,14 +80,24 @@ export class WPAuthService {
   /**Metodo  validar token*/
   validateWPToken() {
     let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('wp-token'));
-    return this.http.post<WP_Token>(`${this.TOKENIZER}/validate?token=`,{}, { headers: headers}).pipe(
-      map(response => {
-        if(response.code ==='jwt_auth_valid_token'){
-          return true;
-        }
-           return false;
-     }))
+    headers = headers.set(
+      'Authorization',
+      'Bearer ' + localStorage.getItem('wp-token')
+    );
+    return this.http
+      .post<WP_Token>(
+        `${this.TOKENIZER}/validate?token=`,
+        {},
+        { headers: headers }
+      )
+      .pipe(
+        map((response) => {
+          if (response.code === 'jwt_auth_valid_token') {
+            return true;
+          }
+          return false;
+        })
+      );
   }
 
   logout() {

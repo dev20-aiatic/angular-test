@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://dashgular.herokuapp.com'
+  baseUrl: 'http://localhost:4000',
+  wpAPI:'https://dev20.latiendasigueabierta.com/wp-json/wp/v2',
+  wpAuth:'https://dev20.latiendasigueabierta.com/wp-json/jwt-auth/v1/token'
+
 };
 /*
  * For easier debugging in development mode, you can import the following file

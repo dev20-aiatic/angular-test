@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { WP_User } from '../interfaces/WP_User';
 import * as moment from "moment";
+import { environment } from 'src/environments/environment';
+import { Wp_Category } from '../interfaces/WP_Category';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +13,7 @@ import * as moment from "moment";
 export class BlogService {
   
   // URL del blog que vamos a trabajar con su REST API
-  public URL = 'https://dev20.latiendasigueabierta.com/';
-  public API = `${this.URL}wp-json/wp/v2/`;
-  public TOKENIZER = `${this.URL}wp-json/jwt-auth/v1/token`;
-
-  // Definimos usuario de blog
-  private user: any;
-  isAuthenticated = false;
-  private loggedIn = new BehaviorSubject<boolean>(false);
-  private token: string;
+  private API: string = environment.wpAPI;
   //Opciones de blog
   allPosts = null;
   pages: any;
@@ -49,7 +43,7 @@ export class BlogService {
       },
     };
 
-    return this.http.get<any[]>(`${this.API}posts?_embed=true`, options).pipe(
+    return this.http.get<any[]>(`${this.API}/posts?_embed=true`, options).pipe(
       map((res) => {
         this.pages = res['headers'].get('x-wp-totalpages');
         this.allPosts = res['headers'].get('x-wp-total');
@@ -60,7 +54,7 @@ export class BlogService {
   }
 
   getPost(id:any) {
-    return this.http.get(`${this.API}posts/${id}?_embed`).pipe(
+    return this.http.get(`${this.API}/posts/${id}?_embed`).pipe(
       map((post) => {
         return post;
       })
@@ -73,7 +67,7 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.post<any[]>(`${this.API}posts`, data, options).pipe(
+    return this.http.post<any[]>(`${this.API}/posts`, data, options).pipe(
       catchError(this.handleError)
     );
   }
@@ -85,7 +79,7 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.put(`${this.API}posts/${id}?_embed`, data, options).pipe(
+    return this.http.put(`${this.API}/posts/${id}?_embed`, data, options).pipe(
       catchError(this.handleError)
     );
   }
@@ -96,19 +90,19 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.delete(`${this.API}posts/${id}`, options).pipe(
+    return this.http.delete(`${this.API}/posts/${id}`, options).pipe(
       catchError(this.handleError)
     );
   }
 
   nextPage(page) {
     return this.http
-      .get(`${this.API}posts?page=${(page)}&per_page=6`)
+      .get(`${this.API}/posts?page=${(page)}&per_page=6`)
       .pipe(catchError(this.handleError));
   }
   previousPage(page) {
     return this.http
-      .get(`${this.API}posts?page=${(page)}&per_page=6`)
+      .get(`${this.API}/posts?page=${(page)}&per_page=6`)
       .pipe(catchError(this.handleError));
   }
 

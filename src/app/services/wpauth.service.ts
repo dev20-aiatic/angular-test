@@ -5,15 +5,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { NotificationService } from './notification.service';
 import { WP_User } from '../interfaces/WP_User';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
+import { WP_Token } from '../interfaces/WP_Token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WPAuthService {
-   // URL del blog que vamos a trabajar
-    public URL = 'https://dev20.latiendasigueabierta.com/';
-   //La ruta de autenticación del plugin
-    public TOKENIZER = `${this.URL}wp-json/jwt-auth/v1/token`;  
+   //La ruta de autenticación del plugin wordpress
+   private TOKENIZER: string = environment.wpAuth;
+
   user: WP_User;
   isAuthenticated = false;
   token: string;
@@ -69,11 +71,16 @@ export class WPAuthService {
   }
 
   /**Metodo  validar token*/
-  validateWPToken(token) {
+  validateWPToken() {
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('wp-token'));
-    return this.http.post(`${this.TOKENIZER}/validate?token=` + token,
-         {}, { headers: headers});
+    return this.http.post<WP_Token>(`${this.TOKENIZER}/validate?token=`,{}, { headers: headers}).pipe(
+      map(response => {
+        if(response.code ==='jwt_auth_valid_token'){
+          return true;
+        }
+           return false;
+     }))
   }
 
   logout() {

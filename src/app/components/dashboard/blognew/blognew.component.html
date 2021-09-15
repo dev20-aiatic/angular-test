@@ -1,4 +1,10 @@
 <ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
+<mat-toolbar>
+  <button [routerLink]="['/web/posts']"  mat-icon-button class="back-button">
+    <mat-icon>keyboard_backspace</mat-icon>
+  </button>
+  <span class="spancentered">Blog - Nueva Entrada</span>
+</mat-toolbar>
 <div class="form-wraper">
   <div class="form-container card">
     <div class="form-body">

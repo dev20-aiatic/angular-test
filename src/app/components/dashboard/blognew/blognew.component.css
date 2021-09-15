@@ -78,6 +78,11 @@ body{
     margin: 0 auto;
 }
 
+.spancentered {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+  }
 
 /*
   ##Device = Desktops

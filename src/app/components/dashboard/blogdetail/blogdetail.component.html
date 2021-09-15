@@ -1,11 +1,10 @@
-
+<ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 <mat-toolbar>
   <button [routerLink]="['/web/posts']"  mat-icon-button class="back-button">
     <mat-icon>keyboard_backspace</mat-icon>
   </button>
   <span class="spancentered">{{postDetail?.title.rendered}}</span>
 </mat-toolbar>
-<ngx-loading-bar [fixed]="true" color="#FFF" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 
 <div class="container">
   <div class="card-holder">
@@ -18,7 +17,6 @@
         </mat-card-header>
         <img mat-card-image *ngIf="postDetail?._embedded['wp:featuredmedia']"
           [src]="postDetail?._embedded['wp:featuredmedia']['0'].source_url" >
-
         <mat-card-content>
           <div [innerHTML]="postDetail?.content.rendered"></div>
         </mat-card-content>
@@ -26,3 +24,4 @@
     </mat-grid-list>
   </div>
 </div>
+

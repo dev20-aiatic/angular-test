@@ -1,8 +1,8 @@
+import { Posteo } from './../../../interfaces/post';
 import { Component, OnInit} from '@angular/core';
 import { BlogService } from 'src/app/services/blog.service';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import { WP_User } from 'src/app/interfaces/WP_User';
 import { Observable } from 'rxjs';
 import { BlogeditComponent } from '../blogedit/blogedit.component';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -14,11 +14,10 @@ import { WPAuthService } from 'src/app/services/wpauth.service';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  Posts: any = null;
+  Posts: any[];
   postCount = null;
   postDeleted: any;
   page = 1;
-  public user$;
 
 
  /*  next() {

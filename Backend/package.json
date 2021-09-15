@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master",
     "heroku-postbuild": "ng build --configuration=production"
   },
   "keywords": [],

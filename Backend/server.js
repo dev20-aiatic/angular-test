@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Router index
-const indexRouter = require("./routes/allRoutes");
+const indexRouter = require("./src/routes/allRoutes");
 
 app.options('/*',(req, res, next) => res.send());
 
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 /**Definimos puerto del servidor */
-app.set('PORT', process.env.PORT || 3000);
+app.set('PORT', process.env.PORT || 8080);
 
 /**Asignamos el puerto de tal manera que sea utilizable por el deploy de heroku */
 app.listen(app.get('PORT'), () => {

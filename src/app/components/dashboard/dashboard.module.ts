@@ -17,6 +17,7 @@ import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { BlognewComponent } from './blognew/blognew.component';
 import { BlogloginComponent } from './bloglogin/bloglogin.component';
 import { BlogeditComponent } from './blogedit/blogedit.component';
+import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,9 @@ import { BlogeditComponent } from './blogedit/blogedit.component';
     DashboardRoutingModule,
     SharedModule,
     MatSidenavModule
-  ]
+  ],
+  providers:[
+    { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },
+  ],
 })
 export class DashboardModule { }

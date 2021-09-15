@@ -1,16 +1,19 @@
+
 <mat-toolbar>
   <button [routerLink]="['/web/posts']"  mat-icon-button class="back-button">
     <mat-icon>keyboard_backspace</mat-icon>
   </button>
-  <span class="spancentered">Blog</span>
+  <span class="spancentered">{{postDetail?.title.rendered}}</span>
 </mat-toolbar>
+<ngx-loading-bar [fixed]="true" color="#FFF" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 
 <div class="container">
   <div class="card-holder">
     <mat-grid-list cols="1" rowHeight="fit" gutterSize="1px">
       <mat-card class="card">
         <mat-card-header>
-          <mat-card-title >{{postDetail?.title.rendered}}</mat-card-title>
+          <div mat-card-avatar class="header-image" style="background-image: url('{{postDetail?._embedded.author[0].avatar_urls[96]}}');"></div>
+          <mat-card-title>{{postDetail?._embedded.author[0].name}}</mat-card-title>
           <mat-card-subtitle>{{postDetail?.date_gmt| date }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image *ngIf="postDetail?._embedded['wp:featuredmedia']"

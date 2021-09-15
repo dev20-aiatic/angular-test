@@ -29,8 +29,8 @@ export class BlognewComponent implements OnInit {
 
   newForm: FormGroup = this.fb.group({
     'title': ['', Validators.compose([Validators.required])],
-    'excerpt': ['', Validators.compose([Validators.required])],
-    'content': ['', Validators.compose([Validators.required])]
+    'excerpt': ['', [Validators.required,  Validators.maxLength(80), Validators.minLength(5)]],
+    'content': ['', [Validators.required, Validators.minLength(5)]]
 });
   ngOnInit() {
   }

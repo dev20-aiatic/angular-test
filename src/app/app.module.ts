@@ -45,7 +45,7 @@ import { LayoutModule } from '@angular/cdk/layout';
             {
               id: FacebookLoginProvider.PROVIDER_ID,
               provider: new FacebookLoginProvider('948547592388825')
-            }
+            },
           ],
           onError: (err) => {
             console.error(err);

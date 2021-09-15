@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { EventEmitter, Injectable, Input, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { WP_User } from '../interfaces/WP_User';
+import * as moment from "moment";
 
 @Injectable({
   providedIn: 'root',
@@ -10,76 +11,21 @@ import { WP_User } from '../interfaces/WP_User';
 export class BlogService {
   
   // URL del blog que vamos a trabajar con su REST API
-  public URL = 'http://dev20.latiendasigueabierta.com/';
+  public URL = 'https://dev20.latiendasigueabierta.com/';
   public API = `${this.URL}wp-json/wp/v2/`;
   public TOKENIZER = `${this.URL}wp-json/jwt-auth/v1/token`;
 
   // Definimos usuario de blog
   private user: any;
-  private loggedIn = new BehaviorSubject<boolean>(false);
   isAuthenticated = false;
-  token: any;
-  
+  private loggedIn = new BehaviorSubject<boolean>(false);
+  private token: string;
   //Opciones de blog
   allPosts = null;
   pages: any;
 
   constructor(private http: HttpClient) {}
   
-  /**Metodo  iniciar sesión*/
-
-  Login(data) {
-    return this.http.post<WP_User>(`${this.TOKENIZER}`, data)
-      .pipe(
-        tap(res => {
-          if (res.token) {
-            localStorage.setItem('wp-token', res.token);
-            this.isAuthenticated = true;
-            this.loggedIn.next(true);
-          }
-        }),
-        catchError(error => of(error))
-      );
-  }
-
-  /**Metodo que autentica si hay token*/
-  autoAuthUser() {
-    this.token = JSON.stringify(localStorage.getItem('wp-token'));
-    if (this.token) {
-      this.isAuthenticated = true;
-      this.loggedIn.next(true);
-    }
-  }
-
-/**Metodo  validar token*/
-  validateWPToken(token) {
-    let headers = new HttpHeaders();
-    headers = headers.set('Authorization', 'Bearer ' + localStorage.getItem('wp-token'));
-    return this.http.post(`${this.TOKENIZER}/validate?token=` + token,
-         {}, { headers: headers});
-  }
-
-/**Metodo  para validar logueo*/
-
-  get isLoggedIn() {
-    return this.loggedIn.asObservable();
-  }
-​
-/**Metodo  para cerrar sesión*/
-logout() {
-    this.token = null;
-    this.loggedIn.next(false);
-    localStorage.removeItem('wp-token');
-}
-
-  getUser() {
-      return this.user;
-  }
-​
-  setUser(user) {
-      this.user = user;
-  }
-
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Hubo un problema, intente nuevamente';
     if (error.error instanceof ErrorEvent) {

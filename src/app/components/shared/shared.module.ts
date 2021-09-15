@@ -28,11 +28,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 //Others
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 
 @NgModule({
   declarations: [],
   imports: [
+    AngularEditorModule,
     CommonModule,
     MatSliderModule,
     MatInputModule,
@@ -59,9 +62,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    LoadingBarHttpClientModule
   ],
   exports: [
+    AngularEditorModule,
     CommonModule,
     MatSliderModule,
     MatInputModule,
@@ -88,7 +93,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    LoadingBarHttpClientModule
   ]
 })
 export class SharedModule { }

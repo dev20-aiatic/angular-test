@@ -1,3 +1,4 @@
+<ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 <div class="form-wraper">
   <div class="form-container card">
     <div class="form-body">
@@ -5,9 +6,6 @@
         <h3 class="form-title">Nueva entrada </h3>
       </div>
       <form [formGroup]="newForm" (ngSubmit)="createPost()">
-        <mat-error *ngIf="Msg">
-          <p>{{Msg}}</p>
-        </mat-error>
         <mat-form-field class="justifier">
           <input matInput placeholder="Título"  formControlName="title" text="title" class="form-input">
           <mat-error>
@@ -20,12 +18,8 @@
             El resumen es obligatorio
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="justifier">
-          <textarea matInput placeholder="Contenido"  formControlName="content" text="content" class="form-input"></textarea>
-          <mat-error>
-            Debes ingresar el contenido para tu entrada
-          </mat-error>
-        </mat-form-field>
+        <angular-editor formControlName="content" placeholder="Contenido"> </angular-editor>
+        <div *ngIf="newForm.controls.content.errors && newForm.controls.content.touched" class="error">El contenido del post es obligatorio (Min 5 palabras).</div>
         <div class="form-footer">
           <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
           <br>

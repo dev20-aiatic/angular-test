@@ -6,26 +6,22 @@ import {
   RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { BlogService } from 'src/app/services/blog.service';
 
 import Swal from 'sweetalert2'
+import { WPAuthService } from './wpauth.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class BlogGuard implements CanActivate  {
   
-  constructor(private blogService: BlogService, private router: Router) {}
+  constructor(private wpAuthService: WPAuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
-    return this.blogService.isLoggedIn        
-      .pipe(
-        take(1),                               
-        map((isLoggedIn: boolean) => {        
-          if (!localStorage.getItem('wp-token') || !isLoggedIn){
+  ): boolean {        
+          if (!localStorage.getItem('wp-token') || !this.wpAuthService.getIsAuth){
             Swal.fire('Error','Debe iniciar sesión para acceder a este contenido', 'error');
             setTimeout(() => {
               this.router.navigate(['/web/wp-login']);
@@ -33,8 +29,6 @@ export class BlogGuard implements CanActivate  {
             return false;
           }
           return true;
-        }));
-  }
-  
+        }
 }
 

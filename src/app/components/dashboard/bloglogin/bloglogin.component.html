@@ -1,3 +1,4 @@
+<ngx-loading-bar [fixed]="true" color="#FFF" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 <div class="form-wraper">
   <div class="form-container card">
     <div class="form-body">
@@ -6,9 +7,6 @@
         <h4 class="form-title">Inicio de sesión</h4>
       </div>
       <form [formGroup]="wpLoginForm" (ngSubmit)="Auth()">
-        <mat-error *ngIf="Msg">
-          <p>{{Msg}}</p>
-        </mat-error>
         <mat-form-field class="justifier">
           <input matInput placeholder="Nombre de usuario"  formControlName="username" text="username" class="form-input">
           <mat-error>

@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Router index
-const indexRouter = require("./src/routes/allRoutes");
+const indexRouter = require("./routes/allRoutes");
 
 app.options('/*',(req, res, next) => res.send());
 

@@ -25,7 +25,7 @@ export class WPAuthService {
     private router: Router,
     private notificationService: NotificationService
   ) {}
-
+  //** Verificar si se encuentra logueado */
   getIsAuth() {
     return this.isAuthenticated;
   }

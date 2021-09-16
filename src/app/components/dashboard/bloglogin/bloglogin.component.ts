@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 })
 export class BlogloginComponent implements OnInit {
   hide = true;
-  loading = false;
   wpLoginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private wpAuthService:WPAuthService, private router:Router) {
@@ -30,9 +29,6 @@ export class BlogloginComponent implements OnInit {
   Auth() {
     const { username, password } = this.wpLoginForm.value;
     this.wpAuthService.Login(username, password);
-    setTimeout(() => {
-      this.loading = true;
-    })
   }
 
   ngOnDestroy() {

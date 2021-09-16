@@ -22,6 +22,7 @@ if (config.use_env_variable) {
 
 /* Función para cargar los modelos en una nueva base de datos */
 //sequelize.sync()
+
 /**
  * Declaramos este método para retornar los nombres y objetos de los archivos en el directorio
  * @param {any} __dirname - nombre del directorio

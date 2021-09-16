@@ -17,6 +17,7 @@ export class BlogComponent implements OnInit {
   Posts: any[];
   postCount = null;
   postDeleted: any;
+  postEdit: any;
   page = 1;
 
 
@@ -79,16 +80,20 @@ redirectTo(uri:string){
     }
 
   /** Llamamos el dialog de editar **/
-   openEdit(id): void{
+   openEdit(post): void{
     let dialogRef  = this.dialog.open(BlogeditComponent, {
       width: '800px',
       height: '400px',
       panelClass: 'my-centered-dialog',
       data:{
-        id:id
+        id:post.id
       }
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.blogService.updatepost(post.id, result)
+      this.postEdit = result;
+      this.notificationService.success('Post '+post.title.rendered+' editado exitosamente');
+      console.log(this.postEdit);
       console.log('Dialogo cerrado');
     });
 } 

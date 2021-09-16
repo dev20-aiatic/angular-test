@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AuthService } from 'src/app/services/auth.service';
 import { WPAuthService } from 'src/app/services/wpauth.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   );
   sideBarOpen = true;
 
-  constructor(private breakpointObserver: BreakpointObserver, private router: Router, private wpAuthService: WPAuthService) {
+  constructor(private breakpointObserver: BreakpointObserver, private auth:AuthService, private router: Router, private wpAuthService: WPAuthService) {
     this.initializeApp();
     if(this.Loggedin){
       this.router.navigateByUrl('/dashboard')
@@ -27,6 +28,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+    get userData() {
+      return this.auth.userlogged;
+    }  
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
@@ -37,6 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   initializeApp() {
+    this.auth.autoAuthUser();
     this.wpAuthService.autoAuthUser();
   }
 

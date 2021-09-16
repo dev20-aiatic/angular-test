@@ -1,15 +1,8 @@
 <div class="body">
   <div class="register">
-    <div class="card-header text-center">
-      <p *ngIf="Msg" class="text-danger text-left">{{Msg}}</p>
-    </div>
     <mat-card>
       <mat-card-content>
       <form [formGroup]= "registerForm" (ngSubmit)="register()">
-        <mat-error *ngIf="Msg">
-          <p>{{Msg}}</p>
-        </mat-error>
-
         <img src="./assets/img/logo.png" width="80%">
           <h2>Registro de usuario</h2>
           <mat-form-field class="ancho" appearance="fill">
@@ -28,17 +21,12 @@
                 Debes ingresar un correo valido
                </mat-error>
           </mat-form-field>
-
           <mat-form-field class="ancho" appearance="fill">
-              <mat-label>Contraseña</mat-label>
-              <input matInput autocomplete="off"  formControlName="password" [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Ocultar contraseña'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error>
-                Debes ingresar una contraseña
-               </mat-error>
-          </mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error>Debes ingresar una contraseña</mat-error>
+        </mat-form-field>
             <br>
             <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
           <br>

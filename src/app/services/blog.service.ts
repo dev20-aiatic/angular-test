@@ -76,6 +76,7 @@ export class BlogService {
   updatepost(id: any, data: any): Observable<any> {
     let options = {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };

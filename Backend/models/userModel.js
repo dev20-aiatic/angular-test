@@ -11,15 +11,9 @@ module.exports = (sequelize, DataTypes) => {
    * 
    */
     const User = sequelize.define('User', {
-        user_Id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true
-          },
         name: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,
-        profile_Id: DataTypes.INTEGER,
         googleauth: {
           type: DataTypes.BOOLEAN,
           defaultValue: 0,
@@ -36,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.associate = function(models) {
-    User.belongsTo(models.Profile, {foreignKey: 'profile_Id', onDelete: 'CASCADE'});
+    User.belongsToMany(models.Profile, {through: 'user_profile', foreignKey: 'profile_Id', otherKey: 'user_Id'});
   };
     return User;
 };

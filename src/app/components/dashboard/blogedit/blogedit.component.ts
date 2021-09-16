@@ -29,7 +29,7 @@ export class BlogeditComponent implements OnInit {
       private router: Router,
       private notificationService: NotificationService,
       @Optional() public dialogRef: MatDialogRef<BlogeditComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: any) {
+      @Inject(MAT_DIALOG_DATA) public data: Posteo) {
           this.id=data.id;
       }
 
@@ -55,26 +55,8 @@ export class BlogeditComponent implements OnInit {
     this.router.navigate([uri]));
   }
   save() {
-        this.editPost.get('content').markAsTouched();
-        const val = this.editPost.value;
-        const data = {
-          title: val.title,
-          excerpt:val.excerpt,
-          content: val.content,
-          status: 'publish'
-        };
-            this.blogService.updatepost(this.id, data)
-            .subscribe(
-              res => {
-                this.notificationService.warn('El post '+ data.title.rendered +' ha sido editado exitosamente');
-                Swal.fire( 'Mensaje', 'El post ha sido editado exitosamente', 'success');
-                  this.redirectTo('/web/posts');
-              },
-              err => {
-                this.notificationService.warn('Error: '+err);
-              }
-            );
-            this.dialogRef.close(this.editPost.value);
+        //this.editPost.get('content').markAsTouched();
+        this.dialogRef.close(this.editPost.value);
   }
 
   close() {

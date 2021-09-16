@@ -5,12 +5,12 @@
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0" [hasBackdrop]="true">
+                         [style.marginTop.px]="mobileQuery.matches ? 0 : 0" [hasBackdrop]="true">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" >
-     <!-- <mat-toolbar class="protoolbar" *ngIf="userData">
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="0" >
+      <!-- <mat-toolbar class="protoolbar" *ngIf="getuserData()">
         <img class="avatar mat-elevation-z8" src="https://civicspaceeastafrica.com/wp-content/themes/gwangi/assets/images/avatars/user-avatar.png" />
-      <p class="username">{{userData.user.name}}</p>
+      <p class="username">{{getuserData}}</p>
       </mat-toolbar> --> 
       <mat-nav-list class="list-container">
       <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard'"> Inicio </a>
@@ -24,7 +24,7 @@
       <mat-divider></mat-divider>
       <a mat-list-item (click)="snav.toggle()" [routerLink]="'/dashboard/profile'"> Perfil</a>
       <mat-divider></mat-divider>
-      <a mat-list-item (click)="logout()" *ngIf="auth.getInfo('token')" mat-list-item>Cerrar sesión</a>
+      <a mat-list-item (click)="logout()" *ngIf="checklogin()" mat-list-item>Cerrar sesión</a>
     </mat-nav-list>
     </mat-sidenav>
 

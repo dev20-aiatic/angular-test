@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const { renewToken } = require('../controllers/userController');
 const UserController = require('../controllers/userController');
-const {validation} = require('../middleware/validation.js')
-router.post('/register',UserController.register);
-router.post('/login',UserController.login);
-router.get('/renew-token',validation, UserController.renewToken);
+const {jwt_validation} = require('../middleware/jwt_validation.js')
+const {Validations} = require('../middleware/Validations.js')
+
+router.post('/register',[Validations.checkDuplicateEmail, Validations.checkBlankInputs],UserController.register);
+router.post('/login',[Validations.checkBlankInputs],UserController.login);
+router.get('/renew-token',jwt_validation, UserController.renewToken);
 router.get('/users', UserController.getUsers);
 router.post('/google', UserController.googleIn);
 router.put('/user/update/:id', UserController.updateProfile);
-router.get('/user/info',validation, UserController.getInfo);
-router.get('/user/profile/:id', validation, UserController.getByPK);
+router.get('/user/info',jwt_validation, UserController.user_profile);
+router.get('/user/profile/:id', UserController.getByPK);
 
 
 module.exports = router

@@ -12,8 +12,8 @@ const jwt_secret = process.env.JWT_SECRET || "development";
          */
 
 
-const validation =  (req, res, next) => {
-  const token = req.headers["x-access-token"];
+const jwt_validation =  (req, res, next) => {
+  const token = req.headers["token"];
         if(!token){
           res.status(401).send({
               auth: false,
@@ -23,7 +23,7 @@ const validation =  (req, res, next) => {
       }
       try {
         const payload = jwt.verify(token, jwt_secret);
-        req.userId = payload.id
+        req.user_Id = payload.id
     } catch (error) {
         return res.status(500).json({
             auth: false,
@@ -34,4 +34,4 @@ const validation =  (req, res, next) => {
     next();
 }
 
-module.exports = {validation};
+module.exports = {jwt_validation};

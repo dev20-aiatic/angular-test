@@ -5,16 +5,8 @@ const router = express.Router();
 const usersRoute = require("./user");
 router.use("/api/auth", usersRoute);
 
-
-//Referenciamos la ruta de persona
-const profileRoute = require("./profile");
-router.use("/api/profile", profileRoute);
-
-
 //Referenciamos la ruta de habilidades
 const skillsRoute = require("./skills");
 router.use("/api/skills", skillsRoute);
-
-
 
 module.exports = router;

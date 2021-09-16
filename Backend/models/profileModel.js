@@ -12,11 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     "Profile",
     {
       // Los atributos del modelo son definidos a partir de aquí
-      profile_Id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-      },
       lastname: DataTypes.STRING,
       natIdCard: DataTypes.BIGINT,
       DoB: DataTypes.DATE,
@@ -41,8 +36,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   // Se define la relacion de llaves presente entre las tablas 'skills' y 'person'
   Profile.associate = function (models) {
-    Profile.hasOne(models.User, {
-      foreignKey:  "profile_Id", onDelete: 'RESTRICT', onUpdate: 'CASCADE'});
+    Profile.belongsToMany(models.User, { through: 'user_profile', foreignKey:  "user_Id", otherKey: 'profile_Id'});
     Profile.belongsTo(models.Skill, { foreignKey: "skill_Id" });
   };
   return Profile;

@@ -1,7 +1,4 @@
-const {
-  User,
-  Profile
-} = require("../models/indexModel");
+const { User, Profile } = require("../models/indexModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const env = process.env.NODE_ENV || "development";
@@ -13,47 +10,36 @@ const UserController = {
    * @param {string} email - Correo del usuario
    * @param {string} password - Contraseña del usuario
    */
-   async register(req, res) {
+  async register(req, res) {
     try {
       const password = await bcrypt.hash(req.body.password, 9);
-      const findUser = await User.findOne({
-        include: [{ model: Profile }],
-        where: {
-          email: req.body.email,
-        },
-      });
-      if (findUser) {
-        return res.status(400).send({
-          message: "La dirección de correo ya está en uso",
-        });
-      }
       /**Inicialmente guardamos el perfil*/
-      const profile = await Profile.create();
+      const profile = await Profile.create({
+        lastname: "",
+        natIdCard: "",
+        DoB: "",
+        city: "",
+        department: "",
+        country: "",
+        postalcode: "",
+        career: "",
+        description: "",
+      });
       /** Creamos el nuevo usuario*/
-      const newUser = await User.create({
+      const user = await User.create({
         name: req.body.name,
         email: req.body.email,
         password,
       });
-
-      /** Asignamos el perfil previamente creado al nuevo usuario*/
-      await profile.setUser(newUser);
-
+      /** Asignamos el perfil al nuevo usuario*/
+      await user.addProfile(profile);
       // Generamos el token para el usuario encontrado
-      const token = jwt.sign(
-        {
-          id: newUser.user_Id,
-          name: newUser.name,
-        },
-        jwt_secret,
-        {
-          expiresIn: "2h",
-        }
-      );
-
+      const token = jwt.sign({ id: user.id }, jwt_secret, {
+        expiresIn: "2h", // expires in 2 hours,
+      });
       res.status(200).send({
         auth: true,
-        user: newUser,
+        user: user,
         token: token,
         message: "¡Gracias por su registro!",
       });
@@ -72,57 +58,98 @@ const UserController = {
    * @param {string} user.id - Identificador del usuario en la base de datos
    */
 
-  async login(req, res) {
+   async login(req, res) {
     try {
-      const findUser = await User.findOne({
-        include: [{
-          require: true,
-          model: Profile,
-        }, ],
-        where: {
-          email: req.body.email,
-        },
-      });
-      if (!findUser) {
-        return res.status(401).send({
-          auth: false,
-          token: null,
-          message: "Correo o contraseña incorrectas",
+        const user = await User.findOne({
+            where: {
+                email: req.body.email
+            }
         });
-      }
-
-      const isMatch = await bcrypt.compare(
-        req.body.password,
-        findUser.password
-      );
-      if (!isMatch) {
-        return res.status(400).send({
-          message: "Contraseña incorrecta",
-        });
-      }
-      // Asignamos el token de inicio de sesión
-      const token = jwt.sign({
-          id: findUser.user_Id,
-          name: findUser.name,
-        },
-        jwt_secret, {
-          expiresIn: "2h",
+        if (!user) {
+            return res.status(401).send({
+                message: 'Correo o contraseña incorrecta'
+            })
         }
-      );
-      //status es 200 by default
-      res.status(200).send({
-        auth: true,
-        user: findUser,
-        token: token,
-        message: "Bienvenido " + findUser.name,
+        
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!isMatch) {
+            return res.status(401).send({
+                auth: false,
+                token: null,
+                message: 'Contraseña incorrecta'
+            })
+        }
+        // Asignamos el token de inicio de sesión
+        const token = jwt.sign({ id: user.id }, jwt_secret, {expiresIn: "24h"});
+        res.status(200).send({
+            auth:true,
+            token:token,
+            message: 'Bienvenido de nuevo ' + user.name
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Hubo un problema al iniciar sesión'
+        });
+    }
+},
+  
+
+  /**Función encargada de mostrar el perfil de usuario
+   * @param {integer} id - Número de registro del usuario
+   * @param {string} lastname - Contraseña del usuario
+   * @param {integer} natIdCard - Número de cedula del usuario
+   * @param {date} DoB - Fecha de nacimiento del usuario
+   * @param {string} city - Ciudad de residencia del usuario
+   * @param {string} department - Departamento de residencia del usuario
+   * @param {string} country - País de recidensia del usuario
+   * @param {integer} postalcode - Código postal del usuario
+   * @param {string} career - Profesión del usuario
+   * @param {integer} skill_Id - Identificador de habilidades asignables al usuario
+   * @param {string} description - Descripción del usuario
+   */
+  async user_profile(req, res) {
+    try {
+      User.findOne({
+        where: { id: req.user_Id },
+        attributes: ["name", "email"],
+        include: [
+          {
+            model: Profile,
+            attributes: [
+              "id",
+              "lastname",
+              "natIdCard",
+              "DoB",
+              "city",
+              "department",
+              "country",
+              "postalcode",
+              "career",
+              "skill_Id",
+              "postalcode",
+              "description",
+            ],
+            through: {
+              attributes: ["user_Id", "profile_Id"],
+            },
+          },
+        ],
+      }).then((user) => {
+        res.status(200).json({
+          message: "Pagina de perfil de usuario",
+          user: user,
+        });
       });
     } catch (error) {
       console.log(error);
-      res.status(500).send({
-        message: "Hubo un problema al iniciar sesión",
+      res.status(500).json({
+        message: "Hubo un problema al obtener los datos",
+        error: error,
       });
     }
   },
+
   /**Función encargada de gestionar la modificación del perfil de usuario
    * @param {integer} id - Número de registro del usuario
    * @param {string} lastname - Contraseña del usuario
@@ -138,40 +165,55 @@ const UserController = {
    */
 
   async updateProfile(req, res) {
-    const {id} = req.params;
-    const {lastname,natIdCard, DoB,city, department,country, postalcode, career, skill_Id, description} = req.body;
+    const { id } = req.params;
+    const {
+      lastname,
+      natIdCard,
+      DoB,
+      city,
+      department,
+      country,
+      postalcode,
+      career,
+      skill_Id,
+      description,
+    } = req.body;
     try {
       /** Buscamos el perfil del usuario mediante EagerLoading */
       const profileFind = await Profile.findOne({
-        include: [{
-          model: User,
-        }, ],
+        include: [
+          {
+            model: User,
+          },
+        ],
         where: {
-          profile_Id: id
+          profile_Id: id,
         },
       });
-      if (!profileFind){
+      if (!profileFind) {
         return res.status(404).json({
-          message: 'No existe perfil con el id ' + id
+          message: "No existe perfil con el id " + id,
         });
       }
 
       /** De encontrarse procedemos a actualizar el usuario */
 
-      await Profile.update({
-        ...req.body
-      },{
-        where:{
-          profile_Id:id
+      await Profile.update(
+        {
+          ...req.body,
+        },
+        {
+          where: {
+            profile_Id: id,
+          },
         }
-      });
+      );
 
       return res.status(200).send({
         auth: true,
         user: profileFind,
         message: "Cambios efectuados correctamente",
       });
-
     } catch (error) {
       console.log(error);
       res.status(500).send({
@@ -181,45 +223,53 @@ const UserController = {
     }
   },
 
+  /**Función encargada del login mediante google
+   * @param {integer} id - Número de registro del usuario
+   * @param {string} email - Email del usuario
+   * @param {string} lastname - Contraseña del usuario
+   * @param {boolean} googleauth - Indica si se logueo mediante google
+   */
   async googleIn(req, res) {
-      //Buscamos si se encuentra previamente registrado
-    try{
+    //Buscamos si se encuentra previamente registrado
+    try {
       const findUser = await User.findOne({
         where: {
-          email: req.body.email
+          email: req.body.email,
         },
       });
       if (!findUser) {
-      /** Procedemos a crear el perfil */
-      const userProfile = await Profile.create();
-      /**Asigmanos el perfil al nuevo usuario*/
-      const newUser = await User.create({
-        name: req.body.name,
-        email: req.body.email,
-        password: ':P',
-        googleauth: true,
-        profile:userProfile,
-      });
-      /** Asignamos el perfil previamente creado al nuevo usuario*/
-      await userProfile.setUser(newUser);
-
-      const fillprofile = await Profile.update({
-        lastname: req.body.lastname,
-        photo: req.body.photo,
-      },{
-        where: {
-          profile_Id: newUser.id
-        },
+        /** Procedemos a crear el perfil */
+        const profile = await Profile.create();
+        /**Asigmanos el perfil al nuevo usuario*/
+        const user = await User.create({
+          name: req.body.name,
+          email: req.body.email,
+          password: ":P",
+          googleauth: true,
+        });
+        /** Asignamos el perfil previamente creado al nuevo usuario*/
+        await user.addProfile(profile);
+        /** Actualizamos el perfil con la información de google*/
+        const fillprofile = await Profile.update(
+          {
+            lastname: req.body.lastname,
+            photo: req.body.photo,
+          },
+          {
+            where: {
+              profile_Id: user.id,
+            },
+          }
+        );
       }
-      )
-
-    }
       // Generamos el token para el usuario encontrado
-      const token = jwt.sign({
+      const token = jwt.sign(
+        {
           id: newUser.id,
           name: newUser.name,
         },
-        jwt_secret, {
+        jwt_secret,
+        {
           expiresIn: "2h",
         }
       );
@@ -228,27 +278,23 @@ const UserController = {
         user: findUser,
         token: token,
         message: "Bienvenido " + findUser.name,
-      })
-
-    } catch (error){
+      });
+    } catch (error) {
       console.log(error);
       res.status(500).send({
         auth: false,
         message: "Upps! no fue posible el logueo con Google",
-      })
-  }
-},
-
-
-
+      });
+    }
+  },
 
   async getInfo(req, res) {
-    const {userId} = req;
+    const { userId } = req;
     try {
       const findUser = await User.findOne({
         where: {
-          user_Id: userId
-        }
+          user_Id: userId,
+        },
       });
       if (!findUser) {
         return res.status(404).send({
@@ -267,10 +313,12 @@ const UserController = {
   async getByPK(req, res) {
     const { user } = req;
     User.findOne({
-      include: [{
-        require: true,
-        model: Profile,
-      }, ],
+      include: [
+        {
+          require: true,
+          model: Profile,
+        },
+      ],
       where: {
         user_Id: user,
       },
@@ -284,15 +332,17 @@ const UserController = {
    * @returns {any}
    */
 
-   async getUsers(res) {
+  async getUsers(res) {
     try {
       const users = User.findAll({
-      include: [{
-        require: true,
-        model: Profile,
-      }, ],
-    });
-    res.status(200).send(users);
+        include: [
+          {
+            require: true,
+            model: Profile,
+          },
+        ],
+      });
+      res.status(200).send(users);
     } catch (error) {
       console.log(error);
       res.status(500).send({
@@ -305,40 +355,43 @@ const UserController = {
    * función encargada de renovar el token del usuario
    * @param {any} req  -- Parametro que se usa para llamar a la respuesta userId del middleware 'Validation'
    * @param {any} res  -- Respuesta obtenida de la promesa
-   * @returns {any}  -- Respuesta exitosa con status 200 o status 500 al encontrarse error 
+   * @returns {any}  -- Respuesta exitosa con status 200 o status 500 al encontrarse error
    */
   async renewToken(req, res) {
-    //Del middleware 'validation' se obtiene el id de usuario en el payload del token JWT con req.userId 
+    //Del middleware 'validation' se obtiene el id de usuario en el payload del token JWT con req.userId
     //el cual puede utilizarse para buscarlo en la tabla 'users'
-    const {userId} = req;
+    const { userId } = req;
     try {
       const findUser = await User.findOne({
         where: {
-          user_Id: userId
-        }
+          user_Id: userId,
+        },
       });
       //Al obtener el usuario se procede a generar de nuevo un token para el usuario
-      const token = jwt.sign({
-        id: findUser.user_Id,
-        name: findUser.name,
-      }, jwt_secret, {
-        expiresIn: '2h'
-      });
+      const token = jwt.sign(
+        {
+          id: findUser.user_Id,
+          name: findUser.name,
+        },
+        jwt_secret,
+        {
+          expiresIn: "2h",
+        }
+      );
 
       //Respuesta exitosa del proceso
       return res.status(200).send({
         auth: true,
         user: findUser,
         token: token,
-        message: "Se ha renovado el token de la sesión"
+        message: "Se ha renovado el token de la sesión",
       });
     } catch (error) {
       return res.status(500).send({
         auth: false,
-        message: 'No se renovó el token del usuario'
+        message: "No se renovó el token del usuario",
       });
     }
   },
-
 };
 module.exports = UserController;

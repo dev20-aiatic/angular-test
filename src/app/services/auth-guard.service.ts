@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivateChild  {
 
   canActivateChild(route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
-    if (!localStorage.getItem('token') ||this.authService.isLoggedIn) {
+    if (!localStorage.getItem('token')) {
       Swal.fire('Error','Debe iniciar sesión para acceder a este contenido', 'error');
       this.router.navigate(["login"]);
       return false;

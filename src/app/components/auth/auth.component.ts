@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { WPAuthService } from 'src/app/services/wpauth.service';
+import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 
 @Component({
   selector: 'app-auth',

@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../services/dashgular/auth.service';
 import { SocialAuthService } from 'angularx-social-login';
 import { Router } from '@angular/router';
 

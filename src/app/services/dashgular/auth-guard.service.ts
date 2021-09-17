@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/dashgular/auth.service';
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/dashgular/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/User';
 import { MatTableDataSource } from '@angular/material/table';

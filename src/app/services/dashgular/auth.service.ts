@@ -1,11 +1,12 @@
-import { ProfileDetails } from './../interfaces/Profile';
-import { obtResponse, Profile, UserDetails } from './../interfaces/Auth';
+import { ProfileDetails } from './../../interfaces/Profile';
+import { obtResponse, Profile, UserDetails } from './../../interfaces/Auth';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { catchError, map, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root',
@@ -14,27 +15,28 @@ export class AuthService {
   private userin: obtResponse;
   loggedIn: boolean = false;
   isAuthenticated: any;
-  api = 'http://localhost:5000/api';
-
+  //La ruta de autenticación del plugin wordpress
+  APP_API: string = environment.APP_REST.API;
+  
   constructor(public httpClient: HttpClient, private route: Router) {}
 
   /** Método registrar usuario */
   signup(name: string, email: string, password: string) {
     return this.httpClient
-      .post<obtResponse>(`${this.api}/auth/register`, { name, email, password })
+      .post<obtResponse>(`${this.APP_API}/auth/register`, { name, email, password })
       .pipe(tap((res) => this.setTokenAndUser(res)));
   }
 
   /**Metodo  iniciar sesión*/
   login(email: string, password: string) {
     return this.httpClient
-      .post<obtResponse>(`${this.api}/auth/login`, { email, password })
+      .post<obtResponse>(`${this.APP_API}/auth/login`, { email, password })
       .pipe(tap((res) => this.setTokenAndUser(res)));
   }
 
   /**Metodo  logueo con Google*/
   loginSocial(socialData: any) {
-    return this.httpClient.post(`${this.api}/auth/google`, socialData);
+    return this.httpClient.post(`${this.APP_API}/auth/google`, socialData);
   }
 
   /** Método que trae los datos del usuario logueado */
@@ -62,7 +64,7 @@ export class AuthService {
   validateToken(): Observable<boolean> {
     const headers = new HttpHeaders().set('token',localStorage.getItem('token') || ''  );
     return this.httpClient
-      .get<obtResponse>(`${this.api}/auth/renew`, { headers })
+      .get<obtResponse>(`${this.APP_API}/auth/renew`, { headers })
       .pipe(
         map((res) => {
           this.setTokenAndUser(res);
@@ -82,7 +84,7 @@ export class AuthService {
 
   /**Metodo  formulario user */
   updateProfile(user: ProfileDetails, id: number): Observable<any> {
-    return this.httpClient.post(`${this.api}/user/profile/${id}`, user);
+    return this.httpClient.post(`${this.APP_API}/user/profile/${id}`, user);
   }
 
   /**Metodo para setear el usuario y token del logueo*/
@@ -97,11 +99,11 @@ export class AuthService {
   /**Metodo para obtener listado de usuarios*/
 
   getUsers(): Observable<any> {
-    return this.httpClient.get(`${this.api}/auth/users`);
+    return this.httpClient.get(`${this.APP_API}/auth/users`);
   }
 
   getInfo(): Observable<any> {
     let headers = new HttpHeaders().set('token', localStorage.getItem('token') || '');
-    return this.httpClient.get(`${this.api}/user/info`, { headers: headers});
+    return this.httpClient.get(`${this.APP_API}/user/info`, { headers: headers});
   }
 }

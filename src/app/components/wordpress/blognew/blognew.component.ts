@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BlogService } from 'src/app/services/blog.service';
+import { BlogService } from 'src/app/services/wordpress/blog.service';
 import { Blog } from 'src/app/interfaces/Blog';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';

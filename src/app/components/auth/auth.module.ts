@@ -7,6 +7,7 @@ import { AuthComponent } from './auth.component';
 import { SharedModule } from '../shared/shared.module';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
+import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     CommonModule,
     SharedModule
-  ]
+  ],
+  providers:[
+    { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },  ],
 })
 export class AuthModule { }

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Locations } from '../interfaces/Locations';
+import { Locations } from '../../interfaces/Locations';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 

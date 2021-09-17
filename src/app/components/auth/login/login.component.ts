@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder,FormGroup, Validators} from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/dashgular/auth.service';
 import { SocialAuthService } from 'angularx-social-login';
 import {FacebookLoginProvider,GoogleLoginProvider,SocialUser} from 'angularx-social-login';
 import { Router } from '@angular/router';

@@ -3,18 +3,18 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { NotificationService } from './notification.service';
-import { WP_User } from '../interfaces/WP_User';
+import { NotificationService } from './../notification.service';
+import { WP_User } from '../../interfaces/WP_User';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { WP_Token } from '../interfaces/WP_Token';
+import { WP_Token } from '../../interfaces/WP_Token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WPAuthService {
   //La ruta de autenticación del plugin wordpress
-  TOKENIZER: string = environment.wpAuth;
+  TOKENIZER: string = environment.WP_REST.AUTH;
   user: WP_User;
   isAuthenticated = false;
   token: string;

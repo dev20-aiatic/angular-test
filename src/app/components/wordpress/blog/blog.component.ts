@@ -1,12 +1,12 @@
-import { Posteo } from './../../../interfaces/post';
+import { Posteo } from '../../../interfaces/post';
 import { Component, OnInit} from '@angular/core';
-import { BlogService } from 'src/app/services/blog.service';
-import { Router } from '@angular/router';
+import { BlogService } from 'src/app/services/wordpress/blog.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { BlogeditComponent } from '../blogedit/blogedit.component';
+//import { BlogeditComponent } from '../blogedit/blogedit.component';
 import { NotificationService } from 'src/app/services/notification.service';
-import { WPAuthService } from 'src/app/services/wpauth.service';
+import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 
 @Component({
   selector: 'app-blog',
@@ -14,7 +14,10 @@ import { WPAuthService } from 'src/app/services/wpauth.service';
   styleUrls: ['./blog.component.css'],
 })
 export class BlogComponent implements OnInit {
-  Posts: any[];
+  posts: any[];
+  categoryId : any[];
+  categoryTitle  : any[];
+
   postCount = null;
   postDeleted: any;
   postEdit: any;
@@ -41,18 +44,14 @@ export class BlogComponent implements OnInit {
   } */
   loading = false;
 
-  constructor( public blogService: BlogService, private router: Router, public dialog: MatDialog, private notificationService: NotificationService, private wpAuthService:WPAuthService) {}
+  constructor( public blogService: BlogService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private wpAuthService:WPAuthService) {}
 
   ngOnInit() {
-    this.getPosts();
+    this.blogService.getRecentPosts(2).subscribe((res) => {
+      this.postCount = this.blogService.allPosts;
+      this.posts = res;
+    });
   }
-
-  getPosts() {
-      this.blogService.getAllPosts().subscribe((res) => {
-        this.postCount = this.blogService.allPosts;
-        this.Posts = res;
-      });
-    }
   /**Metodo que me devuelve la información del usuario */
     get userData() {
       return this.wpAuthService.user;
@@ -80,7 +79,7 @@ redirectTo(uri:string){
     }
 
   /** Llamamos el dialog de editar **/
-   openEdit(post): void{
+/*   openEdit(post): void{
     let dialogRef  = this.dialog.open(BlogeditComponent, {
       width: '800px',
       height: '400px',
@@ -96,7 +95,9 @@ redirectTo(uri:string){
       console.log(this.postEdit);
       console.log('Dialogo cerrado');
     });
-} 
+}
+
+ */
 deletePost(post) {
   if (confirm("¿Realmente desea borrar el post: " + post.title.rendered +" ?" )) {
     this.blogService.deletepost(post.id)
@@ -107,9 +108,9 @@ deletePost(post) {
         console.log(this.postDeleted);
       });
   }
-    
+
 }
- 
+
 }
 
 

@@ -2,8 +2,8 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "test",
-    "host": "localhost",
+    "database": "dashgular",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
   },
@@ -16,10 +16,10 @@
     "operatorsAliases": 0
   },
   "production": {
-    "username": "csrdbkcknsqslgtq",
-    "password": "xq2yawr025up0osk",
-    "database": "vfke2jsokbjq2djh",
-    "host": "g84t6zfpijzwx08q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "oqz436zv3kuh7b5i",
+    "password": "i87mw23nud7nm2k0",
+    "database": "fa5dzwb7hvypdxzr",
+    "host": "nnsgluut5mye50or.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql",
     "operatorsAliases": 0
   }

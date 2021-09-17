@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from 'src/app/services/auth.service';
-import { WPAuthService } from 'src/app/services/wpauth.service';
+import { AuthService } from 'src/app/services/dashgular/auth.service';
+import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 
 @Component({
   selector: 'app-dashboard',

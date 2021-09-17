@@ -9,14 +9,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 // Componentes que son el contenido
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { HistoryComponent } from './history/history.component';
 import { VideoComponent } from './video/video.component';
-import { BlogComponent } from './blog/blog.component';
-import { BlogdetailComponent } from './blogdetail/blogdetail.component';
-import { BlognewComponent } from './blognew/blognew.component';
-import { BlogloginComponent } from './bloglogin/bloglogin.component';
-import { BlogeditComponent } from './blogedit/blogedit.component';
 import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
 
 @NgModule({
@@ -26,12 +20,7 @@ import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
     SidebarComponent,
     HomeComponent,
     VideoComponent,
-    HistoryComponent,
-    BlogComponent,
-    BlogdetailComponent,
-    BlognewComponent,
-    BlogloginComponent,
-    BlogeditComponent
+    HistoryComponent
   ],
   exports: [
     DashboardComponent
@@ -40,7 +29,6 @@ import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    MatSidenavModule
   ],
   providers:[
     { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },

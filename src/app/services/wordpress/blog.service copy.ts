@@ -13,7 +13,7 @@ import { Wp_Category } from '../interfaces/WP_Category';
 export class BlogService {
   
   // URL del blog que vamos a trabajar con su REST API
-  API: string = environment.wpAPI;
+  WP_API: string = environment.WP_REST.API;
   //Opciones de blog
   allPosts = null;
   pages: any;
@@ -34,16 +34,19 @@ export class BlogService {
   }
   
 
-  getAllPosts(page = 1): Observable<any[]> {
+  getAllPosts(categoryId: number, page: number = 1): Observable<any[]> {
+    let category_url = categoryId? ("&categories=" + categoryId): "";
     let options = {
       observe: 'response' as 'body',
       params: {
         per_page: '4',
         page: '' + page,
+        orderby:'modified',
+        category_url
       },
     };
 
-    return this.http.get<any[]>(`${this.API}/posts?_embed=true`, options).pipe(
+    return this.http.get<any[]>(`${this.WP_API}/posts?_embed=true`, options).pipe(
       map((res) => {
         this.pages = res['headers'].get('x-wp-totalpages');
         this.allPosts = res['headers'].get('x-wp-total');
@@ -54,7 +57,7 @@ export class BlogService {
   }
 
   getPost(id:any) {
-    return this.http.get(`${this.API}/posts/${id}?_embed`).pipe(
+    return this.http.get(`${this.WP_API}/posts/${id}?_embed`).pipe(
       map((post) => {
         return post;
       })
@@ -67,7 +70,7 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.post<any[]>(`${this.API}/posts`, data, options).pipe(
+    return this.http.post<any[]>(`${this.WP_API}/posts`, data, options).pipe(
       catchError(this.handleError)
     );
   }
@@ -80,7 +83,7 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.put(`${this.API}/posts/${id}?_embed`, data, options).pipe(
+    return this.http.put(`${this.WP_API}/posts/${id}?_embed`, data, options).pipe(
       catchError(this.handleError)
     );
   }
@@ -91,19 +94,19 @@ export class BlogService {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       }
     };
-    return this.http.delete(`${this.API}/posts/${id}`, options).pipe(
+    return this.http.delete(`${this.WP_API}/posts/${id}`, options).pipe(
       catchError(this.handleError)
     );
   }
 
   nextPage(page) {
     return this.http
-      .get(`${this.API}/posts?page=${(page)}&per_page=6`)
+      .get(`${this.WP_API}/posts?page=${(page)}&per_page=6`)
       .pipe(catchError(this.handleError));
   }
   previousPage(page) {
     return this.http
-      .get(`${this.API}/posts?page=${(page)}&per_page=6`)
+      .get(`${this.WP_API}/posts?page=${(page)}&per_page=6`)
       .pipe(catchError(this.handleError));
   }
 

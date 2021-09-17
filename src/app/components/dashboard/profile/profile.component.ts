@@ -1,7 +1,7 @@
-import { ProfileService } from './../../../services/profile.service';
+import { ProfileService } from './../../../services/dashgular/profile.service';
 import { Profile } from './../../../interfaces/User';
-import { WebService } from './../../../services/web.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { WebService } from './../../../services/dashgular/web.service';
+import { AuthService } from 'src/app/services/dashgular/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 

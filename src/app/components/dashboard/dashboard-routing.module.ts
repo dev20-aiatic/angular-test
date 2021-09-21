@@ -15,6 +15,10 @@ const routes: Routes = [
     { path: 'profile', component: ProfileComponent },
     { path: 'history', component: HistoryComponent },
     { path: 'video', component: VideoComponent },
+    {
+      path: 'posts',
+      loadChildren: () => import('../wordpress/wordpress.module').then( m => m.WordpressModule)
+    },
 /*     {path:'post/:id',component:BlogdetailComponent},
     {path:'posts',component:BlogComponent},
     {path:'newpost',component:BlognewComponent},

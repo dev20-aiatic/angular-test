@@ -1,0 +1,57 @@
+<footer class="footer">
+  <mat-toolbar class="footer">
+    <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+      <button mat-button [routerLink]="'posts'" routerLinkActive="active-menu-item">
+        <div class="toolbar-icon">
+          <mat-icon>book</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Posts</span>
+        </div>
+      </button>
+
+      <button mat-button [routerLink]="'newpost'" routerLinkActive="active-menu-item">
+        <div class="toolbar-icon">
+          <mat-icon>note_add</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Nueva entrada</span>
+        </div>
+      </button>
+
+      <button mat-button routerLink="/messages" routerLinkActive="active-menu-item">
+        <div class="toolbar-icon">
+          <mat-icon>list</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Categorias</span>
+        </div>
+      </button>
+
+      <button *ngIf="!checklogin()" [routerLink]="'wp-login'" mat-button >
+        <div class="toolbar-icon">
+          <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Iniciar sesión</span>
+        </div>
+      </button>
+
+      <button *ngIf="checklogin()"  (click)="logout()" mat-button >
+        <div class="toolbar-icon">
+          <mat-icon>logout</mat-icon>
+        </div>
+        <div class="toolbar-icon-text">
+          <span>Cerrar sesión</span>
+        </div>
+      </button>
+    </div>
+    </mat-toolbar>
+  </footer>
+
+
+
+
+
+  
+  

@@ -1,0 +1,39 @@
+<div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
+  <h1 mat-dialog-title>Editar Post</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="editPost" (ngSubmit)="save()">
+          <mat-form-field>
+          <input matInput formControlName="id"  type="text" placeholder="Id">
+          </mat-form-field>
+          <mat-form-field>
+          <input matInput formControlName="date" [matDatepicker]="Date" placeholder="Fecha de publicación" class="form-control">
+          <mat-datepicker-toggle matSuffix [for]="Date"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #Date ></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput formControlName="modified" [matDatepicker]="DateMOD" placeholder="Fecha última modificación" class="form-control">
+            <mat-datepicker-toggle matSuffix [for]="DateMOD"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #DateMOD ></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="justifier">
+            <mat-select formControlName="category" >
+            <mat-option value="0"></mat-option>
+            <mat-option value="{{category.id}}" *ngFor="let category of categories" >{{category.name}}</mat-option>
+             </mat-select>
+            <mat-label><mat-icon>book</mat-icon> Categoria</mat-label>
+            </mat-form-field>  
+          <mat-form-field>
+              <input matInput formControlName="title"  type="text" placeholder="Titulo">
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput formControlName="excerpt"  type="text" placeholder="Resumen">
+          </mat-form-field>
+          <angular-editor formControlName="content"> </angular-editor>
+          <div *ngIf="editPost.controls.content.errors && editPost.controls.content.touched" class="error">El contenido es requerido (Min 5 palabras).</div>
+        </form>
+  </div>
+  <div mat-dialog-actions>
+      <button mat-button (click)="close()">Cancelar</button>
+      <button mat-button (click)="save()" cdkFocusInitial>Confirmar</button>
+  </div>

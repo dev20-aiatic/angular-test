@@ -8,7 +8,7 @@ const routes: Routes = [
    loadChildren: () => import('./components/auth/auth.module').then(x => x.AuthModule)},
   { path: 'dashboard',
    loadChildren: () => import('./components/dashboard/dashboard.module').then(x => x.DashboardModule), canActivateChild:[AuthGuard]},
-  { path: '**', redirectTo: 'web'}
+  { path: '**', redirectTo: 'web'},
 ];
 
 @NgModule({

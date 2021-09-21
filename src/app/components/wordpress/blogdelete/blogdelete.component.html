@@ -1,0 +1,11 @@
+<ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
+<div style="display: flex;flex-direction: column; margin:1rem auto; max-width: 600px; padding: 1rem;">
+<h1 mat-dialog-title>Confirmación</h1>
+<div mat-dialog-content>
+    <p> ¿Realmente desea borrar el post: <STRONG>{{deletePost}}</STRONG> ?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="close()">No</button>
+    <button mat-button (click)="save()" cdkFocusInitial>Sí</button>
+</div>
+</div>

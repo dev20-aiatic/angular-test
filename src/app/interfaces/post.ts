@@ -1,30 +1,13 @@
+import { Wp_Category } from "./WP_Category";
+
     export class Posteo {
     constructor(public id: number, 
-        public date: Date, 
-        public date_gmt:Date,
-        public modified:Date,
-        public modified_gmt:Date,
-        public slug:string,
-        public status: string,
-        public  type: string,
-        public link: string,
-        public title:GUID,
-        public content:Content,
-        public excerpt:Content,
-        public author: number,
-        public featured_media:number,
-        public comment_status:string,
-        public ping_status:string,
-        public sticky:boolean,
-        public template:string,
-        public format:string,
-        public  meta:Meta,
-        public categories:number[],
-        public tags:number[]) {
+        public title:string,
+        public content:string,
+        public excerpt:string,
+) {
     }
     }
-    
-    
     
     export interface Post {
         id:                      number;
@@ -40,7 +23,7 @@
         title:                   GUID;
         content:                 Content;
         excerpt:                 Content;
-        author:                  number;
+        author:                  Author;
         featured_media:          number;
         comment_status:          string;
         ping_status:             string;
@@ -52,6 +35,7 @@
         tags:                    number[];
         "jetpack-related-posts": JetpackRelatedPost[];
         _links:                  Links;
+        _embedded:               Embedded;
     }
     
 
@@ -67,16 +51,45 @@
         "wp:term":          WpTerm[];
         curies:             Cury[];
     }
-    
-    export interface About {
-        href: string;
+
+    export interface Embedded {
+        author:             AuthorDetails[];
+        "wp:featuredmedia": Featuredmedia[];
+        "wp:term":          WpTerm[];
     }
     
+
+
+    export interface AuthorDetails {
+        embeddable: boolean;
+        id:          number;
+        name:        string;
+        description: string;
+        avatar_urls:  Avatar;
+        link:       string;
+    }
+
+    export interface Featuredmedia {
+        source_url: string;
+    }
+
+    export interface Avatar {
+        24: string;
+        48: string;
+        96: string;
+    }
+    
+
     export interface Author {
         embeddable: boolean;
         href:       string;
     }
     
+    
+    export interface About {
+        href: string;
+    }
+
     export interface Cury {
         name:      string;
         href:      string;
@@ -84,11 +97,13 @@
     }
     
     export interface WpTerm {
-        taxonomy:   string;
-        embeddable: boolean;
-        href:       string;
+        id:   string;
+        name: boolean;
+        taxonomy: string; 
+        _links: Wp_Category      
     }
-    
+
+      
     export interface Content {
         rendered:  string;
         protected: boolean;

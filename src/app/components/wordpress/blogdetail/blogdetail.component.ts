@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Post } from 'src/app/interfaces/post';
 import { BlogService } from 'src/app/services/wordpress/blog.service';
 
 @Component({
@@ -9,24 +10,16 @@ import { BlogService } from 'src/app/services/wordpress/blog.service';
 })
 export class BlogdetailComponent implements OnInit {
   postDetail: any;
-  comments: any;
   constructor(
     private blogService: BlogService,
     private route: ActivatedRoute
   ) {}
 
- async ngOnInit() {
+  ngOnInit() {
     const  id = this.route.snapshot.paramMap.get('id');
       this.blogService.getPost(id)
       .subscribe((res) => {
         this.postDetail = res;
-        console.log(this.postDetail);
-      });
-
-      this.blogService.getComments(id)
-      .subscribe((res) => {
-        this.comments = res;
-        console.log(this.comments);
       });
     }
 }

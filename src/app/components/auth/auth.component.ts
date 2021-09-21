@@ -15,6 +15,7 @@ export class AuthComponent implements OnInit {
 
   constructor(private router: Router, private wpAuthService: WPAuthService) {
     this.initializeApp(); 
+      /**Metodo que valida la sesión**/
     if(this.Loggedin){
       this.router.navigateByUrl('/dashboard')
     }
@@ -22,7 +23,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  /**Metodo que ejecuta función de autologueo de WP component**/
   initializeApp() {
     this.wpAuthService.autoAuthUser();
   }

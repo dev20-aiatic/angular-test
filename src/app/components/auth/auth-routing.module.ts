@@ -1,4 +1,3 @@
-import { BlogdetailModule } from './../wordpress/blogdetail/blogdetail.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -27,24 +26,8 @@ const routes: Routes = [
       {path:'video',component:VideoComponent},
       {
         path: 'posts',
-        loadChildren: () => import('../wordpress/blog/blog.module').then( m => m.BlogModule)
+        loadChildren: () => import('../wordpress/wordpress.module').then( m => m.WordpressModule)
       },
-      {
-        path: 'post/:id',
-        loadChildren: () => import('../wordpress/blogdetail/blogdetail.module').then( m => m.BlogdetailModule)
-      },
-      {
-        path: 'newpost',
-        loadChildren: () => import('../wordpress/blognew/blognew.module').then( m => m.BlognewModule)
-      },
-/*       {path:'post/:id',component:BlogdetailComponent},
-      {path:'posts',component:BlogComponent,resolve: {
-        data: BlogResolver
-      },
-      runGuardsAndResolvers: 'paramsOrQueryParamsChange'
-      },
-      {path:'wp-login', component:BlogloginComponent},
-      {path:'newpost',component:BlognewComponent, canActivate: [BlogGuard]}, */
       { path:'**',redirectTo:''}
     ]}
 ];

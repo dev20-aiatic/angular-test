@@ -23,9 +23,6 @@ export class BlogGuard implements CanActivate  {
   ): boolean {        
           if (!localStorage.getItem('wp-token') || !this.wpAuthService.getIsAuth){
             Swal.fire('Error','Debe iniciar sesión para acceder a este contenido', 'error');
-            setTimeout(() => {
-              this.router.navigate(['/web/wp-login']);
-          }, 2000);  //5s
             return false;
           }
           return true;

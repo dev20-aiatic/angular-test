@@ -1,8 +1,6 @@
 export interface WP_Token {
-    code: string;
-    data: Data;
-}
-
-export interface Data {
-    status: number;
+    token:             string;
+    user_email:        string;
+    user_nicename:     string;
+    user_display_name: string;
 }

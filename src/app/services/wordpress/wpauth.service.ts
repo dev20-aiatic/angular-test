@@ -13,9 +13,8 @@ import { WP_Token } from '../../interfaces/WP_Token';
   providedIn: 'root',
 })
 export class WPAuthService {
-  //La ruta de autenticación del plugin wordpress
   TOKENIZER: string = environment.WP_REST.AUTH;
-  user: WP_User;
+  user: any;
   isAuthenticated = false;
   token: string;
   authStatusListener = new Subject<boolean>();
@@ -25,10 +24,12 @@ export class WPAuthService {
     private router: Router,
     private notificationService: NotificationService
   ) {}
+
   //** Verificar si se encuentra logueado */
   getIsAuth() {
     return this.isAuthenticated;
   }
+
 
   getToken() {
     return this.token;
@@ -38,12 +39,15 @@ export class WPAuthService {
     return this.authStatusListener.asObservable();
   }
 
+  /**
+   * Función encargada de realizar la petición de autenticación del usuario
+   * @void se asigna el token y el usuario
+   */
   Login(username: string, password: string) {
     this.http
-      .post<WP_User>(`${this.TOKENIZER}`, { username, password })
+      .post<WP_Token>(`${this.TOKENIZER}`, { username, password })
       .subscribe(
         (response) => {
-          const _user = response;
           if (response.token) {
             localStorage.setItem('wp-token', response.token);
             this.isAuthenticated = true;
@@ -65,11 +69,10 @@ export class WPAuthService {
       );
   }
 
-  /**Getter del usuario logueado*/
-  get userIN() {
-    return { ...this.user };
-  }
-
+  /**
+   * Función encargada de verificar y manterner iniciada la sesión del usuario
+   * @void 
+   */
   autoAuthUser() {
     if (localStorage.getItem('wp-token')) {
       this.isAuthenticated = true;
@@ -77,7 +80,10 @@ export class WPAuthService {
     }
   }
 
-  /**Metodo  validar token*/
+  /**
+   * Función encargada de validar el token JWT
+   * @return respuesta del wpapi que valida el token 
+   */
   validateWPToken() {
     let headers = new HttpHeaders();
     headers = headers.set(
@@ -89,23 +95,18 @@ export class WPAuthService {
         `${this.TOKENIZER}/validate?token=`,
         {},
         { headers: headers }
-      )
-      .pipe(
-        map((response) => {
-          if (response.code === 'jwt_auth_valid_token') {
-            return true;
-          }
-          return false;
-        })
       );
   }
 
+  /**
+   * Procedimiento encargado de desauntenticar al usuario
+   * @void 
+   */
   logout() {
     this.token = '';
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     this.clearAuthData();
-    this.router.navigateByUrl('login');
   }
 
   private clearAuthData() {

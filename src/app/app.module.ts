@@ -16,7 +16,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

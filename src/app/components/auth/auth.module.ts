@@ -1,3 +1,4 @@
+import { WordpressComponent } from './../wordpress/wordpress.component';
 import { LoginComponent } from 'src/app/components/auth/login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { RegisterComponent } from 'src/app/components/auth/register/register.component';

@@ -1,6 +1,6 @@
 <ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
 <mat-toolbar>
-  <button [routerLink]="['/web/posts']"  mat-icon-button class="back-button">
+  <button [routerLink]="['..']"  mat-icon-button class="back-button">
     <mat-icon>keyboard_backspace</mat-icon>
   </button>
   <span class="spancentered">Blog - Nueva Entrada</span>
@@ -11,6 +11,7 @@
       <div class="form-header">
         <h3 class="form-title">Nueva entrada </h3>
       </div>
+
       <form [formGroup]="newForm" (ngSubmit)="createPost()">
         <mat-form-field class="justifier">
           <input matInput placeholder="Título"  formControlName="title" text="title" class="form-input">
@@ -24,10 +25,48 @@
             El resumen es obligatorio
           </mat-error>
         </mat-form-field>
+        
+        <mat-form-field class="justifier"
+        [floatLabel]="floatLabelControl.value">
+        <mat-select formControlName="category" >
+        <mat-option value="0">-- Sin seleccionar --</mat-option>
+        <mat-option value="{{category.id}}" *ngFor="let category of categories" >{{category.name}}</mat-option>
+         </mat-select>
+        <mat-label><mat-icon>book</mat-icon> Categoria</mat-label>
+        </mat-form-field>
+
         <angular-editor formControlName="content" placeholder="Contenido"> </angular-editor>
         <div *ngIf="newForm.controls.content.errors && newForm.controls.content.touched" class="error">El contenido del post es obligatorio (Min 5 palabras).</div>
+        <br>
+        <span>Cargar imagen</span>
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+        <mat-toolbar>
+          <div class="form-group">
+              <input formControlName="file" id="file" type="file" class="form-control-file" multiple=""
+              (change)="onFileChange($event)">
+            </div>
+            <button mat-mini-fab color="primary" class="upload-btn"type="submit">
+          <mat-icon>attach_file</mat-icon>
+          </button>
+        </mat-toolbar>
+        <br>
+        <br>
+          <div class="preview-wrapper">
+            <div class="img-preview" *ngFor='let url of image'>
+              <img [src]="url" width="200px">
+  
+              <button  mat-icon-button class="upperbutton" (click)="removeImage(url)">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+          </div>
+      
+        </form>
+    
+
         <div class="form-footer">
-          <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
+            <mat-spinner *ngIf="loading" class="spinner" diameter="40"></mat-spinner>
           <br>
           <button type="submit" mat-raised-button class="btn custom-btn" [disabled]="newForm.invalid">
             <mat-icon>send</mat-icon> Crear

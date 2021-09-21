@@ -17,6 +17,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table'; 
+import {MatChipsModule} from '@angular/material/chips';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatOptionModule, MatNativeDateModule} from '@angular/material/core';
@@ -31,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [],
@@ -41,6 +44,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     MatInputModule,
     MatIconModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatButtonModule,
     MatDividerModule,
@@ -63,7 +67,9 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     MatMenuModule,
     MatPaginatorModule,
     MatDialogModule,
-    LoadingBarHttpClientModule
+    LoadingBarHttpClientModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule
   ],
   exports: [
     AngularEditorModule,
@@ -72,6 +78,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     MatInputModule,
     MatIconModule,
     MatCardModule,
+    MatChipsModule,
     MatFormFieldModule,
     MatButtonModule,
     MatDividerModule,
@@ -94,7 +101,9 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
     MatMenuModule,
     MatPaginatorModule,
     MatDialogModule,
-    LoadingBarHttpClientModule
+    LoadingBarHttpClientModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule
   ]
 })
 export class SharedModule { }

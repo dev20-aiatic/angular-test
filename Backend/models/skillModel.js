@@ -16,14 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         autoIncrement: true
       },
       name: DataTypes.STRING
-    }, {});
+    }, 
+    {}
+    );
     Skill.associate = function (models) {
-      Skill.hasMany(models.Profile, {
-        foreignKey: {
-          name: 'skill_Id',
-          allowNull: true,
-        },
-      });
+      Skill.belongsToMany(models.Profile, {through: models.ProfileSkill, foreignKey:"Skill_Id", otherKey:"Profile_Id"});
     };
     return Skill;
   };

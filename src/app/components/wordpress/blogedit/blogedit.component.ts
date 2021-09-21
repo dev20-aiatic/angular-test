@@ -36,7 +36,7 @@ export class BlogeditComponent implements OnInit {
 
 
   ngOnInit() {
-      this.getPostDetais();
+      this.getPostDetails();
       this.getAllCategories();
   }
 
@@ -45,7 +45,7 @@ export class BlogeditComponent implements OnInit {
   }
 
  /**Metodo que me devuelve y setea la información del post**/
- getPostDetais() {
+ getPostDetails() {
   this.blogService.getPost(this.id)
   .subscribe(data => {
     this.editPost.patchValue({

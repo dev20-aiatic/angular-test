@@ -8,10 +8,14 @@ module.exports = (sequelize, DataTypes) => {
    *
    *
    */
-  const Profile = sequelize.define(
-    "Profile",
-    {
+  const Profile = sequelize.define('Profile', {
       // Los atributos del modelo son definidos a partir de aquí
+      id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+      },
       lastname: DataTypes.STRING,
       natIdCard: DataTypes.BIGINT,
       DoB: DataTypes.DATE,
@@ -20,8 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       country: DataTypes.STRING,
       postalcode: DataTypes.STRING,
       career: DataTypes.STRING,
-      skill_Id: DataTypes.INTEGER,
-      photo:DataTypes.STRING,
+      photo: DataTypes.STRING,
       description: DataTypes.TEXT,
       createdAt: {
         type: "TIMESTAMP",
@@ -36,8 +39,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   // Se define la relacion de llaves presente entre las tablas 'skills' y 'person'
   Profile.associate = function (models) {
-    Profile.belongsToMany(models.User, { through: 'user_profile', foreignKey:  "user_Id", otherKey: 'profile_Id'});
-    Profile.belongsTo(models.Skill, { foreignKey: "skill_Id" });
+    Profile.hasOne(models.User, {foreignKey:"Profile_Id"});
+    Profile.belongsToMany(models.Skill, {through:models.ProfileSkill, foreignKey:"Profile_Id", otherKey:"Skill_Id"});
   };
   return Profile;
 };

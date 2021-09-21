@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import { User } from 'src/app/interfaces/User';
 
 @Injectable({
   providedIn: 'root',
@@ -102,8 +103,24 @@ export class AuthService {
     return this.httpClient.get(`${this.APP_API}/auth/users`);
   }
 
-  getInfo(): Observable<any> {
-    let headers = new HttpHeaders().set('token', localStorage.getItem('token') || '');
-    return this.httpClient.get(`${this.APP_API}/user/info`, { headers: headers});
+  getInfo() {
+    let header: HttpHeaders = new HttpHeaders().append('token', localStorage.getItem('token') || '');
+    return this.httpClient.get<User>(`${this.APP_API}/auth/user/info`, { headers: header}).pipe(
+      map((user) => {
+        return user;
+      })
+    );
   }
+
+  
+  /**
+   * Método encargado de actualizar información de usuario
+   * @returns Respuesta frente a petición put de la api
+   */
+
+   update_profile(data: any): Observable<any> {
+    let header: HttpHeaders = new HttpHeaders().append('token', localStorage.getItem('token') || '');
+    return this.httpClient.put(`${this.APP_API}/auth/user/update`, data, {headers: header});
+  }
+
 }

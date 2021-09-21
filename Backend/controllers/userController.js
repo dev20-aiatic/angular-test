@@ -29,10 +29,9 @@ const UserController = {
       const user = await User.create({
         name: req.body.name,
         email: req.body.email,
+        Profile_Id: profile.id,
         password,
       });
-      /** Asignamos el perfil al nuevo usuario*/
-      await user.addProfile(profile);
       // Generamos el token para el usuario encontrado
       const token = jwt.sign({ id: user.id }, jwt_secret, {
         expiresIn: "2h", // expires in 2 hours,
@@ -135,15 +134,15 @@ const UserController = {
             },
           },
         ],
-      }).then((user) => {
-        res.status(200).json({
+      }).then(user => {
+        res.status(200).send({
           message: "Pagina de perfil de usuario",
           user: user,
         });
       });
     } catch (error) {
       console.log(error);
-      res.status(500).json({
+      res.status(500).send({
         message: "Hubo un problema al obtener los datos",
         error: error,
       });
@@ -164,64 +163,27 @@ const UserController = {
    * @param {string} description - Descripción del usuario
    */
 
-  async updateProfile(req, res) {
-    const { id } = req.params;
-    const {
-      lastname,
-      natIdCard,
-      DoB,
-      city,
-      department,
-      country,
-      postalcode,
-      career,
-      skill_Id,
-      description,
-    } = req.body;
-    try {
-      /** Buscamos el perfil del usuario mediante EagerLoading */
-      const profileFind = await Profile.findOne({
-        include: [
-          {
-            model: User,
-          },
-        ],
+ updateProfile(req, res) {
+    User.update({...req.body}, {
+    where: {id: req.user_Id},
+    include:[
+      {
+        model:Profile,
+        as: 'profiles',
+        required: true,
         where: {
-          profile_Id: id,
-        },
-      });
-      if (!profileFind) {
-        return res.status(404).json({
-          message: "No existe perfil con el id " + id,
-        });
-      }
-
-      /** De encontrarse procedemos a actualizar el usuario */
-
-      await Profile.update(
-        {
-          ...req.body,
-        },
-        {
-          where: {
-            profile_Id: id,
-          },
+          id: req.user_Id
         }
-      );
-
-      return res.status(200).send({
-        auth: true,
-        user: profileFind,
-        message: "Cambios efectuados correctamente",
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
-        auth: false,
-        message: "Algo salió mal",
-      });
-    }
-  },
+      }]
+  })
+  .then((user) => res.send({
+    user,
+    message: 'Datos modificados  exitosamente'
+  }))
+  .catch(err => res.send({
+      message: 'Hubo un problema para modificar los datos'
+  }))
+},
 
   /**Función encargada del login mediante google
    * @param {integer} id - Número de registro del usuario

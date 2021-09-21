@@ -19,15 +19,6 @@ const routes: Routes = [
       { path: 'newpost', component: BlognewComponent, canActivate: [BlogGuard]},
       { path: 'editpost', component: BlogeditComponent, canActivate: [BlogGuard]},
       { path: 'wp-login', component: BlogloginComponent},
-
-      /*       {path:'post/:id',component:BlogdetailComponent},
-      {path:'posts',component:BlogComponent,resolve: {
-        data: BlogResolver
-      },
-      runGuardsAndResolvers: 'paramsOrQueryParamsChange'
-      },
-      {path:'wp-login', component:BlogloginComponent},
-      {path:'newpost',component:BlognewComponent, canActivate: [BlogGuard]}, */
       { path: '**', redirectTo: '' },
     ],
   },

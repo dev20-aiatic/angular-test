@@ -9,7 +9,7 @@ router.post('/login',[Validations.checkBlankInputs],UserController.login);
 router.get('/renew-token',jwt_validation, UserController.renewToken);
 router.get('/users', UserController.getUsers);
 router.post('/google', UserController.googleIn);
-router.put('/user/update/:id', UserController.updateProfile);
+router.put('/user/update',jwt_validation, UserController.updateProfile);
 router.get('/user/info',jwt_validation, UserController.user_profile);
 router.get('/user/profile/:id', UserController.getByPK);
 

@@ -1,7 +1,7 @@
 
 
   <mat-toolbar>
-      <span class="span">Perfil</span>
+      <span class="span">Perfil de Usuario</span>
   </mat-toolbar>
 
   <div class="grid-container"> 
@@ -9,10 +9,10 @@
   <mat-grid-list [cols]="1 "rowHeight = "400px" (window:resize)="onResize($event)">
     <mat-grid-tile>
     <mat-card class="dashboard-card">
-      <form [formGroup]="profileForm" novalidate>
+      <form [formGroup]="profileForm" (ngSubmit)="save()">
       <mat-card-header>
         <mat-card-title>
-          Profile de <p class="form-control-static">{{userData.user.name}</p>
+          Detalles de usuario
           <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -28,19 +28,19 @@
       
      <!-- Campo de nombre del usuario -->
 
-              <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+              <mat-form-field class="mid-width">
                 <mat-label>Nombre</mat-label>
                 <input matInput placeholder="Ej. Pepito" formControlName="name">
               </mat-form-field>
       
       <!-- Campo de apellido del usuario -->
-      <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+      <mat-form-field class="mid-width">
         <mat-label>Apellido</mat-label>
-        <input matInput placeholder="Ej." formControlName="lastname">
+        <input matInput placeholder="Ej. Perez" formControlName="lastname">
       </mat-form-field>
       
       <!-- Campo de cédula del usuario -->
-      <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+      <mat-form-field class="mid-width">
         <mat-label>Cédula</mat-label>
         <input matInput #natIdCard maxlength="13" placeholder="Ej. 44785210" type="number" formControlName="natIdCard">
       </mat-form-field>
@@ -51,7 +51,7 @@
 
 <!-- Campo de Fecha de nacimiento del usuario -->
 
-    <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+    <mat-form-field class="mid-width">
       <mat-label>Fecha de nacimiento</mat-label>
       <input matInput formControlName="DoB" [matDatepicker]="DateofBirth" class="form-control">
       <mat-datepicker-toggle matSuffix [for]="DateofBirth"></mat-datepicker-toggle>
@@ -61,14 +61,13 @@
 
     <!-- Campo de Profesión -->
 
-  <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+  <mat-form-field class="mid-width">
     <mat-label>Profesión</mat-label>
     <input matInput placeholder="Ej. Abogado" formControlName="career">
   </mat-form-field>
 
 <!-- Campo de Habilidad -->
-  <mat-form-field class="mid-width" appearance="fill"
-  [floatLabel]="floatLabelControl.value">
+  <mat-form-field class="mid-width">
 <mat-select formControlName="skill_Id">
   <mat-option>-- Sin seleccionar --</mat-option>
   <mat-option value="option">Option</mat-option>
@@ -79,15 +78,14 @@
 
    <div class="mainContainer">
   <!-- Campo de País -->
- <mat-form-field class="mid-width" appearance="fill" [floatLabel]="floatLabelControl.value">
+ <mat-form-field class="mid-width">
   <mat-label>País</mat-label>
   <input matInput placeholder="Ej. Perez" formControlName="country">
 </mat-form-field>
 
 <!-- Campo de departamento -->
 
-<mat-form-field class="mid-width" appearance="fill"
-        [floatLabel]="floatLabelControl.value">
+<mat-form-field class="mid-width">
       <mat-select [(ngModel)]="department"  formControlName="department" (selectionChange)="deparmentChangeAction(department)" >
         <mat-option value="0">-- Sin seleccionar --</mat-option>
         <mat-option value="{{department.region}}" *ngFor="let department of departments">{{department.region}}</mat-option>
@@ -96,8 +94,7 @@
     </mat-form-field>
 
 <!-- Campo de ciudad -->
-<mat-form-field class="mid-width" appearance="fill"
-[floatLabel]="floatLabelControl.value">
+<mat-form-field class="mid-width">
 <mat-select name="city" formControlName="city">
 <mat-option >-- Sin seleccionar --</mat-option>
 <mat-option value="{{city}}" *ngFor="let city of cities">{{city.city}}</mat-option>
@@ -107,6 +104,10 @@
 </div>
 
       </mat-card-content>
+      <div class="actions">
+        <button type="submit" mat-raised-button class="inline-buttons" color="warn" [disabled]="profileForm.invalid">Cancelar</button>
+        <button type="submit" mat-raised-button class="inline-buttons" click="save()" color="accent" [disabled]="profileForm.invalid">Guardar Cambios</button>
+      </div>
       </form>
     </mat-card>
     </mat-grid-tile>
@@ -125,6 +126,7 @@
           </mat-menu>
         </mat-card-title>
       </mat-card-header>
+      <form [formGroup]="profileForm" novalidate>
       <mat-card-content class="dashboard-card-content">
         <div>
         <mat-form-field class="full-width" appearance="fill">
@@ -132,10 +134,9 @@
           <mat-label>Descripción</mat-label>
           <textarea matInput placeholder="Ej. Empresario desde hace 12 años..."></textarea>
         </mat-form-field>
-      
         </div>
-      
       </mat-card-content>
+      </form>
     </mat-card>
     </mat-grid-tile>
  </mat-grid-list>

@@ -1,19 +1,12 @@
-import { UserDetails } from './../../../interfaces/Auth';
 import { BlogdeleteComponent } from './../blogdelete/blogdelete.component';
-import { Post, Posteo } from '../../../interfaces/post';
+import { Post } from '../../../interfaces/post';
 import { Component, HostListener, OnInit} from '@angular/core';
 import { BlogService } from 'src/app/services/wordpress/blog.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import { forkJoin, Observable } from 'rxjs';
-//import { BlogeditComponent } from '../blogedit/blogedit.component';
 import { NotificationService } from 'src/app/services/notification.service';
-import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { concatMap, map } from 'rxjs/operators';
 import { BlogeditComponent } from '../blogedit/blogedit.component';
-import { Wp_Category } from 'src/app/interfaces/WP_Category';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-blog',
@@ -54,7 +47,6 @@ export class BlogComponent implements OnInit {
       });
     }
   } */
-  loading = false;
   private finishPage = 5;
   private actualPage: number;
   public showGoUpButton: boolean;
@@ -83,7 +75,7 @@ export class BlogComponent implements OnInit {
       );
   }
 
-   /**Metodo que me devuelve la información del usuario */
+   /**Metodo que alimenta scroll infinito */
 loadData(e) {
     this.page++;
 

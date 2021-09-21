@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   APP_REST: {
-    BASEURL: 'https://dash-ap.herokuapp.com',
-    API: 'https://dash-ap.herokuapp.com/api',
+    BASEURL: 'http://localhost:4200',
+    API: 'http://localhost:5000/api',
   },
   WP_REST: {
     API: 'https://dev20.latiendasigueabierta.com/wp-json/wp/v2/',

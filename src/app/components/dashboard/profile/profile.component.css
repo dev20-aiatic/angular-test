@@ -16,6 +16,19 @@
   right: 10px;
 }
 
+.inline-buttons {
+  display: inline-block;
+  text-align: center !important; 
+  margin-right: 5%;
+}
+
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dashboard-card-content {
   text-align: center;
   flex-grow: 1;

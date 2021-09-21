@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HistoryComponent } from './history/history.component';
 import { VideoComponent } from './video/video.component';
 import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     DashboardRoutingModule,
     SharedModule,
   ],

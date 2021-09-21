@@ -1,4 +1,19 @@
 <ngx-loading-bar [fixed]="false" color="#126E82" height="4px" [includeSpinner]="false" > </ngx-loading-bar>
+
+<div class="row pb-5">
+  <div class="col-md-12 p-5">
+    <ngx-spinner
+    bdOpacity = 0.9
+    bdColor = ""
+    size ="medium"
+    color = "black"
+    type="ball-spin-clockwise"
+    >
+    <p style="font-size: 20px; color: black">Cargando...</p>
+  </ngx-spinner>
+  </div>
+</div>
+
 <mat-toolbar>
   <button [routerLink]="['/web/posts']"  mat-icon-button class="back-button">
     <mat-icon>keyboard_backspace</mat-icon>
@@ -24,4 +39,3 @@
     </mat-grid-list>
   </div>
 </div>
-

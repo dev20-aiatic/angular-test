@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 
 //Declaramos la variable entorno del backend
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 //Enrutamos el config.json para obtener credenciales de DB MYSQL
 const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
 

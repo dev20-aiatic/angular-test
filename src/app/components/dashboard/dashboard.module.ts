@@ -23,9 +23,6 @@ import { RouterModule } from '@angular/router';
     VideoComponent,
     HistoryComponent
   ],
-  exports: [
-    DashboardComponent
-  ],
   imports: [
     CommonModule,
     RouterModule,

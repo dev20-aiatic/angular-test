@@ -1,0 +1,6 @@
+site_name: Documentación Dashgular
+
+nav:
+  - Inicio: 'index.md'
+
+theme: readthedocs

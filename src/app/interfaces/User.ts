@@ -6,9 +6,11 @@ export interface User {
 }
 
 export interface UserDetails {
-    name: string;
+    Profile: Profile;
     email: string;
-    Profiles: Profile[];
+    id: string;
+    name: string;
+    social: string;
 }
 
 export interface Profile {

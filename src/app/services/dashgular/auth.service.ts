@@ -103,6 +103,11 @@ export class AuthService {
     return this.httpClient.get(`${this.APP_API}/auth/users`);
   }
 
+
+  /**
+   * Método encargado de traer información del usuario autenticado
+   * @returns Respuesta frente a petición get de la api
+   */
   getInfo() {
     let header: HttpHeaders = new HttpHeaders().append('token', localStorage.getItem('token') || '');
     return this.httpClient.get<User>(`${this.APP_API}/auth/user/info`, { headers: header}).pipe(

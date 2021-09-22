@@ -51,20 +51,19 @@ export class ProfileComponent implements OnInit {
    getProfile() {
    this.auth.getInfo()
     .subscribe(data => {
-      this.details=data;
-      console.log(this.details);
-      this.profileForm.setValue({
-        name: data.user.name,
-        lastname:data.user.Profiles['0'].lastname,
-        natIdCard:data.user.Profiles['0'].natIdCard,
-        DoB: data.user.Profiles['0'].DoB,
-        city:data.user.Profiles['0'].city,
-        department:data.user.Profiles['0'].department,
-        country:data.user.Profiles['0'].country,
-        postalcode:data.user.Profiles['0'].postalcode,
-        career:data.user.Profiles['0'].career,
-        skill_Id:data.user.Profiles['0'].skill_Id,
-        description:data.user.Profiles['0'].description,
+      this.details = data;
+      this.profileForm.patchValue({
+        name:data.user.name,
+        lastname:data.user.Profile.lastname,
+        natIdCard:data.user.Profile.natIdCard,
+        DoB:data.user.Profile.DoB,
+        city:data.user.Profile.city,
+        department:data.user.Profile.department,
+        country:data.user.Profile.country,
+        postalcode:data.user.Profile.postalcode,
+        career:data.user.Profile.career,
+        skill_Id:data.user.Profile.skill_Id,
+        description:data.user.Profile.description,
         })
       },
       (error) => {

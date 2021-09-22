@@ -26,19 +26,19 @@ const UserController = {
         description: "",
       });
       /** Creamos el nuevo usuario*/
-      const user = await User.create({
+     const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,
         Profile_Id: profile.id,
         password,
       });
       // Generamos el token para el usuario encontrado
-      const token = jwt.sign({ id: user.id }, jwt_secret, {
+      const token = jwt.sign({id:newUser.id}, jwt_secret, {
         expiresIn: "2h", // expires in 2 hours,
       });
       res.status(200).send({
         auth: true,
-        user: user,
+        user: newUser,
         token: token,
         message: "¡Gracias por su registro!",
       });
@@ -110,33 +110,12 @@ const UserController = {
   async user_profile(req, res) {
     try {
       User.findOne({
-        where: { id: req.user_Id },
-        attributes: ["name", "email"],
-        include: [
-          {
-            model: Profile,
-            attributes: [
-              "id",
-              "lastname",
-              "natIdCard",
-              "DoB",
-              "city",
-              "department",
-              "country",
-              "postalcode",
-              "career",
-              "skill_Id",
-              "postalcode",
-              "description",
-            ],
-            through: {
-              attributes: ["user_Id", "profile_Id"],
-            },
-          },
-        ],
+        where: { id: req.user_Id 
+        },
+        attributes: ["id", "name", "email", "social"],
+        include: [Profile],
       }).then(user => {
         res.status(200).send({
-          message: "Pagina de perfil de usuario",
           user: user,
         });
       });
@@ -165,21 +144,19 @@ const UserController = {
 
  updateProfile(req, res) {
     User.update({...req.body}, {
-    where: {id: req.user_Id},
-    include:[
-      {
-        model:Profile,
-        as: 'profiles',
-        required: true,
-        where: {
-          id: req.user_Id
-        }
-      }]
-  })
-  .then((user) => res.send({
-    user,
-    message: 'Datos modificados  exitosamente'
-  }))
+      where: { id: req.user_Id 
+      },
+      attributes: ["id", "name", "email", "social"],
+    })
+  Profile.update({...req.body}, {
+    where: { id: req.user_Id 
+    },
+    attributes: [ "id", "lastname", "natIdCard", "DoB", "city", "department", "country", "postalcode", "career", "skill_Id", "postalcode", "description"],
+  }).then((user, profile) => res.send({
+  user,
+  profile,
+  message: 'Datos de perfil modificados exitosamente'
+}))
   .catch(err => res.send({
       message: 'Hubo un problema para modificar los datos'
   }))

@@ -1,4 +1,4 @@
-const { User, Profile } = require("../models/indexModel");
+const { User, Profile, Event} = require("../models/indexModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const env = process.env.NODE_ENV || "development";
@@ -142,25 +142,40 @@ const UserController = {
    * @param {string} description - Descripción del usuario
    */
 
- updateProfile(req, res) {
-    User.update({...req.body}, {
+ async updateProfile(req, res) {
+   try {
+    const finduser = await User.findOne({
       where: { id: req.user_Id 
       },
-      attributes: ["id", "name", "email", "social"],
-    })
-  Profile.update({...req.body}, {
-    where: { id: req.user_Id 
-    },
-    attributes: [ "id", "lastname", "natIdCard", "DoB", "city", "department", "country", "postalcode", "career", "skill_Id", "postalcode", "description"],
-  }).then((user, profile) => res.send({
-  user,
-  profile,
-  message: 'Datos de perfil modificados exitosamente'
-}))
-  .catch(err => res.send({
-      message: 'Hubo un problema para modificar los datos'
-  }))
+      attributes: ["id", "name", "email", "social", "Profile_Id"],
+    });
+    
+    await User.update({...req.body}, {
+      where: {id: req.user_Id },
+    });
+
+    await Profile.update({...req.body}, {
+      where: { id: finduser.Profile_Id 
+      },
+    });
+
+   /*   Event.create({
+      username: finduser.name,
+      description: "actualizacion de perfil"
+   }); */
+   
+    res.status(200).send({
+        message: "Datos actualizados correctamente",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Hubo un problema al actualizar  los datos",
+      error: error,
+    });
+  }
 },
+
 
   /**Función encargada del login mediante google
    * @param {integer} id - Número de registro del usuario

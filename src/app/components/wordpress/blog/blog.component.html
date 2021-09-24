@@ -7,10 +7,10 @@
         <div mat-card-avatar class="header-image" style="background-image: url('{{post._embedded.author[0].avatar_urls[96]}}');"></div>
           <mat-card-title>{{post._embedded.author[0].name}}</mat-card-title>
           <mat-card-subtitle *ngIf="post.modified">{{post.date_gmt| date}}</mat-card-subtitle>
-          <button mat-icon-button class="more-button " [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+          <button *ngIf="checklogin()" mat-icon-button class="more-button " [matMenuTriggerFor]="menu" aria-label="Toggle menu">
             <mat-icon>more_vert</mat-icon>
           </button>
-          <mat-menu #menu="matMenu" xPosition="before">
+          <mat-menu  #menu="matMenu" xPosition="before">
             <button mat-menu-item (click)="openEdit(post)"  >Editar</button>
             <button mat-menu-item (click)='openDelete(post)'>Eliminar</button>
           </mat-menu>

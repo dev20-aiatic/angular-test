@@ -7,6 +7,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { NotificationService } from 'src/app/services/notification.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BlogeditComponent } from '../blogedit/blogedit.component';
+import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 
 @Component({
   selector: 'app-blog',
@@ -52,7 +53,7 @@ export class BlogComponent implements OnInit {
   public showGoUpButton: boolean;
 
   
-  constructor( public blogService: BlogService, private router: Router, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private spinner: NgxSpinnerService) {
+  constructor( public blogService: BlogService, private router: Router, private wpAuthService:WPAuthService, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private spinner: NgxSpinnerService) {
     this.actualPage = 1;
     this.showGoUpButton = false;
   }
@@ -124,7 +125,7 @@ redirectTo(uri:string){
         this.blogService.updatepost(post.id, data).subscribe(
           res => {
             this.redirectTo('/web/posts');
-            this.notificationService.success('Post '+res.title.reSndered+' editado exitosamente');
+            this.notificationService.success('Post '+res.title.rendered+' editado exitosamente');
           },
           err => {
             this.notificationService.warn('Error: '+err+' ');
@@ -160,6 +161,11 @@ redirectTo(uri:string){
       );
     }
    });
+}
+
+/**Metodo que valida el logueo**/
+checklogin() {
+  return this.wpAuthService.getIsAuth();
 }
 
 }

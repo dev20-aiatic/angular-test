@@ -1,20 +1,11 @@
 import { environment } from 'src/environments/environment';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpEvent,
-  HttpEventType,
-  HttpHeaders,
-  HttpParams,
-  HttpRequest,
-} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, of, throwError } from 'rxjs';
-import { catchError, last, map, tap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, map} from 'rxjs/operators';
 import { WP_User } from '../../interfaces/WP_User';
-import * as moment from 'moment';
 import { Wp_Category } from '../../interfaces/WP_Category';
-import { Post, Posteo } from 'src/app/interfaces/post';
+import { Post} from 'src/app/interfaces/post';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +21,7 @@ export class BlogService {
 
   /**
    * procedimiento encargado de administrar las respuestas de error de wp-rest-api
+   * @params error - Respuesta de error obtenida de la petición mediante dependecia HTTP
    * @returns Mensaje de error obtenido
    */
   handleError(error: HttpErrorResponse) {
@@ -46,10 +38,10 @@ export class BlogService {
 
   /**
    * Método encargado de obtener el listado de los posts publicados en el blog
+   * @params page - Número de la página a consultar
    * @returns Respuesta de petición de la api
    */
-  getRecentPosts(categoryId: number, page = 1): Observable<any[]> {
-    let category_url = categoryId ? '&categories=' + categoryId : '';
+  getRecentPosts(page = 1): Observable<Post[]> {
     let options = {
       observe: 'response' as 'body',
       params: {
@@ -60,7 +52,7 @@ export class BlogService {
     };
 
     return this.http
-      .get<any[]>(`${this.WP_API}posts?_embed=true`, options)
+      .get<Post[]>(`${this.WP_API}posts?_embed=true`, options)
       .pipe(
         map((res) => {
           this.pages = res['headers'].get('x-wp-totalpages');
@@ -73,9 +65,10 @@ export class BlogService {
 
   /**
    * Método encargado de obtener detalles de un post especifico
+   * @params id - ID del post a consultar
    * @returns Respuesta de petición de la api
    */
-  getPost(id: any) {
+  getPost(id: any) : Observable<Post> {
     return this.http.get<Post>(`${this.WP_API}posts/${id}?_embed`).pipe(
       map((post) => {
         return post;
@@ -85,6 +78,7 @@ export class BlogService {
 
   /**
    * Método encargado de obtener más posts
+   * @params page - Número de la página a consultar 
    * @returns Respuesta de petición de la api
    */
 
@@ -102,6 +96,7 @@ export class BlogService {
   }
   /**
    * Método encargado de obtener los comentarios de un post en especifico
+   * @params Id - Número de identificación del comentario
    * @returns Respuesta de petición de la api
    */
   getComments(id: any) {
@@ -126,6 +121,8 @@ export class BlogService {
 
   /**
    * Método encargado de habilitar la creación de comentarios para un post
+   * @params postId - Número de identificación del post en el que creará el comentarios
+   * @params comment - String del comentario ingresado por el usuario
    * @returns Respuesta de petición de la api
    */
   createComment(postId: number, user: any, comment: string) {
@@ -147,16 +144,17 @@ export class BlogService {
 
   /**
    * Método encargado de crear un nuevo post
+   * @params data - Array con la información ingresada por el usuario en el modal 
    * @returns Respuesta de petición de la api
    */
-  createpost(data: any): Observable<any[]> {
+  createpost(data: any): Observable<Post[]> {
     let options = {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       },
     };
     return this.http
-      .post<any[]>(`${this.WP_API}posts`, data, options)
+      .post<Post[]>(`${this.WP_API}posts`, data, options)
       .pipe(catchError(this.handleError));
   }
 
@@ -178,22 +176,25 @@ export class BlogService {
 
   /**
    * Método encargado de actualizar un post
+   * @params id - Número de	identificación del posts
+   * @params data - Array con los datos a modificar del post existente
    * @returns Respuesta de petición de la api
    */
 
-  updatepost(id: any, data: any): Observable<any> {
+  updatepost(id: any, data: any): Observable<Post> {
     let options = {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
       },
     };
     return this.http
-      .post(`${this.WP_API}posts/${id}`, data, options)
+      .post<Post>(`${this.WP_API}posts/${id}`, data, options)
       .pipe(catchError(this.handleError));
   }
 
   /**
    * Método encargado de eliminar un post
+   * @params Id - Número de identificación del post a eliminar
    * @returns Respuesta de petición de la api
    */
 

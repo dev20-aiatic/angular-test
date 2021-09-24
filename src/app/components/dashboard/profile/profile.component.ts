@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+  
  
   //Declaramos función para alternar los select de los material select input "deparment" "city"
   deparmentChangeAction(department) {
@@ -115,14 +116,14 @@ save() {
       .subscribe(
         res => {
           this.Msg = res;
-          Swal.fire( 'Mensaje', this.Msg, 'success');
+          Swal.fire( 'Mensaje', res['message'], 'success');
           setTimeout(() => {
             this.router.navigate(['..'], { relativeTo: this.route });
           })
         },
         err => {
           this.Msg = err
-          Swal.fire( 'Mensaje', this.Msg, 'error');
+          Swal.fire( 'Mensaje', err.error.message, 'error');
         }
       );
 

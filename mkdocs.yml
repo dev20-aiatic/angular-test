@@ -1,0 +1,20 @@
+site_name: Documentación Dashgular - Proyecto Practicas 2021-2 AIATIC
+site_url: https://dashgular.readthedocs.io/
+site_description: Documentación Proyecto Practica AIATIC.
+site_author: Daniel Pacheco
+
+repo_url: https://github.com/dev20-aiatic/angular-test/
+edit_uri: ""
+
+
+theme: readthedocs
+
+nav:
+      - Documentación: documentacion/introduction.md
+      - Backend: documentacion/backend.md
+      - Frontend: documentacion/frontend.md
+      - Implementación Wordpress: 'wordpress.md'
+
+markdown_extensions:
+    - toc:
+        permalink: 

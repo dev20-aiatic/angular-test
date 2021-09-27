@@ -10,7 +10,7 @@
         </div>
       </button>
 
-      <button mat-button [routerLink]="'newpost'" routerLinkActive="active-menu-item">
+      <button mat-button  *ngIf="checklogin()" [routerLink]="'newpost'" routerLinkActive="active-menu-item">
         <div class="toolbar-icon">
           <mat-icon>note_add</mat-icon>
         </div>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Backend &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Modelo: Usuario" href="userModel.html" />
+    <link rel="prev" title="Documentación" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Backend</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#requerimientos">Requerimientos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#primer-paso">Primer Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tercer-paso">Tercer Paso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="userModel.html">Modelo: Usuario</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuracion-inicial">Configuración Inicial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ejecutar">Ejecutar</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wp/wordpress.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Backend</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/backend/index.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="backend">
+<h1>Backend<a class="headerlink" href="#backend" title="Enlazar permanentemente con este título"></a></h1>
+<section id="introduccion">
+<h2>Introducción<a class="headerlink" href="#introduccion" title="Enlazar permanentemente con este título"></a></h2>
+<p>En esta sección encontrará toda la documentación e informaión  relacionada con la creación
+y configuración del servidor Node.js Express que hace uso de base de datos MySql con el ORM Sequelize.</p>
+</section>
+<section id="requerimientos">
+<h2>Requerimientos<a class="headerlink" href="#requerimientos" title="Enlazar permanentemente con este título"></a></h2>
+<a class="reference internal image-reference" href="../_images/Node.png"><img alt="Logo Node JS" class="align-right" src="../_images/Node.png" style="width: 200px;" /></a>
+<p>El primer requerimiento para implementar el Backend es tener Node instalado en el ordenador.
+En caso de que no esté instalado, sigue esta serie de pasos para instalarlo. Basado en este
+<a class="reference external" href="https://www.cursosgis.com/como-instalar-node-js-y-npm-en-4-pasos/">tutorial</a></p>
+<ul class="simple">
+<li><ol class="arabic simple">
+<li><p>Entrar en <a class="reference external" href="https://nodejs.org/es/download/">https://nodejs.org/es/download/</a> y dar clic a la opción compatible
+con el sistema operativo del ordenador.</p></li>
+</ol>
+</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/Node-Install-1.png"><img alt="Paso 1 instalación Node" class="align-center" src="../_images/Node-Install-1.png" style="width: 400px;" /></a>
+<ul class="simple">
+<li><ol class="arabic simple" start="2">
+<li><p>Ejecutar el instalador descargado y dar clic en <strong>(Next)</strong> hasta finalizar el proceso
+de instalación.</p></li>
+</ol>
+</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/Node-Install-2.png"><img alt="Paso 2 instalación Node" class="align-center" src="../_images/Node-Install-2.png" style="width: 400px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Una vez se complete la instalación, se sugiere verificar la versión de Node.js y NPM
+que se instalaron mediante los siguientes comandos por consola:</p>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="o">-</span><span class="n">v</span>
+
+<span class="n">npm</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+<p>Estos comandos por consola mostrarán un resultado como este:</p>
+<a class="reference internal image-reference" href="../_images/Node-Install-3.png"><img alt="Paso 3 instalación Node" class="align-center" src="../_images/Node-Install-3.png" style="width: 400px;" /></a>
+</section>
+<section id="primer-paso">
+<h2>Primer Paso<a class="headerlink" href="#primer-paso" title="Enlazar permanentemente con este título"></a></h2>
+<p>Se procede a crear un directorio para el backend en nuestro proyecto</p>
+</section>
+<section id="tercer-paso">
+<h2>Tercer Paso<a class="headerlink" href="#tercer-paso" title="Enlazar permanentemente con este título"></a></h2>
+<p>Se procede a crear controladores, middlewares, modelos, rutas necesarias para la creación de nuestra
+API REST.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="userModel.html">Modelo: Usuario</a></li>
+</ul>
+</div>
+</section>
+<section id="configuracion-inicial">
+<h2>Configuración Inicial<a class="headerlink" href="#configuracion-inicial" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">npm</span> <span class="n">install</span>
+</pre></div>
+</div>
+</section>
+<section id="ejecutar">
+<h2>Ejecutar<a class="headerlink" href="#ejecutar" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">node</span> <span class="n">server</span><span class="o">.</span><span class="n">js</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Documentación" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="userModel.html" class="btn btn-neutral float-right" title="Modelo: Usuario" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

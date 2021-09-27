@@ -77,24 +77,6 @@ export class BlogService {
   }
 
   /**
-   * Método encargado de obtener más posts
-   * @params page - Número de la página a consultar 
-   * @returns Respuesta de petición de la api
-   */
-
-  getMorePosts(page: number): any {
-    page++;
-    return this.http
-      .get<Post>(`${this.WP_API}posts/?_embed&page=` + page, {
-        observe: 'response',
-      })
-      .pipe(
-        map((post) => {
-          return post;
-        })
-      );
-  }
-  /**
    * Método encargado de obtener los comentarios de un post en especifico
    * @params Id - Número de identificación del comentario
    * @returns Respuesta de petición de la api
@@ -107,40 +89,15 @@ export class BlogService {
     );
   }
 
-  getAuthor(author) {
-    return this.http.get(`${this.WP_API}` + 'users/' + author);
-  }
+  /**
+   * Método encargado de obtener listado de categorias existentes
+   * @returns Respuesta de petición de la api
+   */
 
   getCategories() {
     return this.http.get(`${this.WP_API}categories`);
   }
 
-  getCategory(category: number) {
-    return this.http.get(`${this.WP_API}` + 'categories/' + category);
-  }
-
-  /**
-   * Método encargado de habilitar la creación de comentarios para un post
-   * @params postId - Número de identificación del post en el que creará el comentarios
-   * @params comment - String del comentario ingresado por el usuario
-   * @returns Respuesta de petición de la api
-   */
-  createComment(postId: number, user: any, comment: string) {
-    let header: HttpHeaders = new HttpHeaders().append(
-      'Authorization',
-      'Bearer ' + user.token
-    );
-    return this.http.post(
-      `${this.WP_API}` + 'comments?token=' + user.token,
-      {
-        author_name: user.displayname,
-        author_email: user.email,
-        post: postId,
-        content: comment,
-      },
-      { headers: header }
-    );
-  }
 
   /**
    * Método encargado de crear un nuevo post
@@ -209,30 +166,4 @@ export class BlogService {
       .pipe(catchError(this.handleError));
   }
 
-  /**
-   * Método encargado de consultar la información de usuario logueado
-   * @returns Información del usuario logueado
-   */
-  getUserLogged(): Observable<WP_User> {
-    let options = {
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('wp-token'),
-      },
-    };
-
-    return this.http
-      .post<WP_User>(`${this.WP_API}users/me`, options)
-      .pipe(catchError(this.handleError));
-  }
-
-  nextPage(page) {
-    return this.http
-      .get(`${this.WP_API}/posts?page=${page}&per_page=6`)
-      .pipe(catchError(this.handleError));
-  }
-  previousPage(page) {
-    return this.http
-      .get(`${this.WP_API}/posts?page=${page}&per_page=6`)
-      .pipe(catchError(this.handleError));
-  }
 }

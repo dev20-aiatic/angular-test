@@ -15,16 +15,15 @@ export class BlogdeleteComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data) {
         this.deletePost = data.title;
     }
-
-    close(): void {
-      this.dialogo.close(false);
+    ngOnInit() {
     }
 
     save(): void {
       this.dialogo.close(true);
     }
 
-  ngOnInit() {
-    console.log(this.data)
-  }
+    close(): void {
+      this.dialogo.close(false);
+    }
+
 }

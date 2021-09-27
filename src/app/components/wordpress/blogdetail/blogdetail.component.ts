@@ -18,11 +18,11 @@ export class BlogdetailComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.getposts();
+    this.getpost();
     }
 
     /**Metodo que trae los detalles del post */
-  async getposts() {
+  async getpost() {
     const  id = this.route.snapshot.paramMap.get('id');
     this.spinner.show();
     this.blogService.getPost(id).subscribe((res) =>  {

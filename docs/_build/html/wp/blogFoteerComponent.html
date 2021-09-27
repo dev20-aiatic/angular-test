@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Componente: Blog Footer &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="prev" title="Componente: Blog New" href="blogNewComponent.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend.html">Frontend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="wordpress.html">Implementación de Wordpress</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress.html#primer-paso">Primer Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wordpress.html#segundo-paso">Segundo Paso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="wordpress.html#tercer-paso">Tercer Paso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="postInterface.html">Interface: Post</a></li>
+<li class="toctree-l3"><a class="reference internal" href="categoryInterface.html">Interface: WP_Category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postService.html">Servicio: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: BlogGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogComponent.html">Componente: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDetailComponent.html">Componente: Blog Detail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDeleteComponent.html">Componente: Blog Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogEditComponent.html">Componente: Blog Edit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogLoginComponent.html">Componente: Blog Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogNewComponent.html">Componente: Blog New</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Componente: Blog Footer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-chequear-login">Función: Chequear Login</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-redirigir">Función: Redirigir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-cerrar-sesion">Método: Cerrar Sesión</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="wordpress.html">Implementación de Wordpress</a> &raquo;</li>
+      <li>Componente: Blog Footer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wp/blogFoteerComponent.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="componente-blog-footer">
+<h1>Componente: Blog Footer<a class="headerlink" href="#componente-blog-footer" title="Enlazar permanentemente con este título"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>Las opciones disponibles aparecen o desaparecen de acuerdo a la función Chequear Login.</p>
+</div>
+<p>Este componente tiene como función servir de barra inferior en los diferentes componentes del apartado
+Blog del aplicativo para que el usuario acceda fácilmente a las opciones: ver, crear
+nuevas entradas, ver categorias e iniciar/cerrar sesión.</p>
+<p>A continuación se puede previsualizar la barra inferior al no estar autenticado el usuario:</p>
+<figure class="align-center">
+<img alt="Vistazo al componente Blog New" src="../_images/BlogLoginComponent2.png" />
+</figure>
+<p>Una vez que el usuario inicie sesión, la barra inferior habilitará y ocultará opciones tal como
+se aprecia a continuación:</p>
+<figure class="align-center">
+<img alt="Vistazo al componente Blog al estar autenticado" src="../_images/BlogLoginComponent3.png" />
+</figure>
+<ul class="simple">
+<li><p>Se procede a realizar la creación del componente ‘Blog’ con el siguiente
+comando:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">component</span> <span class="pre">components/wordpress/blog</span></code></p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias,
+servicios requeridos en el componente. Así mismo, se definen los parametros
+requeridos en el constructor y se implementan el método requerido en el inicializador de Angular tal
+como se aprecia a continuación:</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">BlogService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/blog.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">WPAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/wpauth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-footer&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./footer.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./footer.component.css&#39;</span><span class="p">]</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">FooterComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span><span class="p">{</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">blogService</span>: <span class="kt">BlogService</span><span class="p">,</span> 
+<span class="linenos">18</span>              <span class="k">private</span> <span class="nx">wpAuthService</span>:<span class="kt">WPAuthService</span><span class="p">,</span> 
+<span class="linenos">19</span>              <span class="k">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">22</span>  <span class="k">this</span><span class="p">.</span><span class="nx">checklogin</span><span class="p">();</span>
+<span class="linenos">23</span>  <span class="p">}</span>
+<span class="linenos">24</span>  
+</pre></div>
+</div>
+<section id="funcion-chequear-login">
+<h2>Función: Chequear Login<a class="headerlink" href="#funcion-chequear-login" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta función se encarga de llamar a la función Verificar Logueo Usuario definida
+previamente en el Serivicio Autenticación para retornar dicho boleano que
+permite corroborar el inicio de sesión.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getAllCategories</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">this</span><span class="p">.</span><span class="nx">blogService</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span>  <span class="p">{</span>
+<span class="linenos">3</span>      <span class="k">this</span><span class="p">.</span><span class="nx">categories</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="linenos">4</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">categories</span><span class="p">);</span>
+<span class="linenos">5</span>    <span class="p">});</span>
+<span class="linenos">6</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-redirigir">
+<h2>Función: Redirigir<a class="headerlink" href="#funcion-redirigir" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta se implementa para redirigir eficientemente al usuario a una ruta ya que
+los componente del blog son visible tanto de forma publica o privada en el aplicativo.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">fb</span>: <span class="kt">FormBuilder</span><span class="p">,</span>
+<span class="linenos">2</span>     <span class="k">public</span> <span class="nx">blogService</span>: <span class="kt">BlogService</span><span class="p">,</span>
+<span class="linenos">3</span>     <span class="k">private</span> <span class="nx">blog</span>:<span class="kt">BlogService</span><span class="p">,</span>
+<span class="linenos">4</span>     <span class="k">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">,</span>
+<span class="linenos">5</span>     <span class="k">private</span> <span class="nx">route</span>:<span class="kt">ActivatedRoute</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-cerrar-sesion">
+<h2>Método: Cerrar Sesión<a class="headerlink" href="#metodo-cerrar-sesion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de llamar a la función Cerrar sesión definida previamente
+en el Servicio Autenticación para posteriormente, redigir al usuario al componente Blog.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>     <span class="c1">//Formulario detalles post</span>
+<span class="linenos">2</span>  <span class="nx">newForm</span>: <span class="kt">FormGroup</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+<span class="linenos">3</span>    <span class="nx">title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">compose</span><span class="p">([</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">])],</span>
+<span class="linenos">4</span>    <span class="nx">excerpt</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">,</span>  <span class="nx">Validators</span><span class="p">.</span><span class="nx">maxLength</span><span class="p">(</span><span class="mf">80</span><span class="p">),</span> <span class="nx">Validators</span><span class="p">.</span><span class="nx">minLength</span><span class="p">(</span><span class="mf">5</span><span class="p">)]],</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">BlogService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/blog.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">WPAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/wpauth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-footer&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./footer.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./footer.component.css&#39;</span><span class="p">]</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">FooterComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span><span class="p">{</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">blogService</span>: <span class="kt">BlogService</span><span class="p">,</span> 
+<span class="linenos">18</span>              <span class="k">private</span> <span class="nx">wpAuthService</span>:<span class="kt">WPAuthService</span><span class="p">,</span> 
+<span class="linenos">19</span>              <span class="k">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span>  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">22</span>  <span class="k">this</span><span class="p">.</span><span class="nx">checklogin</span><span class="p">();</span>
+<span class="linenos">23</span>  <span class="p">}</span>
+<span class="linenos">24</span>  
+<span class="linenos">25</span> 
+<span class="linenos">26</span>    <span class="cm">/**Metodo que valida el logueo**/</span>
+<span class="linenos">27</span>    <span class="nx">checklogin</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">28</span>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">wpAuthService</span><span class="p">.</span><span class="nx">getIsAuth</span><span class="p">();</span>
+<span class="linenos">29</span>  <span class="p">}</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>  <span class="cm">/**Metodo que redirige a la ruta actual**/</span>
+<span class="linenos">32</span>  <span class="nx">reloadCurrentRoute</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">33</span>    <span class="kd">let</span> <span class="nx">currentUrl</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">url</span><span class="p">;</span>
+<span class="linenos">34</span>    <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigateByUrl</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">skipLocationChange</span>: <span class="kt">true</span><span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos">35</span>        <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="nx">currentUrl</span><span class="p">]);</span>
+<span class="linenos">36</span>    <span class="p">});</span>
+<span class="linenos">37</span>  <span class="p">}</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">40</span>    <span class="k">this</span><span class="p">.</span><span class="nx">wpAuthService</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="linenos">41</span>    <span class="k">this</span><span class="p">.</span><span class="nx">reloadCurrentRoute</span><span class="p">()</span>
+<span class="linenos">42</span>  <span class="p">}</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="blogNewComponent.html" class="btn btn-neutral float-left" title="Componente: Blog New" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -39,7 +39,7 @@
         <div *ngIf="newForm.controls.content.errors && newForm.controls.content.touched" class="error">El contenido del post es obligatorio (Min 5 palabras).</div>
         <br>
         <span>Cargar imagen</span>
-        <form [formGroup]="myForm" (ngSubmit)="submit()">
+        <form [formGroup]="imgForm" (ngSubmit)="submit()">
 
         <mat-toolbar>
           <div class="form-group">
@@ -61,7 +61,6 @@
               </button>
             </div>
           </div>
-      
         </form>
     
 

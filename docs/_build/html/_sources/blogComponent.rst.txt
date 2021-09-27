@@ -1,0 +1,325 @@
+
+Componente - Blog
+#################
+
+Este componente tiene como función mostrar el listado de los
+publicaciones obtenidas por el método previamente definido en el
+servicio, así mismo, permitir la creación, eliminación y modificación de
+publicaciones acorde a cada uno de los alcances de los métodos creados
+para dicho fin.
+
+-  Se realiza la creación del componente ‘Blog’ con el siguiente
+   comando:
+
+``ng generate component components/wordpress/blog``
+
+-  Se procede a efectuar la importación de las diferentes dependencias,
+   servicios, otros componentes y tipos requeridos en el componente tal
+   como se aprecia a continuación. Así mismo, se define las variables y
+   endpoints de la API previamente definidos en el environment.
+
+.. code:: typescript
+
+   import { BlogdeleteComponent } from './../blogdelete/blogdelete.component';
+   import { Post } from '../../../interfaces/post';
+   import { Component, HostListener, OnInit} from '@angular/core';
+   import { BlogService } from 'src/app/services/wordpress/blog.service';
+   import { ActivatedRoute, Router } from '@angular/router';
+   import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+   import { NotificationService } from 'src/app/services/notification.service';
+   import { NgxSpinnerService } from 'ngx-spinner';
+   import { BlogeditComponent } from '../blogedit/blogedit.component';
+   import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
+
+   @Component({
+     selector: 'app-blog',
+     templateUrl: './blog.component.html',
+     styleUrls: ['./blog.component.css'],
+   })
+   export class BlogComponent implements OnInit {
+     posts!: Post[];  
+     postCount = null;
+     page = 1;
+    
+
+-  Se define los parametros requeridos en el constructor y se
+   implementan los métodos requeridos en el inicializador de Angular.
+   Tal como se muestra a continuación:
+
+.. code:: typescript
+
+    constructor( public blogService: BlogService, private router: Router, private wpAuthService:WPAuthService, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private spinner: NgxSpinnerService) {
+       this.actualPage = 1;
+       this.showGoUpButton = false;
+     }
+
+     async  ngOnInit() {
+       this.getposts();
+       }
+
+Método: Obtener Post
+********************
+
+-  Este método se encarga de obtener el listado de los post recibidos
+   existentes en el blog.
+
+.. code:: typescript
+
+   async getposts() {
+         this.spinner.show();
+         this.blogService.getRecentPosts(1).subscribe((data) =>  {
+           this.postCount = this.blogService.allPosts;
+           this.posts = data;
+           this.spinner.hide();
+         },
+         err => console.error(err),
+         );
+     }
+
+Evento: Modal Edicción
+**********************
+
+-  Este se encarga de llamar al método encargado de abrir el modal que
+   se ocupará de la edicción de una publicación. Así mismo, en este
+   evento se define el método ``.afterClosed()`` que se encarga de
+   recibir los datos obtenidos del formulario de edicción del post y
+   enviarlos al método ``updatepost`` definida en el Servicio POST.
+
+.. code:: typescript
+
+      openEdit(post): void{
+
+       const dialogConfig = new MatDialogConfig();
+
+       dialogConfig.autoFocus = true;
+
+       dialogConfig.data = {
+         id:post.id
+       };
+
+       const dialogRef = this.dialog.open(BlogeditComponent, dialogConfig);
+
+       dialogRef.afterClosed().subscribe(
+         data => {
+           console.log(data);
+         if (data) {
+           this.blogService.updatepost(post.id, data).subscribe(
+             res => {
+               this.redirectTo('/web/posts');
+               this.notificationService.success('Post '+res.title.rendered+' editado exitosamente');
+             },
+             err => {
+               this.notificationService.warn('Error: '+err+' ');
+             }
+           );
+         }
+        });
+   }
+
+Evento: Modal Eliminar
+**********************
+
+-  Este se encarga de llamar al método encargado de abrir el modal que
+   se ocupará de la eliminación de una publicación. Así mismo, en este
+   evento se define el método ``.afterClosed()`` que se encarga de
+   recibir la respuesta de confirmación para enviar el Id del post al
+   método ``deletepost`` definida en el Servicio POST.
+
+.. code:: typescript
+
+      openDelete(post): void{
+
+     const dialogConfig = new MatDialogConfig();
+
+
+     dialogConfig.data = {
+       title:post.title.rendered
+     };
+
+     const dialogRef = this.dialog.open(BlogdeleteComponent, dialogConfig);
+
+     dialogRef.afterClosed().subscribe((
+       save:boolean) => {
+       if (save) {
+         this.blogService.deletepost(post.id)
+         .subscribe((res) => {
+           this.redirectTo('/web/posts');
+           this.notificationService.success('Post '+res.title.rendered+' eliminado exitosamente');
+           },
+           err => {
+             this.notificationService.warn('Error: '+err+' ');
+           }
+         );
+       }
+      });
+   }
+
+Método: Validar Logueo
+**********************
+
+-  Este se encarga de retornar un boleano como respuesta del método
+   ``getIsAuth`` definido en el Servicio Autenticación, para validar si
+   el usuario se encuentra logueado.
+
+.. code:: typescript
+
+   checklogin() {
+     return this.wpAuthService.getIsAuth();
+   }
+
+Función: Redirigir
+^^^^^^^^^^^^^^^^^^
+
+-  Esta se implementa para redirigir eficientemente al usuario a una
+   ruta ya que el componente del blog es visible tanto de forma publica
+   o privada en el aplicativo.
+
+.. code:: typescript
+
+   redirectTo(uri:string){
+     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+     this.router.navigate([uri]));
+   }
+
+Código Fuente completo del Componente: Post
+*******************************************
+
+.. code:: typescript
+
+   import { BlogdeleteComponent } from './../blogdelete/blogdelete.component';
+   import { Post } from '../../../interfaces/post';
+   import { Component, HostListener, OnInit} from '@angular/core';
+   import { BlogService } from 'src/app/services/wordpress/blog.service';
+   import { ActivatedRoute, Router } from '@angular/router';
+   import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+   import { NotificationService } from 'src/app/services/notification.service';
+   import { NgxSpinnerService } from 'ngx-spinner';
+   import { BlogeditComponent } from '../blogedit/blogedit.component';
+   import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
+
+   @Component({
+     selector: 'app-blog',
+     templateUrl: './blog.component.html',
+     styleUrls: ['./blog.component.css'],
+   })
+   export class BlogComponent implements OnInit {
+
+     posts!: Post[];
+     postCount = null;
+     page = 1;
+
+     
+     constructor( public blogService: BlogService, private router: Router, private wpAuthService:WPAuthService, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private spinner: NgxSpinnerService) {
+       this.actualPage = 1;
+     }
+
+     async  ngOnInit() {
+       this.getposts();
+       }
+
+
+     /**Metodo que trae los posts */
+     async getposts() {
+         this.spinner.show();
+         this.blogService.getRecentPosts(1).subscribe((data) =>  {
+           this.postCount = this.blogService.allPosts;
+           this.posts = data;
+           this.spinner.hide();
+         },
+         err => console.error(err),
+         );
+     }
+
+      /**Metodo que alimenta scroll infinito */
+   loadData(e) {
+       this.page++;
+
+       this.blogService.getRecentPosts(this.page)
+         .subscribe((data) => {
+         this.posts = [...this.posts, ...data];
+         e.target.complete();
+         if (this.page == this.blogService.pages) {
+           e.target.disabled = true;
+         }
+       });
+     }
+
+   /**Metodo que me devuelve la información del usuario */
+   getuserData() {
+     this.blogService.getUserLogged().subscribe(data =>  {
+       this.userDetails = data;
+       console.log(this.userDetails);
+     });
+   }
+
+     /**Función para redirigir al usuario */
+   redirectTo(uri:string){
+     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+     this.router.navigate([uri]));
+   }
+
+
+     /** Llamamos el dialog de editar **/
+      openEdit(post): void{
+
+       const dialogConfig = new MatDialogConfig();
+
+       dialogConfig.autoFocus = true;
+
+       dialogConfig.data = {
+         id:post.id
+       };
+
+       const dialogRef = this.dialog.open(BlogeditComponent, dialogConfig);
+
+       dialogRef.afterClosed().subscribe(
+         data => {
+           console.log(data);
+         if (data) {
+           this.blogService.updatepost(post.id, data).subscribe(
+             res => {
+               this.redirectTo('/web/posts');
+               this.notificationService.success('Post '+res.title.rendered+' editado exitosamente');
+             },
+             err => {
+               this.notificationService.warn('Error: '+err+' ');
+             }
+           );
+         }
+        });
+   }
+
+    /** Llamamos el dialog encargado para el borrado del post **/
+    openDelete(post): void{
+
+     const dialogConfig = new MatDialogConfig();
+
+
+     dialogConfig.data = {
+       title:post.title.rendered
+     };
+
+     const dialogRef = this.dialog.open(BlogdeleteComponent, dialogConfig);
+
+     dialogRef.afterClosed().subscribe((
+       save:boolean) => {
+       if (save) {
+         this.blogService.deletepost(post.id)
+         .subscribe((res) => {
+           this.redirectTo('/web/posts');
+           this.notificationService.success('Post '+res.title.rendered+' eliminado exitosamente');
+           },
+           err => {
+             this.notificationService.warn('Error: '+err+' ');
+           }
+         );
+       }
+      });
+   }
+
+   /**Metodo que valida el logueo**/
+   checklogin() {
+     return this.wpAuthService.getIsAuth();
+   }
+
+   }

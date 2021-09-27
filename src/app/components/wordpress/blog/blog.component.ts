@@ -17,50 +17,20 @@ import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 export class BlogComponent implements OnInit {
   posts!: Post[];
   userDetails: any;
-
-
   postCount = null;
   page = 1;
-  throttle = 300;
-  scrollDistance = 0.2;
-  limit = 20;
-
-
-
-
-
-
- /*  next() {
-    this.blogService.nextPage(this.page += 1).subscribe(data => {
-      console.log(data);
-      if (data) {
-        this.Posts = data;
-      }
-    });
-  }
-  previous() {
-    if (this.page > 1) {
-      this.blogService.previousPage(this.page -= 1).subscribe(data => {
-        console.log(data);
-        if (data) {
-          this.Posts = data;
-        }
-      });
-    }
-  } */
-  private finishPage = 5;
-  private actualPage: number;
-  public showGoUpButton: boolean;
 
   
-  constructor( public blogService: BlogService, private router: Router, private wpAuthService:WPAuthService, private route: ActivatedRoute, public dialog: MatDialog, private notificationService: NotificationService, private spinner: NgxSpinnerService) {
-    this.actualPage = 1;
-    this.showGoUpButton = false;
+  constructor( public blogService: BlogService,
+               private router: Router, 
+               private wpAuthService:WPAuthService,
+               public dialog: MatDialog, 
+               private notificationService: NotificationService, 
+               private spinner: NgxSpinnerService) {
   }
 
   async  ngOnInit() {
     this.getposts();
-    this.getuserData();
     }
 
 
@@ -76,27 +46,6 @@ export class BlogComponent implements OnInit {
       );
   }
 
-   /**Metodo que alimenta scroll infinito */
-loadData(e) {
-    this.page++;
-
-    this.blogService.getRecentPosts(this.page)
-      .subscribe((data) => {
-      this.posts = [...this.posts, ...data];
-      e.target.complete();
-      if (this.page == this.blogService.pages) {
-        e.target.disabled = true;
-      }
-    });
-  }
-
-/**Metodo que me devuelve la información del usuario */
-getuserData() {
-  this.blogService.getUserLogged().subscribe(data =>  {
-    this.userDetails = data;
-    console.log(this.userDetails);
-  });
-}
 
   /**Función para redirigir al usuario */
 redirectTo(uri:string){

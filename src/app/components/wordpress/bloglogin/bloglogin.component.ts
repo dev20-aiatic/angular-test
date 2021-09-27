@@ -23,7 +23,10 @@ export class BlogloginComponent implements OnInit {
 
 
   ngOnInit() {
-   
+  }
+
+  ngOnDestroy() {
+    this.wpLoginForm.reset();
   }
 
   Auth() {
@@ -31,7 +34,4 @@ export class BlogloginComponent implements OnInit {
     this.wpAuthService.Login(username, password);
   }
 
-  ngOnDestroy() {
-    this.wpLoginForm.reset();
-  }
 }

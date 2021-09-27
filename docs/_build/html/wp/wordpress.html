@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Implementación de Wordpress &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Interface: Post" href="postInterface.html" />
+    <link rel="prev" title="Frontend" href="../frontend/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementación de Wordpress</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#primer-paso">Primer Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#segundo-paso">Segundo Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tercer-paso">Tercer Paso</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="postInterface.html">Interface: Post</a></li>
+<li class="toctree-l3"><a class="reference internal" href="categoryInterface.html">Interface: WP_Category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postService.html">Servicio: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: BlogGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogComponent.html">Componente: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDetailComponent.html">Componente: Blog Detail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDeleteComponent.html">Componente: Blog Delete</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogEditComponent.html">Componente: Blog Edit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogLoginComponent.html">Componente: Blog Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogNewComponent.html">Componente: Blog New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogFoteerComponent.html">Componente: Blog Footer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Implementación de Wordpress</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wp/wordpress.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="implementacion-de-wordpress">
+<h1>Implementación de Wordpress<a class="headerlink" href="#implementacion-de-wordpress" title="Enlazar permanentemente con este título"></a></h1>
+<section id="primer-paso">
+<h2>Primer Paso<a class="headerlink" href="#primer-paso" title="Enlazar permanentemente con este título"></a></h2>
+<p>Se procede a verificar el funcionamiento de la API de WordPress,
+para ello intenta hacer una llamada HTTP a tu sitio WordPress ingresando a la siguiente URL:
+<a class="reference external" href="http://tudominio.com.com/wp-json/wp/v2">http://tudominio.com.com/wp-json/wp/v2</a> que devolverá un JSON como este:</p>
+<img alt="Respuesta Wordpress Rest API" class="align-center" src="../_images/JSON_API.png" />
+</section>
+<section id="segundo-paso">
+<h2>Segundo Paso<a class="headerlink" href="#segundo-paso" title="Enlazar permanentemente con este título"></a></h2>
+<p>Despúes de comprobar el funcionamiento del punto final en la ruta del
+sitio, se procede a instalar el siguiente plugin:
+<a class="reference external" href="https://wordpress.org/plugins/jwt-authentication-for-wp-rest-api">Plugin WordPressAutenticación</a>
+en nuestro sitio WordPress para la autenticación JWT que permitirá la Creación,
+Modificación y Eliminación de Posts del blog.</p>
+<figure class="align-center">
+<img alt="Plugin WordPressAutenticación" src="../_images/Authplugin.png" />
+</figure>
+</section>
+<section id="tercer-paso">
+<h2>Tercer Paso<a class="headerlink" href="#tercer-paso" title="Enlazar permanentemente con este título"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Nota</p>
+<p>Antes de continuar es opcional modificar el entorno del front (Angular) para añadir
+los endpoints que se implementará de la API. De lo contrario, puede definirse en cada
+uno de los servicios en los que se implemente.</p>
+</div>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">export</span> <span class="kd">const</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">{</span>
+<span class="nx">production</span>: <span class="kt">false</span><span class="p">,</span>
+<span class="nx">APP_REST</span><span class="o">:</span> <span class="p">{</span>
+ <span class="nx">BASEURL</span><span class="o">:</span> <span class="s1">&#39;http://localhost:4200&#39;</span><span class="p">,</span>
+ <span class="nx">API</span><span class="o">:</span> <span class="s1">&#39;http://localhost:5000/api&#39;</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="nx">WP_REST</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">API</span><span class="o">:</span> <span class="s1">&#39;https://tudominio.com/wp-json/wp/v2/&#39;</span><span class="p">,</span>
+    <span class="nx">AUTH</span><span class="o">:</span> <span class="s1">&#39;https://tudominio.com/wp-json/jwt-auth/v1/&#39;</span>
+<span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Se procede a crear controladores, middlewares, modelos, rutas  servicios y componentes en el
+Front (Angular) para efectuar las diferentes llamadas a la rest API.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="postInterface.html">Interface: Post</a></li>
+<li class="toctree-l1"><a class="reference internal" href="categoryInterface.html">Interface: WP_Category</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postService.html">Servicio: Blog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#procedimiento-error-de-respuesta">Procedimiento: Error de respuesta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-listar-entradas">Método: Listar Entradas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-detalles-publicacion">Método: Detalles publicación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-subir-imagen-destacada">Método: Subir imagen destacada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-crear-nueva-entrada">Método: Crear nueva Entrada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-modificar-entrada">Método: Modificar Entrada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-eliminar-entrada">Método: Eliminar Entrada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-listar-categorias">Método: Listar Categorias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#metodo-obtener-comentarios">Método: Obtener Comentarios</a></li>
+<li class="toctree-l2"><a class="reference internal" href="postService.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="authService.html">Servicio: Autenticación</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#funciones-verificar-logueo-usuario">Funciones: Verificar Logueo Usuario</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#funcion-obtener-token">Función: Obtener Token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#metodo-login">Método: Login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#funcion-auto-autenticacion">Función: Auto-Autenticación</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#metodo-validar-token-jwt">Método: Validar Token JWT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#funcion-cerrar-sesion">Función: Cerrar Sesión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#funcion-limpiar-sesion">Función: Limpiar Sesión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="authService.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="guardService.html">Servicio: BlogGuard</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guardService.html#interfaz-can-activate">Interfaz: Can Activate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guardService.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogComponent.html">Componente: Blog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#metodo-obtener-posts">Método: Obtener Posts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#funcion-redirigir">Función: Redirigir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#evento-modal-ediccion">Evento: Modal Edicción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#evento-modal-eliminar">Evento: Modal Eliminar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#metodo-validar-logueo">Método: Validar Logueo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogDetailComponent.html">Componente: Blog Detail</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogDetailComponent.html#metodo-obtener-detalles-post">Método: Obtener Detalles Post</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogDetailComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogDeleteComponent.html">Componente: Blog Delete</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogDeleteComponent.html#funcion-guardar-evento">Función: Guardar Evento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogDeleteComponent.html#funcion-cerrar-evento">Función: Cerrar Evento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogDeleteComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogEditComponent.html">Componente: Blog Edit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogEditComponent.html#metodo-obtener-detalles-post">Método: Obtener Detalles Post</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogEditComponent.html#metodo-obtener-categorias">Método: Obtener Categorias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogEditComponent.html#funcion-guardar-evento">Función: Guardar Evento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogEditComponent.html#funcion-cerrar-evento">Función: Cerrar Evento</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogEditComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogLoginComponent.html">Componente: Blog Login</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogLoginComponent.html#metodo-autenticar">Método: Autenticar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogLoginComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogNewComponent.html">Componente: Blog New</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogNewComponent.html#metodo-obtener-categorias">Método: Obtener Categorias</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogNewComponent.html#metodo-crear-entrada">Método: Crear Entrada</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogNewComponent.html#metodos-carga-de-imagen">Métodos Carga de imagen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogNewComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="blogFoteerComponent.html">Componente: Blog Footer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="blogFoteerComponent.html#funcion-chequear-login">Función: Chequear Login</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogFoteerComponent.html#funcion-redirigir">Función: Redirigir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogFoteerComponent.html#metodo-cerrar-sesion">Método: Cerrar Sesión</a></li>
+<li class="toctree-l2"><a class="reference internal" href="blogFoteerComponent.html#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="../frontend/index.html" class="btn btn-neutral float-left" title="Frontend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="postInterface.html" class="btn btn-neutral float-right" title="Interface: Post" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

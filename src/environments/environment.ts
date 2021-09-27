@@ -10,7 +10,7 @@ export const environment = {
   },
   WP_REST: {
     API: 'https://dev20.latiendasigueabierta.com/wp-json/wp/v2/',
-    AUTH: 'https://dev20.latiendasigueabierta.com/wp-json/jwt-auth/v1/token'
+    AUTH: 'https://dev20.latiendasigueabierta.com/wp-json/jwt-auth/v1/'
   }
 };
 

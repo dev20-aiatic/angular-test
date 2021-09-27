@@ -14,14 +14,15 @@ import { WPAuthService } from 'src/app/services/wordpress/wpauth.service';
 
 export class FooterComponent implements OnInit{
 
-  constructor(public blogService: BlogService, private wpAuthService:WPAuthService, private router: Router) {
-   }
+  constructor(public blogService: BlogService, 
+              private wpAuthService:WPAuthService, 
+              private router: Router) {}
 
-    /**Metodo que me devuelve la información del usuario */
-    get userData() {
-      return this.wpAuthService.user;
+  ngOnInit(): void {
+  this.checklogin();
   }
   
+ 
     /**Metodo que valida el logueo**/
     checklogin() {
       return this.wpAuthService.getIsAuth();
@@ -38,11 +39,6 @@ export class FooterComponent implements OnInit{
   logout(): void {
     this.wpAuthService.logout();
     this.reloadCurrentRoute()
-  }
-
-  
-  ngOnInit(): void {
-
   }
 
 }

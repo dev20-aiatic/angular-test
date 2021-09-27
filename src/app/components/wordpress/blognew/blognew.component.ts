@@ -1,12 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { BlogService } from 'src/app/services/wordpress/blog.service';
-import { Blog } from 'src/app/interfaces/Blog';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-blognew',
@@ -37,8 +34,7 @@ export class BlognewComponent implements OnInit {
      public blogService: BlogService,
      private blog:BlogService,
      private router: Router,
-     private route:ActivatedRoute,
-     private http: HttpClient) { }
+     private route:ActivatedRoute) { }
 
      //Formulario detalles post
   newForm: FormGroup = this.fb.group({
@@ -46,14 +42,14 @@ export class BlognewComponent implements OnInit {
     excerpt: ['', [Validators.required,  Validators.maxLength(80), Validators.minLength(5)]],
     category:['', Validators.compose([Validators.required])],
     content: ['', [Validators.required, Validators.minLength(5)]],
-    featured_media: ['']
+    featured_media: [''],
 });
     //Formulario para la carga de imagen
-    myForm = new FormGroup({
-      name: new FormControl('test', [Validators.required]),
-      file: new FormControl('', [Validators.required]),
-      fileSource: new FormControl('', [Validators.required])
-    });
+
+    imgForm: FormGroup = this.fb.group({
+      file: ['', [Validators.required]],
+      fileSource:['', [Validators.required]],
+  });
 
   ngOnInit() {
     this.getAllCategories();
@@ -81,7 +77,6 @@ export class BlognewComponent implements OnInit {
       categories: val.category,
       status: 'publish'
     };
-        console.log(data);
         this.blog.createpost(data)
         .subscribe(
           res => {
@@ -104,11 +99,6 @@ export class BlognewComponent implements OnInit {
 
  /* Carga de img */
 
- get formValue(){
-  return this.myForm.controls;
-}
-
-
  onFileChange(event:any) {
   if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
@@ -124,41 +114,37 @@ export class BlognewComponent implements OnInit {
   }
 }
 
-// Patch form Values
+// Enrutar valor de imagen
 patchValues(){
-  this.myForm.patchValue({
+  this.imgForm.patchValue({
      fileSource: this.image
   });
 }
 
-// Remove Image
+// Función para remover imagen
 removeImage(url:any){
   console.log(this.image,url);
   this.image = this.image.filter(img => (img != url));
-  !this.myForm.patchValue;
+  !this.imgForm.patchValue;
   this.patchValues();
 }
    
-// Submit Form Data
-/* submit(){
-  this.http.post('http://localhost:8005/upload.php', this.myForm.value)
-    .subscribe(res => {
-      console.log(res);
-      alert('Imagen cargada correctamente');
-    })
-}
- */
 
 submit() {
 
-  const val = this.myForm.value;
-    const attachData = {
-      title: val.name,
-      file:val.fileSource,
-      status: 'publish'
-    };
+  const val = this.imgForm.value;
 
-        this.blog.uploadImage(attachData)
+    const data = new FormData();
+
+    data.append('title', val.file);
+    data.append('author', '1');
+    data.append('media_type', 'image');
+    data.append('file', val.fileSource);
+    data.append('status', 'publish');
+    data.append('comment_status', 'closed');
+
+        console.log(data);
+        this.blog.uploadImage(data)
         .subscribe(
           res => {
             this.Msg = res;

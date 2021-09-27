@@ -40,11 +40,13 @@ export class BlogeditComponent implements OnInit {
       this.getAllCategories();
   }
 
-  showHTML(){
-    const htmlContentWithoutStyles = document.getElementById("htmlDiv");
-  }
 
- /**Metodo que me devuelve y setea la información del post**/
+
+ /**
+  * Método que me devuelve y setea la información del post
+  * @params Id - Variable que almacena el dato recibido del componente 'BlogComponent'
+  * @returns - Información de la publicación
+  */
  getPostDetails() {
   this.blogService.getPost(this.id)
   .subscribe(data => {
@@ -60,20 +62,22 @@ export class BlogeditComponent implements OnInit {
   });
 }
 
-  /**Metodo que me devuelve las categorias existentes */
+  /**
+  * Metodo que me devuelve las categorias existentes
+  * @returns - Listado de categorias
+  */
   getAllCategories() {
     this.blogService.getCategories().subscribe(data =>  {
       this.categories = data;
     });
   }
 
-
+  //Función encargada de guardar la información del evento
   save() {
-
-        //this.editPost.get('content').markAsTouched();
-        this.dialogRef.close(this.editPost.value);
+      this.dialogRef.close(this.editPost.value);
   }
 
+  //Función encargada de cerrar el dialogo
   close() {
       this.dialogRef.close(false);
   }

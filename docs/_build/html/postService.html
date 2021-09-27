@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicio: Post &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="Componente - Blog" href="blogComponent.html" />
+    <link rel="prev" title="Interface: WP_Category" href="categoryInterface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Proyecto Angular - Práctica Profesional 2021-2 AIATIC
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="backend.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frontend.html">Frontend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="wordpress.html">Implementación de Wordpress en Angular</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="wordpress.html#primer-paso">Primer Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wordpress.html#segundo-paso">Segundo Paso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="wordpress.html#terce-paso">Terce Paso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="postInterface.html">Interface: Post</a></li>
+<li class="toctree-l3"><a class="reference internal" href="categoryInterface.html">Interface: WP_Category</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Servicio: Post</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#procedimiento-error-de-respuesta">Procedimiento: Error de respuesta</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-listar-publicaciones">Método: Listar publicaciones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-detalles-publicacion">Método: Detalles publicación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-crear-nueva-publicacion">Método: Crear nueva publicación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-modificar-publicacion">Método: Modificar publicación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-eliminar-publicacion">Método: Eliminar publicación</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-listar-categorias">Método: Listar Categorias</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo-del-servicio-post">Código Fuente completo del Servicio: Post</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="blogComponent.html">Componente - Blog</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="wordpress.html">Implementación de Wordpress en Angular</a> &raquo;</li>
+      <li>Servicio: Post</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/postService.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="servicio-post">
+<h1>Servicio: Post<a class="headerlink" href="#servicio-post" title="Enlazar permanentemente con este título"></a></h1>
+<p>Este servicio se encargará de efectuar las peticiones a la Rest API
+relacionadas con las publicaciones del blog</p>
+<ul class="simple">
+<li><p>Se realiza la creación del servicio para la Rest Api de WordPress con
+el siguiente comando:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">service</span> <span class="pre">services/blog</span></code></p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias y
+tipos requeridos en el servicio tal como se aprecia a continuación.
+Así mismo, se define las variables y endpoints de la API previamente
+definidos en el environment.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpErrorResponse</span><span class="p">,</span> <span class="nx">HttpHeaders</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span><span class="p">,</span> <span class="nx">throwError</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">catchError</span><span class="p">,</span> <span class="nx">map</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Wp_Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../interfaces/WP_Category&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Post</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/post&#39;</span><span class="p">;</span>
+
+<span class="kd">@Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BlogService</span> <span class="p">{</span>
+<span class="c1">// Endpoint de WordPress Rest API</span>
+  <span class="nx">WP_API</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">WP_REST</span><span class="p">.</span><span class="nx">API</span><span class="p">;</span>
+<span class="c1">//Parametros para la consulta de los posts</span>
+  <span class="nx">allPosts</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">pages</span>: <span class="kt">any</span><span class="p">;</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span>: <span class="kt">HttpClient</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="procedimiento-error-de-respuesta">
+<h2>Procedimiento: Error de respuesta<a class="headerlink" href="#procedimiento-error-de-respuesta" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este procedimiento es el encargado de gestionar las respuestas de
+error obtenidas de la API, este recibe como parametro el error de la
+depedencia HttpErrorResponse</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">handleError</span><span class="p">(</span><span class="nx">error</span>: <span class="kt">HttpErrorResponse</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="s1">&#39;Hubo un problema, intente nuevamente&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">error</span> <span class="ow">instanceof</span> <span class="nx">ErrorEvent</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Errores del lado del cliente</span>
+      <span class="nx">errorMessage</span> <span class="o">=</span> <span class="sb">`Error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// Errores del lado de la api</span>
+      <span class="nx">errorMessage</span> <span class="o">=</span> <span class="sb">`Código de error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">\n Mensaje: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">throwError</span><span class="p">(</span><span class="nx">errorMessage</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-listar-publicaciones">
+<h2>Método: Listar publicaciones<a class="headerlink" href="#metodo-listar-publicaciones" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Se define este método que será el encargado de traer todas las
+publicaciones del blog de acuerdo al parámetro de número de
+publicaciones por página, el número de página y ordenando los post
+por su modificación.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">getRecentPosts</span><span class="p">(</span><span class="nx">page</span> <span class="o">=</span> <span class="mf">1</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">observe</span><span class="o">:</span> <span class="s1">&#39;response&#39;</span> <span class="kr">as</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span>
+      <span class="nx">params</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">per_page</span><span class="o">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span>
+        <span class="nx">page</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="nx">page</span><span class="p">,</span>
+        <span class="nx">orderby</span><span class="o">:</span> <span class="s1">&#39;modified&#39;</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">any</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts?_embed=true`</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">=</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;headers&#39;</span><span class="p">].</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;x-wp-totalpages&#39;</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">allPosts</span> <span class="o">=</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;headers&#39;</span><span class="p">].</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;x-wp-total&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">];</span>
+        <span class="p">}),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-detalles-publicacion">
+<h2>Método: Detalles publicación<a class="headerlink" href="#metodo-detalles-publicacion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encargará de traer la información detallada de una
+publicación especifica, para ello recibe como parámetro el id del
+post para realizar la correspondiente llamada al punto final.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">getPost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">?_embed`</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
+      <span class="nx">map</span><span class="p">((</span><span class="nx">post</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">post</span><span class="p">;</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-crear-nueva-publicacion">
+<h2>Método: Crear nueva publicación<a class="headerlink" href="#metodo-crear-nueva-publicacion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Se define este método para la creación de nuevas publicaciones, este
+recibe como parametro un array con la información requerida para la
+creación de un nuevo post. Adicionalmente se define un encabezado en
+el que se agregará los detalles de autenticación requeridos para
+efectuar exitosamente la petición.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">createpost</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+       <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+     <span class="p">},</span>
+   <span class="p">};</span>
+   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+     <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-modificar-publicacion">
+<h2>Método: Modificar publicación<a class="headerlink" href="#metodo-modificar-publicacion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método es el encargado de modificar las publicaciones del blog,
+este recibe como parametro el id del post y un array (data) con la
+información requerida para la modificación del mismo. Adicionalmente
+se define un encabezado en el que se agregará los detalles de
+autenticación requeridos para efectuar exitosamente la petición.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">updatepost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+       <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+     <span class="p">},</span>
+   <span class="p">};</span>
+   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+     <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-eliminar-publicacion">
+<h2>Método: Eliminar publicación<a class="headerlink" href="#metodo-eliminar-publicacion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este se encarga de efectuar la eliminación de una publiación, este
+recibe como parametro el id del post y un array (data) con la
+información requerida para la modificación del mismo. Adicionalmente
+se define un encabezado en el que se agregará los detalles de
+autenticación requeridos para efectuar exitosamente la petición.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">deletepost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+   <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+       <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+     <span class="p">},</span>
+   <span class="p">};</span>
+   <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+     <span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+     <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+ <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-listar-categorias">
+<h2>Método: Listar Categorias<a class="headerlink" href="#metodo-listar-categorias" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Se define el método que se encarga de obtener el listado de todas las
+categorias existentes en el blog.</p></li>
+<li></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="nx">getCategories</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">categories`</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+<p>Al añadir cada uno de los métodos mencionados y el procedimiento
+encargado de manipular los errores de la API el código del servicio
+tendrá el siguiente aspecto:</p>
+</section>
+<section id="codigo-fuente-completo-del-servicio-post">
+<h2>Código Fuente completo del Servicio: Post<a class="headerlink" href="#codigo-fuente-completo-del-servicio-post" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/environments/environment&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpErrorResponse</span><span class="p">,</span> <span class="nx">HttpHeaders</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span><span class="p">,</span> <span class="nx">throwError</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">catchError</span><span class="p">,</span> <span class="nx">map</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">WP_User</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../interfaces/WP_User&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Wp_Category</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../interfaces/WP_Category&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Post</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/post&#39;</span><span class="p">;</span>
+
+<span class="kd">@Injectable</span><span class="p">({</span>
+  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">BlogService</span> <span class="p">{</span>
+  <span class="c1">// URL del blog que vamos a trabajar con su REST API</span>
+  <span class="nx">WP_API</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">WP_REST</span><span class="p">.</span><span class="nx">API</span><span class="p">;</span>
+  <span class="c1">//Opciones de blog</span>
+  <span class="nx">allPosts</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="nx">pages</span>: <span class="kt">any</span><span class="p">;</span>
+
+  <span class="kr">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">http</span>: <span class="kt">HttpClient</span><span class="p">)</span> <span class="p">{}</span>
+
+   <span class="cm">/**</span>
+<span class="cm">   * procedimiento encargado de administrar las respuestas de error de wp-rest-api</span>
+<span class="cm">   * @params error - Respuesta de error obtenida de la petición mediante dependecia HTTP</span>
+<span class="cm">   * @returns Mensaje de error obtenido</span>
+<span class="cm">   */</span>
+
+  <span class="nx">handleError</span><span class="p">(</span><span class="nx">error</span>: <span class="kt">HttpErrorResponse</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="s1">&#39;Hubo un problema, intente nuevamente&#39;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">.</span><span class="nx">error</span> <span class="ow">instanceof</span> <span class="nx">ErrorEvent</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Errores del lado del cliente</span>
+      <span class="nx">errorMessage</span> <span class="o">=</span> <span class="sb">`Error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c1">// Errores del lado de la api</span>
+      <span class="nx">errorMessage</span> <span class="o">=</span> <span class="sb">`Código de error: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">status</span><span class="si">}</span><span class="sb">\n Mensaje: </span><span class="si">${</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">throwError</span><span class="p">(</span><span class="nx">errorMessage</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Método encargado de obtener el listado de los posts publicados en el blog</span>
+<span class="cm">   * @params page - Número de la página a consultar</span>
+<span class="cm">   * @returns Respuesta de petición de la api</span>
+<span class="cm">   */</span>
+  <span class="nx">getRecentPosts</span><span class="p">(</span><span class="nx">page</span> <span class="o">=</span> <span class="mf">1</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">observe</span><span class="o">:</span> <span class="s1">&#39;response&#39;</span> <span class="kr">as</span> <span class="s1">&#39;body&#39;</span><span class="p">,</span>
+      <span class="nx">params</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">per_page</span><span class="o">:</span> <span class="s1">&#39;10&#39;</span><span class="p">,</span>
+        <span class="nx">page</span><span class="o">:</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="nx">page</span><span class="p">,</span>
+        <span class="nx">orderby</span><span class="o">:</span> <span class="s1">&#39;modified&#39;</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts?_embed=true`</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+        <span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">pages</span> <span class="o">=</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;headers&#39;</span><span class="p">].</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;x-wp-totalpages&#39;</span><span class="p">);</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">allPosts</span> <span class="o">=</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;headers&#39;</span><span class="p">].</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;x-wp-total&#39;</span><span class="p">);</span>
+          <span class="k">return</span> <span class="nx">res</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">];</span>
+        <span class="p">}),</span>
+        <span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">)</span>
+      <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Método encargado de obtener detalles de un post especifico</span>
+<span class="cm">   * @params id - ID del post a consultar</span>
+<span class="cm">   * @returns Respuesta de petición de la api</span>
+<span class="cm">   */</span>
+  <span class="nx">getPost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">)</span> <span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">?_embed`</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
+      <span class="nx">map</span><span class="p">((</span><span class="nx">post</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">post</span><span class="p">;</span>
+      <span class="p">})</span>
+    <span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">getCategories</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">categories`</span><span class="p">);</span>
+  <span class="p">}</span>
+
+
+  <span class="cm">/**</span>
+<span class="cm">   * Método encargado de crear un nuevo post</span>
+<span class="cm">   * @params data - Array con la información ingresada por el usuario en el modal</span>
+<span class="cm">   * @returns Respuesta de petición de la api</span>
+<span class="cm">   */</span>
+  <span class="nx">createpost</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+  <span class="p">}</span>
+
+
+  <span class="cm">/**</span>
+<span class="cm">   * Método encargado de actualizar un post</span>
+<span class="cm">   * @params id - Número de identificación del posts</span>
+<span class="cm">   * @params data - Array con los datos a modificar del post existente</span>
+<span class="cm">   * @returns Respuesta de petición de la api</span>
+<span class="cm">   */</span>
+
+  <span class="nx">updatepost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">,</span> <span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">Post</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+  <span class="p">}</span>
+
+  <span class="cm">/**</span>
+<span class="cm">   * Método encargado de eliminar un post</span>
+<span class="cm">   * @params Id - Número de identificación del post a eliminar</span>
+<span class="cm">   * @returns Respuesta de petición de la api</span>
+<span class="cm">   */</span>
+
+  <span class="nx">deletepost</span><span class="p">(</span><span class="nx">id</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">Authorization</span><span class="o">:</span> <span class="s1">&#39;Bearer &#39;</span> <span class="o">+</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;wp-token&#39;</span><span class="p">),</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">http</span>
+      <span class="p">.</span><span class="ow">delete</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">WP_API</span><span class="si">}</span><span class="sb">posts/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">catchError</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">handleError</span><span class="p">));</span>
+  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="categoryInterface.html" class="btn btn-neutral float-left" title="Interface: WP_Category" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="blogComponent.html" class="btn btn-neutral float-right" title="Componente - Blog" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

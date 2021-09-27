@@ -25,27 +25,29 @@ export class WPAuthService {
     private notificationService: NotificationService
   ) {}
 
-  //** Verificar si se encuentra logueado */
+  // Función para verificar si usuario se encuentra logueado
   getIsAuth() {
     return this.isAuthenticated;
   }
 
+  // Función para validación de inicio de sesión
+  getAuthStatusListener() {
+  return this.authStatusListener.asObservable();
+  }
 
+  // Función para obtener el token JWT generado por la API
   getToken() {
     return this.token;
   }
 
-  getAuthStatusListener() {
-    return this.authStatusListener.asObservable();
-  }
 
   /**
-   * Función encargada de realizar la petición de autenticación del usuario
+   * Método encargado de realizar la petición de autenticación del usuario
    * @void se asigna el token y el usuario
    */
   Login(username: string, password: string) {
     this.http
-      .post<WP_Token>(`${this.TOKENIZER}`, { username, password })
+      .post<WP_Token>(`${this.TOKENIZER}token`, { username, password })
       .subscribe(
         (response) => {
           if (response.token) {
@@ -92,7 +94,7 @@ export class WPAuthService {
     );
     return this.http
       .post<WP_Token>(
-        `${this.TOKENIZER}/validate?token=`,
+        `${this.TOKENIZER}token/validate?token=`,
         {},
         { headers: headers }
       );

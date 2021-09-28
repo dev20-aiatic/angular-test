@@ -1,14 +1,17 @@
-const { User, Profile, Event} = require("../models/indexModel");
+const { User, Profile, Event} = require("../models/index.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const env = process.env.NODE_ENV || "development";
 const jwt_secret = process.env.JWT_SECRET || "development";
 
 const UserController = {
-  /**Función encargada de gestionar el registro de usuario
-   * @param {string} name - Nombre completo del usurio
-   * @param {string} email - Correo del usuario
-   * @param {string} password - Contraseña del usuario
+  /**Método encargado de gestionar el registro de usuario
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function create - Función sequelize que permite crear un nuevo registro
+   * @function sign - Función de dependencia jwt que genera el token de logueo
+   * @function hash - Función de dependencia bcrypt que encripta el password
+   * @returns - Token, registro de perfil y usuario
    */
   async register(req, res) {
     try {
@@ -51,12 +54,14 @@ const UserController = {
     }
   },
 
-  /**Función encargada de gestionar el inicio de sesión
-   * @param {string} email - Correo del usuario
-   * @param {string} password - Contraseña del usuario
-   * @param {string} user.id - Identificador del usuario en la base de datos
+  /**Método encargado de gestionar el inicio de sesión
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna
+   * @function sign - Función de dependencia jwt que genera el token de logueo
+   * @function compare - Función de dependencia bcrypt que compara la clave encriptada con la clave ingresada
+   * @returns - Token, información del inicio de sesión
    */
-
    async login(req, res) {
     try {
         const user = await User.findOne({
@@ -93,19 +98,11 @@ const UserController = {
     }
 },
   
-
-  /**Función encargada de mostrar el perfil de usuario
-   * @param {integer} id - Número de registro del usuario
-   * @param {string} lastname - Contraseña del usuario
-   * @param {integer} natIdCard - Número de cedula del usuario
-   * @param {date} DoB - Fecha de nacimiento del usuario
-   * @param {string} city - Ciudad de residencia del usuario
-   * @param {string} department - Departamento de residencia del usuario
-   * @param {string} country - País de recidensia del usuario
-   * @param {integer} postalcode - Código postal del usuario
-   * @param {string} career - Profesión del usuario
-   * @param {integer} skill_Id - Identificador de habilidades asignables al usuario
-   * @param {string} description - Descripción del usuario
+  /**Método encargado de mostrar el perfil de usuario
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna
+   * @returns - Información del usuario incluyendo el perfil asociado a este
    */
   async user_profile(req, res) {
     try {
@@ -128,18 +125,13 @@ const UserController = {
     }
   },
 
-  /**Función encargada de gestionar la modificación del perfil de usuario
-   * @param {integer} id - Número de registro del usuario
-   * @param {string} lastname - Contraseña del usuario
-   * @param {integer} natIdCard - Número de cedula del usuario
-   * @param {date} DoB - Fecha de nacimiento del usuario
-   * @param {string} city - Ciudad de residencia del usuario
-   * @param {string} department - Departamento de residencia del usuario
-   * @param {string} country - País de recidensia del usuario
-   * @param {integer} postalcode - Código postal del usuario
-   * @param {string} career - Profesión del usuario
-   * @param {integer} skill_Id - Identificador de habilidades asignables al usuario
-   * @param {string} description - Descripción del usuario
+   /**Método encargado de gestionar la modificación del perfil de usuario
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna
+   * @function update - Función sequelize que permite actualizar registros de un modelo
+   * @function create - Función sequelize que permite crear un nuevo registro
+   * @returns - Información del usuario incluyendo el perfil asociado a este
    */
 
  async updateProfile(req, res) {
@@ -159,10 +151,10 @@ const UserController = {
       },
     });
 
-   /*   Event.create({
+      Event.create({
       username: finduser.name,
-      description: "actualizacion de perfil"
-   }); */
+      description: "Modificó su perfil"
+   }); 
    
     res.status(200).send({
         message: "Datos actualizados correctamente",
@@ -176,12 +168,13 @@ const UserController = {
   }
 },
 
-
-  /**Función encargada del login mediante google
-   * @param {integer} id - Número de registro del usuario
-   * @param {string} email - Email del usuario
-   * @param {string} lastname - Contraseña del usuario
-   * @param {boolean} googleauth - Indica si se logueo mediante google
+  /**Método encargado de gestionar el inicio de sesión con Google
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna
+   * @function create - Función sequelize que permite crear un nuevo registro
+   * @function sign - Función de dependencia jwt que genera el token de logueo
+   * @returns - Token, información del inicio de sesión
    */
   async googleIn(req, res) {
     //Buscamos si se encuentra previamente registrado
@@ -193,45 +186,44 @@ const UserController = {
       });
       if (!findUser) {
         /** Procedemos a crear el perfil */
-        const profile = await Profile.create();
-        /**Asigmanos el perfil al nuevo usuario*/
-        const user = await User.create({
+        const profile = await Profile.create({
+        lastname: "",
+        natIdCard: "",
+        DoB: "",
+        city: "",
+        department: "",
+        country: "",
+        postalcode: "",
+        career: "",
+        description: "",
+        });
+
+        /** Creamos el nuevo usuario*/
+        const newUser = await User.create({
           name: req.body.name,
           email: req.body.email,
+          Profile_Id: profile.id,
           password: ":P",
-          googleauth: true,
+          social: "google",
         });
-        /** Asignamos el perfil previamente creado al nuevo usuario*/
-        await user.addProfile(profile);
+
         /** Actualizamos el perfil con la información de google*/
-        const fillprofile = await Profile.update(
-          {
-            lastname: req.body.lastname,
-            photo: req.body.photo,
-          },
-          {
-            where: {
-              profile_Id: user.id,
-            },
-          }
-        );
+        
+        await Profile.update({
+          lastname: req.body.lastname,
+          photo: req.body.photo,
+        }, {
+          where: { id: newUser.Profile_Id},
+        });
+
       }
-      // Generamos el token para el usuario encontrado
-      const token = jwt.sign(
-        {
-          id: newUser.id,
-          name: newUser.name,
-        },
-        jwt_secret,
-        {
-          expiresIn: "2h",
-        }
-      );
+       // Asignamos el token de inicio de sesión
+      const token = jwt.sign({ id: newUser.id }, jwt_secret, {expiresIn: "24h"});
       res.status(200).send({
         auth: true,
-        user: findUser,
+        user: newUser,
         token: token,
-        message: "Bienvenido " + findUser.name,
+        message: "Bienvenido " + user.name,
       });
     } catch (error) {
       console.log(error);
@@ -242,48 +234,11 @@ const UserController = {
     }
   },
 
-  async getInfo(req, res) {
-    const { userId } = req;
-    try {
-      const findUser = await User.findOne({
-        where: {
-          user_Id: userId,
-        },
-      });
-      if (!findUser) {
-        return res.status(404).send({
-          message: "No hay usuario",
-        });
-      }
-      res.status(200).send(findUser);
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
-        message: "Hubo un problema al encontrar el usuario",
-      });
-    }
-  },
-
-  async getByPK(req, res) {
-    const { user } = req;
-    User.findOne({
-      include: [
-        {
-          require: true,
-          model: Profile,
-        },
-      ],
-      where: {
-        user_Id: user,
-      },
-    }).then((user) => res.send(user));
-  },
-
-  /**
-   * Función que se encarga de listar todos los usuarios de la BD
-   * @param {any} req
-   * @param {any} res
-   * @returns {any}
+  /**Método encargado de traer todos los usuarios registrados
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findAll - Función sequelize que permite buscar todos los registros de un modelo mediante una columna
+   * @returns - Listado de usuarios registrados
    */
 
   async getUsers(res) {
@@ -305,34 +260,22 @@ const UserController = {
     }
   },
 
-  /**
-   * función encargada de renovar el token del usuario
-   * @param {any} req  -- Parametro que se usa para llamar a la respuesta userId del middleware 'Validation'
-   * @param {any} res  -- Respuesta obtenida de la promesa
-   * @returns {any}  -- Respuesta exitosa con status 200 o status 500 al encontrarse error
+  /**Método encargado de renovar el token del usuario
+   * @param req - Argumento de solicitud HTTP 
+   * @param res - Argumento de respuesta HTTP
+   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna
+   * @function sign - Función de dependencia jwt que genera el token de logueo
+   * @returns - Token de logueo renovado
    */
   async renewToken(req, res) {
-    //Del middleware 'validation' se obtiene el id de usuario en el payload del token JWT con req.userId
+    //Del middleware 'jwt' se obtiene el id de usuario en el payload del token JWT con req.userId
     //el cual puede utilizarse para buscarlo en la tabla 'users'
-    const { userId } = req;
     try {
       const findUser = await User.findOne({
-        where: {
-          user_Id: userId,
-        },
+        where: {id: req.user_Id},
       });
       //Al obtener el usuario se procede a generar de nuevo un token para el usuario
-      const token = jwt.sign(
-        {
-          id: findUser.user_Id,
-          name: findUser.name,
-        },
-        jwt_secret,
-        {
-          expiresIn: "2h",
-        }
-      );
-
+      const token = jwt.sign({ id: findUser.id }, jwt_secret, {expiresIn: "24h"});
       //Respuesta exitosa del proceso
       return res.status(200).send({
         auth: true,

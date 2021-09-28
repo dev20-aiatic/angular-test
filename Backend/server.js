@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require("cors");
 require('dotenv').config()
 
-// Initialize express app
+// Inicializamos la aplicación express
 const app = express();
 
 // Middleware
@@ -12,8 +12,8 @@ app.use(morgan('combined'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Router index
-const indexRouter = require("./routes/allRoutes");
+// Incluimos la rutas
+const indexRouter = require("./routes/all.route");
 
 app.options('/*',(req, res, next) => res.send());
 

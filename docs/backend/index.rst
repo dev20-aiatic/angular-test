@@ -21,16 +21,16 @@ En caso de que no esté instalado, sigue esta serie de pasos para instalarlo. Ba
 `tutorial <https://www.cursosgis.com/como-instalar-node-js-y-npm-en-4-pasos/>`__
 
 
-* 1. Entrar en https://nodejs.org/es/download/ y dar clic a la opción compatible 
-     con el sistema operativo del ordenador.
+1. Entrar en https://nodejs.org/es/download/ y dar clic a la opción compatible 
+   con el sistema operativo del ordenador.
        
 .. image:: img/Node-Install-1.png
    :alt: Paso 1 instalación Node
    :width: 400
    :align: center
 
-* 2. Ejecutar el instalador descargado y dar clic en **(Next)** hasta finalizar el proceso
-     de instalación.
+2. Ejecutar el instalador descargado y dar clic en **(Next)** hasta finalizar el proceso
+   de instalación.
 
 .. image:: img/Node-Install-2.png
    :alt: Paso 2 instalación Node
@@ -55,33 +55,69 @@ Estos comandos por consola mostrarán un resultado como este:
    :align: center
 
 
+Estructura Directorio
+*********************
+.. code-block:: 
 
-Primer Paso
-***********
-Se procede a crear un directorio para el backend en nuestro proyecto
+   ├───config
+   │   ├───config.json
+   ├───controllers
+   │   ├───skills.controller.js
+   │   ├───user.controller.js
+   ├───middlewares
+   │   ├───jwt_validation.js
+   │   ├───validation.js
+   ├───models
+   │   ├───events.model.js
+   │   ├───index.model.js
+   │   ├───profile.model.js
+   │   ├───profileskills.model.js
+   │   ├───skill.model.js
+   │   ├───user.model.js
+   ├───routes
+   │   ├───all.route.js
+   │   ├───skills.route.js
+   │   ├───user.route.js
+   ├───.env
+   ├───package-lock.json
+   ├───package.json
+   ├───Procfile
+   ├───.server.js
 
 
+Ejecutar localmente
+*******************
 
-Tercer Paso
-***********
+Seguir las instrucciones en el apartado Configuración Inicial descrita en el home de esta 
+documentación `ver aquí <../index.html#configuracion-inicial>`_
+
+Documentación
+*************
+
 Se procede a crear controladores, middlewares, modelos, rutas necesarias para la creación de nuestra
 API REST.
 
+
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contenido:
 
    userModel
+   profileModel
+   skillsModel
+   profileskillsModel
+   eventsModel
+   indexModel
 
+   userController
 
-Configuración Inicial
-*********************
-.. code-block:: 
+   userRoute
+   skillsRoute
+   allRoute
+
+   configurationJSON
+
+   jwtMiddleware  
+   validationMiddleware
    
-   npm install
-
-Ejecutar
-*************
-.. code-block:: 
-   
-   node server.js   
+   serverFile

@@ -40,8 +40,10 @@ A continuación se listarán las tecnologias y librerias implementadas para el d
 * **Bases de datos**
     * MYSQL
 
-Inicio Rápido
-*************
+Configuración Inicial
+*********************
+
+Para ejecutar localmente  el proyecto se sugiere seguir los siguientes pasos:
 
 .. code-block:: 
 
@@ -53,13 +55,71 @@ Inicio Rápido
 
    # Instalar depedencias del Front
    npm install
-   
+
    # Dirigise a la carpeta del Backend
    cd backend
 
    # Instalar depedencias del backend
    npm install
    
+Posteriormente, se procede a efectuar configuración inicial del Backend, para ello:
+
+1. Dirigirse a la carpeta *config* contenida en el directorio Backend tal como se
+   puede apreciar a continuación:
+
+.. code-block:: 
+   
+   Backend
+   ├───config
+   │   ├───config.json
+
+
+2. Modificar en el archivo config.json la configuración de entorno de desarrollo, las credenciales
+   de acceso a la base de datos que desee utilizar y el dialecto correspondiente al sistema de gestión
+   de base de datos relación que implementar.
+
+.. code-block:: 
+
+   {
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "dashgular",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": 0
+  },
+
+3. Antes de correr la Rest Api, dirigirse a la carpeta *models* contenida tambíen en el directorio 
+   Backend tal como se puede apreciar a continuación:
+
+.. code-block:: 
+   
+   Backend
+   ├───models
+   │   ├───index.model.js
+
+4. Quitar la línea de comentario de la función encargada de sincronizar los modelos de Sequelize
+   de este modo:
+
+.. code-block:: 
+   
+   /* Función para cargar los modelos en una nueva base de datos */
+   sequelize.sync()
+
+Por consiguiente, el proyecto se encuentra listo para ser ejecutado para ello ejecute los siguientes
+comandos:
+
+.. code-block:: 
+
+   # Ejecutar Backend
+   node server.js / npm start
+
+   # Dirigise a la carpeta del proyecto
+   cd ..
+
+   # Ejecutar Frontend
+   ng serve / npm start
 
 .. toctree::
    :maxdepth: 2

@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   /**
-   * Este modelo  sequelize se encarga de definir los atributos de la tabla 'skill' para el ORM
+   * Este modelo  se encarga de definir los atributos de la tabla 'skills'
    * 
    * @module Skill
    * 
@@ -15,7 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true
       },
-      name: DataTypes.STRING
+      name: DataTypes.STRING,
+      createdAt: {
+        type: "TIMESTAMP",
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      },
+      updatedAt: {
+        type: "TIMESTAMP",
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+      },
     }, 
     {}
     );

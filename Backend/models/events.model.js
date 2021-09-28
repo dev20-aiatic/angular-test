@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   /**
-   * Este modelo sequelize se encarga de definir los atributos de la tabla 'eventos' para el ORM
+   * Este modelo se encarga de definir los atributos de la tabla 'events'
    *
    * @module Events
    *
@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   Event.associate = function (models) {
+    
   };
   return Event;
 };

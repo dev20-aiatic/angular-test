@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controlador: Usuario &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Ruta: Usuario" href="userRoute.html" />
+    <link rel="prev" title="Modelo: Index" href="indexModel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Backend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#requerimientos">Requerimientos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejcutar-localmente">Ejcutar localmente</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#documentacion">Documentación</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="userModel.html">Modelo: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileModel.html">Modelo: Perfil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillsModel.html">Modelo: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileskillsModel.html">Modelo: PerfilHabilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="eventsModel.html">Modelo: Eventos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indexModel.html">Modelo: Index</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Controlador: Usuario</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-registro">Método: Registro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-login">Método: Login</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-usuario-perfil">Método: Usuario_Perfil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-actualizar-perfil">Método: Actualizar Perfil</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-login-con-google">Método: Login con Google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-renovar-token">Método: Renovar Token</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="userRoute.html">Ruta: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillsRoute.html">Ruta: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="allRoute.html">Ruta: Todas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurationJSON.html">JSON: Configuración</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jwtMiddleware.html">Middleware: JWT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validationMiddleware.html">Middleware: Validación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverFile.html">Fichero: Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wp/wordpress.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Backend</a> &raquo;</li>
+      <li>Controlador: Usuario</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/backend/userController.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="controlador-usuario">
+<h1>Controlador: Usuario<a class="headerlink" href="#controlador-usuario" title="Enlazar permanentemente con este título"></a></h1>
+<p>Este controlador nos permite manejar la lógica detrás de las consultas a los modelos
+previamente creados, en especifico esté se encarga de definir las funciones que efectuarán
+consultas en los Modelos <strong>Usuario</strong>, <strong>Perfil</strong>, <strong>Eventos</strong>, en orden de manipular los registros
+en las correspondientes tablas presentes en la base de datos.</p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias y modelos
+requeridos en el controlador tal como se aprecia a continuación:</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">const</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">Profile</span><span class="p">,</span> <span class="nx">Event</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../models/index.model&quot;</span><span class="p">);</span>
+<span class="linenos">2</span><span class="kd">const</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;bcryptjs&quot;</span><span class="p">);</span>
+<span class="linenos">3</span><span class="kd">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;jsonwebtoken&quot;</span><span class="p">);</span>
+<span class="linenos">4</span><span class="kd">const</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
+<span class="linenos">5</span><span class="kd">const</span> <span class="nx">jwt_secret</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<section id="metodo-registro">
+<h2>Método: Registro<a class="headerlink" href="#metodo-registro" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este método se encarga de llamar los modelos <strong>Usuario</strong> y <strong>Perfil</strong> para efectuar las consultas
+requeridas en orden de llevar a cabo el registro del usuario. El método de registro se
+ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Mediante la Ruta Usuario se carga el Middleware Validación ver aquí, el cual se
+encarga de validar si el email ingresado por el usuario ya se encuentra registrado
+en la tabla <strong>users</strong>.</p></li>
+<li><p>De acuerdo a la validación, sino está registrado se procede a cifrar la contraseña ingresada
+mediante la función <code class="docutils literal notranslate"><span class="pre">hash()</span></code> de la dependencia <strong>bcrypt</strong>.</p></li>
+<li><p>Se procede a efectuar las consultas  <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">INTO</span> <span class="pre">users</span></code> y <code class="docutils literal notranslate"><span class="pre">INSERT</span> <span class="pre">INTO</span> <span class="pre">profiles</span></code>
+por medio del método sequelize <code class="docutils literal notranslate"><span class="pre">.create()</span></code>.</p></li>
+<li><p>Se genera el token JWT de logueo con la función <code class="docutils literal notranslate"><span class="pre">sign()</span></code> de la dependencia <strong>jwt</strong>
+definiendo como parámetros el id del usuario y expiración de 2 horas.</p></li>
+<li><p>Dado el caso que se ejecuten correctamente o no cada uno de los anteriores pasos, se procede
+a devolver una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro los
+códigos de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria al registro del usuario
+o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>  <span class="k">async</span> <span class="nx">register</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 3</span>      <span class="kd">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="mf">9</span><span class="p">);</span>
+<span class="linenos"> 4</span>      <span class="cm">/**Inicialmente guardamos el perfil*/</span>
+<span class="linenos"> 5</span>      <span class="kd">const</span> <span class="nx">profile</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos"> 6</span>        <span class="nx">lastname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 7</span>        <span class="nx">natIdCard</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 8</span>        <span class="nx">DoB</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 9</span>        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>        <span class="nx">department</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">11</span>        <span class="nx">country</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">12</span>        <span class="nx">postalcode</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">13</span>        <span class="nx">career</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">14</span>        <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">15</span>      <span class="p">});</span>
+<span class="linenos">16</span>      <span class="cm">/** Creamos el nuevo usuario*/</span>
+<span class="linenos">17</span>     <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">18</span>        <span class="nx">name</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">19</span>        <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos">20</span>        <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="linenos">21</span>        <span class="nx">password</span><span class="p">,</span>
+<span class="linenos">22</span>      <span class="p">});</span>
+<span class="linenos">23</span>      <span class="c1">// Generamos el token para el usuario encontrado</span>
+<span class="linenos">24</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span><span class="nx">newUser</span><span class="p">.</span><span class="nx">id</span><span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span>
+<span class="linenos">25</span>        <span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;2h&quot;</span><span class="p">,</span> <span class="c1">// expires in 2 hours,</span>
+<span class="linenos">26</span>      <span class="p">});</span>
+<span class="linenos">27</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">28</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">29</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">,</span>
+<span class="linenos">30</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos">31</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;¡Gracias por su registro!&quot;</span><span class="p">,</span>
+<span class="linenos">32</span>      <span class="p">});</span>
+<span class="linenos">33</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">34</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">35</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">36</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">37</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al tratar de crear el usuario&quot;</span><span class="p">,</span>
+<span class="linenos">38</span>      <span class="p">});</span>
+<span class="linenos">39</span>    <span class="p">}</span>
+<span class="linenos">40</span>  <span class="p">},</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-login">
+<h2>Método: Login<a class="headerlink" href="#metodo-login" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este es el encargado de llamar el modelo <strong>Usuario</strong> y efectuar las consultas
+requeridas en orden de llevar a cabo el inició de sesión del usuario. El método
+de inicio de sesión se ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Mediante la Ruta Usuario se carga el Middleware Validación ver aquí, el cual se
+encarga de validar sí se han ingresado cada uno de los campos requeridos para la
+autenticación.</p></li>
+<li><p>Al pasarse la validación se procede a efectuar consulta del correo electrónico ingresado
+por el usuario mediante método sequelize <code class="docutils literal notranslate"><span class="pre">.findOne()</span></code>, en caso de no encontrase se
+devolverá una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como
+parámetro el código de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">401</span></code> para indicar que no se completo la
+autenticación y debe verificarse el correo ingresado.</p></li>
+<li><p>Se procede a evaluar si la contraseña ingresada es válida mediante la función <code class="docutils literal notranslate"><span class="pre">compare()</span></code>
+de la dependencia bcrypt, en caso de no coincida se devolverá una respuesta en JSON mediante
+<code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro el código de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">401</span></code>
+para indicar que no se completo la autenticación y debe verificarse la contraseña ingresada.</p></li>
+<li><p>Se genera el token JWT de logueo con la función <code class="docutils literal notranslate"><span class="pre">sign()</span></code> de la dependencia <strong>jwt</strong>
+definiendo como parámetros el id del usuario y expiración de 24 horas.</p></li>
+<li><p>Dado el caso que se ejecuten correctamente o no cada uno de los anteriores pasos, se procede
+a devolver una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro los
+códigos de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria a la autenticación del usuario
+o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>   <span class="k">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 3</span>        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 4</span>            <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 5</span>                <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span>
+<span class="linenos"> 6</span>            <span class="p">}</span>
+<span class="linenos"> 7</span>        <span class="p">});</span>
+<span class="linenos"> 8</span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 9</span>            <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">10</span>                <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Correo o contraseña incorrecta&#39;</span>
+<span class="linenos">11</span>            <span class="p">})</span>
+<span class="linenos">12</span>        <span class="p">}</span>
+<span class="linenos">13</span>        
+<span class="linenos">14</span>        <span class="kd">const</span> <span class="nx">isMatch</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+<span class="linenos">15</span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">16</span>            <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">17</span>                <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">18</span>                <span class="nx">token</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="linenos">19</span>                <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Contraseña incorrecta&#39;</span>
+<span class="linenos">20</span>            <span class="p">})</span>
+<span class="linenos">21</span>        <span class="p">}</span>
+<span class="linenos">22</span>        <span class="c1">// Asignamos el token de inicio de sesión</span>
+<span class="linenos">23</span>        <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos">24</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">25</span>            <span class="nx">auth</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="linenos">26</span>            <span class="nx">token</span><span class="o">:</span><span class="nx">token</span><span class="p">,</span>
+<span class="linenos">27</span>            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Bienvenido de nuevo &#39;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span>
+<span class="linenos">28</span>        <span class="p">});</span>
+<span class="linenos">29</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">30</span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">31</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">32</span>            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hubo un problema al iniciar sesión&#39;</span>
+<span class="linenos">33</span>        <span class="p">});</span>
+<span class="linenos">34</span>    <span class="p">}</span>
+<span class="linenos">35</span><span class="p">},</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-usuario-perfil">
+<h2>Método: Usuario_Perfil<a class="headerlink" href="#metodo-usuario-perfil" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este es el encargado de llamar los modelo <strong>Usuario</strong> y <strong>Perfil</strong> para efectuar las consultas
+requeridas en orden de llevar a cabo la consulta de los registros del usuario y su perfil relacionado.
+El método de consultar usuario y perfil se ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Mediante la Ruta Usuario se carga el Middleware JWT ver aquí, el cual se
+encarga de validar el token y descomponer el payload para retornar el usuario
+relacionado a este.</p></li>
+<li><p>Despúes de realizada la validación del token se procede la consulta del id asociado al token de
+logueo mediante método sequelize <code class="docutils literal notranslate"><span class="pre">.findOne()</span></code>, en caso de no encontrase se devolverá una
+respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro el código de
+respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria a la consulta o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para
+respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>  <span class="k">async</span> <span class="nx">user_profile</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 3</span>      <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 4</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> 
+<span class="linenos"> 5</span>        <span class="p">},</span>
+<span class="linenos"> 6</span>        <span class="nx">attributes</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;social&quot;</span><span class="p">],</span>
+<span class="linenos"> 7</span>        <span class="nx">include</span><span class="o">:</span> <span class="p">[</span><span class="nx">Profile</span><span class="p">],</span>
+<span class="linenos"> 8</span>      <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">user</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos"> 9</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">10</span>          <span class="nx">user</span><span class="o">:</span> <span class="nx">user</span><span class="p">,</span>
+<span class="linenos">11</span>        <span class="p">});</span>
+<span class="linenos">12</span>      <span class="p">});</span>
+<span class="linenos">13</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">14</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">15</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">16</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al obtener los datos&quot;</span><span class="p">,</span>
+<span class="linenos">17</span>        <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">,</span>
+<span class="linenos">18</span>      <span class="p">});</span>
+<span class="linenos">19</span>    <span class="p">}</span>
+<span class="linenos">20</span>  <span class="p">},</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-actualizar-perfil">
+<h2>Método: Actualizar Perfil<a class="headerlink" href="#metodo-actualizar-perfil" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este es el encargado de llamar los modelos <strong>Usuario</strong>, <strong>Perfil</strong> y <strong>Eventos</strong> para efectuar las consultas
+requeridas en orden de llevar a cabo la actualización de los registros del usuario y su perfil relacionado.
+El método de actualizar usuario y perfil correspondiente se ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Mediante la Ruta Usuario se carga el Middleware JWT ver aquí, el cual se
+encarga de validar el token y descomponer el payload para retornar el usuario
+relacionado a este.</p></li>
+<li><p>Se procede a verificar la existencia del usuario mediante el método sequelize
+<code class="docutils literal notranslate"><span class="pre">.findOne()</span></code> definiendo como parametro el id asociado al payload presente en
+el token de logueo.</p></li>
+<li><p>Se procede a efectuar la actualización de los registros del usuario y perfil mediante
+método sequelize <code class="docutils literal notranslate"><span class="pre">.update()</span></code> definiendo como parámetro para el usuario el id asociado al payload
+presente en el token de logueo y para el perfil el atributo  <code class="docutils literal notranslate"><span class="pre">Profile_Id</span></code> presente en el
+usuario encontrado.</p></li>
+<li><p>Finalmente se procede a crear el registro correspondiente de la modificación del perfil
+de usuario en el Modelo Eventos mediante el método sequelize <code class="docutils literal notranslate"><span class="pre">.create()</span></code> definiendo como
+parámetro el nombre del usuario que efectuó la modificación y descripción que da constancia de la
+modificación del perfil.</p></li>
+<li><p>Dado el caso que se ejecuten correctamente o no cada uno de los anteriores pasos, se procede
+a devolver una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro los
+códigos de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria a la autenticación del usuario
+o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="k">async</span> <span class="nx">updateProfile</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 2</span>   <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 3</span>    <span class="kd">const</span> <span class="nx">finduser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 4</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> 
+<span class="linenos"> 5</span>      <span class="p">},</span>
+<span class="linenos"> 6</span>      <span class="nx">attributes</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;social&quot;</span><span class="p">,</span> <span class="s2">&quot;Profile_Id&quot;</span><span class="p">],</span>
+<span class="linenos"> 7</span>    <span class="p">});</span>
+<span class="linenos"> 8</span>    
+<span class="linenos"> 9</span>    <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">update</span><span class="p">({...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">},</span> <span class="p">{</span>
+<span class="linenos">10</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> <span class="p">},</span>
+<span class="linenos">11</span>    <span class="p">});</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>    <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">update</span><span class="p">({...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">},</span> <span class="p">{</span>
+<span class="linenos">14</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">finduser</span><span class="p">.</span><span class="nx">Profile_Id</span> 
+<span class="linenos">15</span>      <span class="p">},</span>
+<span class="linenos">16</span>    <span class="p">});</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>      <span class="nx">Event</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">19</span>      <span class="nx">username</span><span class="o">:</span> <span class="nx">finduser</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">20</span>      <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;Modificó su perfil&quot;</span>
+<span class="linenos">21</span>   <span class="p">});</span> 
+<span class="linenos">22</span>   
+<span class="linenos">23</span>    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">24</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Datos actualizados correctamente&quot;</span><span class="p">,</span>
+<span class="linenos">25</span>    <span class="p">});</span>
+<span class="linenos">26</span>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">27</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">28</span>    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">29</span>      <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al actualizar  los datos&quot;</span><span class="p">,</span>
+<span class="linenos">30</span>      <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">,</span>
+<span class="linenos">31</span>    <span class="p">});</span>
+<span class="linenos">32</span>  <span class="p">}</span>
+<span class="linenos">33</span><span class="p">},</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-login-con-google">
+<h2>Método: Login con Google<a class="headerlink" href="#metodo-login-con-google" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este es el encargado de llamar los modelos <strong>Usuario</strong> y <strong>Perfil</strong> para efectuar las consultas
+requeridas en orden de llevar a cabo la actualización de los registros del usuario y su perfil relacionado.
+El método de actualizar usuario y perfil correspondiente se ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Se procede a verificar la existencia del usuario mediante el método sequelize
+<code class="docutils literal notranslate"><span class="pre">.findOne()</span></code> definiendo como parametro el email asociado a la cuenta de google.</p></li>
+<li><p>De no encontrarse registrado se procede a efectuar la creación de registros de usuario y perfil
+mediante método sequelize <code class="docutils literal notranslate"><span class="pre">.create()</span></code> asignando los atributos posibles para el perfil y para el
+usuario se asignan como atributos los registros obtenidos de la cuenta de google y el id asociado al
+perfil previamente creado.</p></li>
+<li><p>Se procede a efectuar la actualización de los registros del perfil mediante el método sequelize
+<code class="docutils literal notranslate"><span class="pre">.update()</span></code> definiendo como párametro el atributo <code class="docutils literal notranslate"><span class="pre">Profile_Id</span></code> presente en el usuario creado.</p></li>
+<li><p>Despúes de crear los registros se genera el token JWT de logueo con la función <code class="docutils literal notranslate"><span class="pre">sign()</span></code> de la
+dependencia <strong>jwt</strong> definiendo como parámetros el id del usuario y expiración de 24 horas.</p></li>
+<li><p>Dado el caso que se ejecuten correctamente o no cada uno de los anteriores pasos, se procede
+a devolver una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro los
+códigos de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria a la autenticación del usuario
+o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>    <span class="c1">//Buscamos si se encuentra previamente registrado</span>
+<span class="linenos"> 2</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 3</span>      <span class="kd">const</span> <span class="nx">findUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 4</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 5</span>          <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos"> 6</span>        <span class="p">},</span>
+<span class="linenos"> 7</span>      <span class="p">});</span>
+<span class="linenos"> 8</span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">findUser</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 9</span>        <span class="cm">/** Procedemos a crear el perfil */</span>
+<span class="linenos">10</span>        <span class="kd">const</span> <span class="nx">profile</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">11</span>        <span class="nx">lastname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">12</span>        <span class="nx">natIdCard</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">13</span>        <span class="nx">DoB</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">14</span>        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">15</span>        <span class="nx">department</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">16</span>        <span class="nx">country</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">17</span>        <span class="nx">postalcode</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">18</span>        <span class="nx">career</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">19</span>        <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">20</span>        <span class="p">});</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>        <span class="cm">/** Creamos el nuevo usuario*/</span>
+<span class="linenos">23</span>        <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">24</span>          <span class="nx">name</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">25</span>          <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos">26</span>          <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="linenos">27</span>          <span class="nx">password</span><span class="o">:</span> <span class="s2">&quot;:P&quot;</span><span class="p">,</span>
+<span class="linenos">28</span>          <span class="nx">social</span><span class="o">:</span> <span class="s2">&quot;google&quot;</span><span class="p">,</span>
+<span class="linenos">29</span>        <span class="p">});</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>        <span class="cm">/** Actualizamos el perfil con la información de google*/</span>
+<span class="linenos">32</span>        
+<span class="linenos">33</span>        <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span>
+<span class="linenos">34</span>          <span class="nx">lastname</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">lastname</span><span class="p">,</span>
+<span class="linenos">35</span>          <span class="nx">photo</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">photo</span><span class="p">,</span>
+<span class="linenos">36</span>        <span class="p">},</span> <span class="p">{</span>
+<span class="linenos">37</span>          <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">.</span><span class="nx">Profile_Id</span><span class="p">},</span>
+<span class="linenos">38</span>        <span class="p">});</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span>      <span class="p">}</span>
+<span class="linenos">41</span>       <span class="c1">// Asignamos el token de inicio de sesión</span>
+<span class="linenos">42</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos">43</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">44</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">45</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">,</span>
+<span class="linenos">46</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos">47</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Bienvenido &quot;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">48</span>      <span class="p">});</span>
+<span class="linenos">49</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">50</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">51</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">52</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">53</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Upps! no fue posible el logueo con Google&quot;</span><span class="p">,</span>
+<span class="linenos">54</span>      <span class="p">});</span>
+<span class="linenos">55</span>    <span class="p">}</span>
+<span class="linenos">56</span>  <span class="p">},</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-renovar-token">
+<h2>Método: Renovar Token<a class="headerlink" href="#metodo-renovar-token" title="Enlazar permanentemente con este título"></a></h2>
+<p>Este es el encargado de llamar al modelo <strong>Usuario</strong> para efectuar las consultas requeridas
+en orden de llevar a la renovación del token relacionado con el usuario logueado.
+El método de renovar token se ejecuta de la siguiente forma:</p>
+<ol class="arabic simple">
+<li><p>Se procede a verificar la existencia del usuario mediante el método sequelize
+<code class="docutils literal notranslate"><span class="pre">.findOne()</span></code> definiendo como parametro el id asociado al payload presente en
+el token de logueo.</p></li>
+<li><p>Despúes de crear los registros se genera el token JWT de logueo con la función <code class="docutils literal notranslate"><span class="pre">sign()</span></code> de la
+dependencia <strong>jwt</strong> definiendo como parámetros el id del usuario y expiración de 24 horas.</p></li>
+<li><p>Dado el caso que se ejecuten correctamente o no cada uno de los anteriores pasos, se procede
+a devolver una respuesta en JSON mediante <code class="docutils literal notranslate"><span class="pre">res.status().send()</span></code> definiendo como parámetro los
+códigos de respuesta HTTP: <code class="docutils literal notranslate"><span class="pre">200</span></code> para respuesta satisfactoria a la renovación del usuario
+o código <code class="docutils literal notranslate"><span class="pre">500</span></code> para respuesta de solicitud no soportada por el servidor.</p></li>
+</ol>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>  <span class="k">async</span> <span class="nx">renewToken</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="c1">//Del middleware &#39;jwt&#39; se obtiene el id de usuario en el payload del token JWT con req.userId</span>
+<span class="linenos"> 3</span>    <span class="c1">//el cual puede utilizarse para buscarlo en la tabla &#39;users&#39;</span>
+<span class="linenos"> 4</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 5</span>      <span class="kd">const</span> <span class="nx">findUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 6</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span><span class="p">},</span>
+<span class="linenos"> 7</span>      <span class="p">});</span>
+<span class="linenos"> 8</span>      <span class="c1">//Al obtener el usuario se procede a generar de nuevo un token para el usuario</span>
+<span class="linenos"> 9</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">findUser</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos">10</span>      <span class="c1">//Respuesta exitosa del proceso</span>
+<span class="linenos">11</span>      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">12</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">13</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">findUser</span><span class="p">,</span>
+<span class="linenos">14</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos">15</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Se ha renovado el token de la sesión&quot;</span><span class="p">,</span>
+<span class="linenos">16</span>      <span class="p">});</span>
+<span class="linenos">17</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">18</span>      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">19</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">20</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;No se renovó el token del usuario&quot;</span><span class="p">,</span>
+<span class="linenos">21</span>      <span class="p">});</span>
+<span class="linenos">22</span>    <span class="p">}</span>
+<span class="linenos">23</span>  <span class="p">},</span>
+<span class="linenos">24</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="kd">const</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">Profile</span><span class="p">,</span> <span class="nx">Event</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../models/index.model&quot;</span><span class="p">);</span>
+<span class="linenos">  2</span><span class="kd">const</span> <span class="nx">bcrypt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;bcryptjs&quot;</span><span class="p">);</span>
+<span class="linenos">  3</span><span class="kd">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;jsonwebtoken&quot;</span><span class="p">);</span>
+<span class="linenos">  4</span><span class="kd">const</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
+<span class="linenos">  5</span><span class="kd">const</span> <span class="nx">jwt_secret</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">JWT_SECRET</span> <span class="o">||</span> <span class="s2">&quot;development&quot;</span><span class="p">;</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="kd">const</span> <span class="nx">UserController</span> <span class="o">=</span> <span class="p">{</span>
+<span class="linenos">  8</span>  <span class="cm">/**Método encargado de gestionar el registro de usuario</span>
+<span class="linenos">  9</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos"> 10</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos"> 11</span><span class="cm">   * @function create - Función sequelize que permite crear un nuevo registro</span>
+<span class="linenos"> 12</span><span class="cm">   * @function sign - Función de dependencia jwt que genera el token de logueo</span>
+<span class="linenos"> 13</span><span class="cm">   * @function hash - Función de dependencia bcrypt que encripta el password</span>
+<span class="linenos"> 14</span><span class="cm">   * @returns - Token, registro de perfil y usuario</span>
+<span class="linenos"> 15</span><span class="cm">   */</span>
+<span class="linenos"> 16</span>  <span class="k">async</span> <span class="nx">register</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 17</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 18</span>      <span class="kd">const</span> <span class="nx">password</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">hash</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="mf">9</span><span class="p">);</span>
+<span class="linenos"> 19</span>      <span class="cm">/**Inicialmente guardamos el perfil*/</span>
+<span class="linenos"> 20</span>      <span class="kd">const</span> <span class="nx">profile</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos"> 21</span>        <span class="nx">lastname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 22</span>        <span class="nx">natIdCard</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 23</span>        <span class="nx">DoB</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 24</span>        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 25</span>        <span class="nx">department</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 26</span>        <span class="nx">country</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 27</span>        <span class="nx">postalcode</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 28</span>        <span class="nx">career</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 29</span>        <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos"> 30</span>      <span class="p">});</span>
+<span class="linenos"> 31</span>      <span class="cm">/** Creamos el nuevo usuario*/</span>
+<span class="linenos"> 32</span>     <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos"> 33</span>        <span class="nx">name</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos"> 34</span>        <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos"> 35</span>        <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="linenos"> 36</span>        <span class="nx">password</span><span class="p">,</span>
+<span class="linenos"> 37</span>      <span class="p">});</span>
+<span class="linenos"> 38</span>      <span class="c1">// Generamos el token para el usuario encontrado</span>
+<span class="linenos"> 39</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span><span class="nx">newUser</span><span class="p">.</span><span class="nx">id</span><span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span>
+<span class="linenos"> 40</span>        <span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;2h&quot;</span><span class="p">,</span> <span class="c1">// expires in 2 hours,</span>
+<span class="linenos"> 41</span>      <span class="p">});</span>
+<span class="linenos"> 42</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 43</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos"> 44</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">,</span>
+<span class="linenos"> 45</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos"> 46</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;¡Gracias por su registro!&quot;</span><span class="p">,</span>
+<span class="linenos"> 47</span>      <span class="p">});</span>
+<span class="linenos"> 48</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 49</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos"> 50</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 51</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos"> 52</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al tratar de crear el usuario&quot;</span><span class="p">,</span>
+<span class="linenos"> 53</span>      <span class="p">});</span>
+<span class="linenos"> 54</span>    <span class="p">}</span>
+<span class="linenos"> 55</span>  <span class="p">},</span>
+<span class="linenos"> 56</span>
+<span class="linenos"> 57</span>  <span class="cm">/**Método encargado de gestionar el inicio de sesión</span>
+<span class="linenos"> 58</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos"> 59</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos"> 60</span><span class="cm">   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna</span>
+<span class="linenos"> 61</span><span class="cm">   * @function sign - Función de dependencia jwt que genera el token de logueo</span>
+<span class="linenos"> 62</span><span class="cm">   * @function compare - Función de dependencia bcrypt que compara la clave encriptada con la clave ingresada</span>
+<span class="linenos"> 63</span><span class="cm">   * @returns - Token, información del inicio de sesión</span>
+<span class="linenos"> 64</span><span class="cm">   */</span>
+<span class="linenos"> 65</span>   <span class="k">async</span> <span class="nx">login</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 66</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos"> 67</span>        <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos"> 68</span>            <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 69</span>                <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span>
+<span class="linenos"> 70</span>            <span class="p">}</span>
+<span class="linenos"> 71</span>        <span class="p">});</span>
+<span class="linenos"> 72</span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 73</span>            <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 74</span>                <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Correo o contraseña incorrecta&#39;</span>
+<span class="linenos"> 75</span>            <span class="p">})</span>
+<span class="linenos"> 76</span>        <span class="p">}</span>
+<span class="linenos"> 77</span>        
+<span class="linenos"> 78</span>        <span class="kd">const</span> <span class="nx">isMatch</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">bcrypt</span><span class="p">.</span><span class="nx">compare</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span><span class="p">);</span>
+<span class="linenos"> 79</span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isMatch</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 80</span>            <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">401</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 81</span>                <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos"> 82</span>                <span class="nx">token</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+<span class="linenos"> 83</span>                <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Contraseña incorrecta&#39;</span>
+<span class="linenos"> 84</span>            <span class="p">})</span>
+<span class="linenos"> 85</span>        <span class="p">}</span>
+<span class="linenos"> 86</span>        <span class="c1">// Asignamos el token de inicio de sesión</span>
+<span class="linenos"> 87</span>        <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos"> 88</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 89</span>            <span class="nx">auth</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+<span class="linenos"> 90</span>            <span class="nx">token</span><span class="o">:</span><span class="nx">token</span><span class="p">,</span>
+<span class="linenos"> 91</span>            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Bienvenido de nuevo &#39;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span>
+<span class="linenos"> 92</span>        <span class="p">});</span>
+<span class="linenos"> 93</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 94</span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos"> 95</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos"> 96</span>            <span class="nx">message</span><span class="o">:</span> <span class="s1">&#39;Hubo un problema al iniciar sesión&#39;</span>
+<span class="linenos"> 97</span>        <span class="p">});</span>
+<span class="linenos"> 98</span>    <span class="p">}</span>
+<span class="linenos"> 99</span><span class="p">},</span>
+<span class="linenos">100</span>  
+<span class="linenos">101</span>  <span class="cm">/**Método encargado de mostrar el perfil de usuario</span>
+<span class="linenos">102</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos">103</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos">104</span><span class="cm">   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna</span>
+<span class="linenos">105</span><span class="cm">   * @returns - Información del usuario incluyendo el perfil asociado a este</span>
+<span class="linenos">106</span><span class="cm">   */</span>
+<span class="linenos">107</span>  <span class="k">async</span> <span class="nx">user_profile</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">108</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos">109</span>      <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos">110</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> 
+<span class="linenos">111</span>        <span class="p">},</span>
+<span class="linenos">112</span>        <span class="nx">attributes</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;social&quot;</span><span class="p">],</span>
+<span class="linenos">113</span>        <span class="nx">include</span><span class="o">:</span> <span class="p">[</span><span class="nx">Profile</span><span class="p">],</span>
+<span class="linenos">114</span>      <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">user</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos">115</span>        <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">116</span>          <span class="nx">user</span><span class="o">:</span> <span class="nx">user</span><span class="p">,</span>
+<span class="linenos">117</span>        <span class="p">});</span>
+<span class="linenos">118</span>      <span class="p">});</span>
+<span class="linenos">119</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">120</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">121</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">122</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al obtener los datos&quot;</span><span class="p">,</span>
+<span class="linenos">123</span>        <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">,</span>
+<span class="linenos">124</span>      <span class="p">});</span>
+<span class="linenos">125</span>    <span class="p">}</span>
+<span class="linenos">126</span>  <span class="p">},</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span>   <span class="cm">/**Método encargado de gestionar la modificación del perfil de usuario</span>
+<span class="linenos">129</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos">130</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos">131</span><span class="cm">   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna</span>
+<span class="linenos">132</span><span class="cm">   * @function update - Función sequelize que permite actualizar registros de un modelo</span>
+<span class="linenos">133</span><span class="cm">   * @function create - Función sequelize que permite crear un nuevo registro</span>
+<span class="linenos">134</span><span class="cm">   * @returns - Información del usuario incluyendo el perfil asociado a este</span>
+<span class="linenos">135</span><span class="cm">   */</span>
+<span class="linenos">136</span>
+<span class="linenos">137</span> <span class="k">async</span> <span class="nx">updateProfile</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">138</span>   <span class="k">try</span> <span class="p">{</span>
+<span class="linenos">139</span>    <span class="kd">const</span> <span class="nx">finduser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos">140</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> 
+<span class="linenos">141</span>      <span class="p">},</span>
+<span class="linenos">142</span>      <span class="nx">attributes</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span> <span class="s2">&quot;social&quot;</span><span class="p">,</span> <span class="s2">&quot;Profile_Id&quot;</span><span class="p">],</span>
+<span class="linenos">143</span>    <span class="p">});</span>
+<span class="linenos">144</span>    
+<span class="linenos">145</span>    <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">update</span><span class="p">({...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">},</span> <span class="p">{</span>
+<span class="linenos">146</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span> <span class="p">},</span>
+<span class="linenos">147</span>    <span class="p">});</span>
+<span class="linenos">148</span>
+<span class="linenos">149</span>    <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">update</span><span class="p">({...</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">},</span> <span class="p">{</span>
+<span class="linenos">150</span>      <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">finduser</span><span class="p">.</span><span class="nx">Profile_Id</span> 
+<span class="linenos">151</span>      <span class="p">},</span>
+<span class="linenos">152</span>    <span class="p">});</span>
+<span class="linenos">153</span>
+<span class="linenos">154</span>      <span class="nx">Event</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">155</span>      <span class="nx">username</span><span class="o">:</span> <span class="nx">finduser</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">156</span>      <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;Modificó su perfil&quot;</span>
+<span class="linenos">157</span>   <span class="p">});</span> 
+<span class="linenos">158</span>   
+<span class="linenos">159</span>    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">160</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Datos actualizados correctamente&quot;</span><span class="p">,</span>
+<span class="linenos">161</span>    <span class="p">});</span>
+<span class="linenos">162</span>  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">163</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">164</span>    <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">165</span>      <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al actualizar  los datos&quot;</span><span class="p">,</span>
+<span class="linenos">166</span>      <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">,</span>
+<span class="linenos">167</span>    <span class="p">});</span>
+<span class="linenos">168</span>  <span class="p">}</span>
+<span class="linenos">169</span><span class="p">},</span>
+<span class="linenos">170</span>
+<span class="linenos">171</span>  <span class="cm">/**Método encargado de gestionar el inicio de sesión con Google</span>
+<span class="linenos">172</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos">173</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos">174</span><span class="cm">   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna</span>
+<span class="linenos">175</span><span class="cm">   * @function create - Función sequelize que permite crear un nuevo registro</span>
+<span class="linenos">176</span><span class="cm">   * @function sign - Función de dependencia jwt que genera el token de logueo</span>
+<span class="linenos">177</span><span class="cm">   * @returns - Token, información del inicio de sesión</span>
+<span class="linenos">178</span><span class="cm">   */</span>
+<span class="linenos">179</span>  <span class="k">async</span> <span class="nx">googleIn</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">180</span>    <span class="c1">//Buscamos si se encuentra previamente registrado</span>
+<span class="linenos">181</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos">182</span>      <span class="kd">const</span> <span class="nx">findUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos">183</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos">184</span>          <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos">185</span>        <span class="p">},</span>
+<span class="linenos">186</span>      <span class="p">});</span>
+<span class="linenos">187</span>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">findUser</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">188</span>        <span class="cm">/** Procedemos a crear el perfil */</span>
+<span class="linenos">189</span>        <span class="kd">const</span> <span class="nx">profile</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">190</span>        <span class="nx">lastname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">191</span>        <span class="nx">natIdCard</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">192</span>        <span class="nx">DoB</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">193</span>        <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">194</span>        <span class="nx">department</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">195</span>        <span class="nx">country</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">196</span>        <span class="nx">postalcode</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">197</span>        <span class="nx">career</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">198</span>        <span class="nx">description</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="linenos">199</span>        <span class="p">});</span>
+<span class="linenos">200</span>
+<span class="linenos">201</span>        <span class="cm">/** Creamos el nuevo usuario*/</span>
+<span class="linenos">202</span>        <span class="kd">const</span> <span class="nx">newUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+<span class="linenos">203</span>          <span class="nx">name</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">204</span>          <span class="nx">email</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+<span class="linenos">205</span>          <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="linenos">206</span>          <span class="nx">password</span><span class="o">:</span> <span class="s2">&quot;:P&quot;</span><span class="p">,</span>
+<span class="linenos">207</span>          <span class="nx">social</span><span class="o">:</span> <span class="s2">&quot;google&quot;</span><span class="p">,</span>
+<span class="linenos">208</span>        <span class="p">});</span>
+<span class="linenos">209</span>
+<span class="linenos">210</span>        <span class="cm">/** Actualizamos el perfil con la información de google*/</span>
+<span class="linenos">211</span>        
+<span class="linenos">212</span>        <span class="k">await</span> <span class="nx">Profile</span><span class="p">.</span><span class="nx">update</span><span class="p">({</span>
+<span class="linenos">213</span>          <span class="nx">lastname</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">lastname</span><span class="p">,</span>
+<span class="linenos">214</span>          <span class="nx">photo</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">photo</span><span class="p">,</span>
+<span class="linenos">215</span>        <span class="p">},</span> <span class="p">{</span>
+<span class="linenos">216</span>          <span class="nx">where</span><span class="o">:</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">.</span><span class="nx">Profile_Id</span><span class="p">},</span>
+<span class="linenos">217</span>        <span class="p">});</span>
+<span class="linenos">218</span>
+<span class="linenos">219</span>      <span class="p">}</span>
+<span class="linenos">220</span>       <span class="c1">// Asignamos el token de inicio de sesión</span>
+<span class="linenos">221</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos">222</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">223</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">224</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">newUser</span><span class="p">,</span>
+<span class="linenos">225</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos">226</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Bienvenido &quot;</span> <span class="o">+</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">227</span>      <span class="p">});</span>
+<span class="linenos">228</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">229</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">230</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">231</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">232</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Upps! no fue posible el logueo con Google&quot;</span><span class="p">,</span>
+<span class="linenos">233</span>      <span class="p">});</span>
+<span class="linenos">234</span>    <span class="p">}</span>
+<span class="linenos">235</span>  <span class="p">},</span>
+<span class="linenos">236</span>
+<span class="linenos">237</span>  <span class="cm">/**Método encargado de traer todos los usuarios registrados</span>
+<span class="linenos">238</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos">239</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos">240</span><span class="cm">   * @function findAll - Función sequelize que permite buscar todos los registros de un modelo mediante una columna</span>
+<span class="linenos">241</span><span class="cm">   * @returns - Listado de usuarios registrados</span>
+<span class="linenos">242</span><span class="cm">   */</span>
+<span class="linenos">243</span>
+<span class="linenos">244</span>  <span class="k">async</span> <span class="nx">getUsers</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">245</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos">246</span>      <span class="kd">const</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findAll</span><span class="p">({</span>
+<span class="linenos">247</span>        <span class="nx">include</span><span class="o">:</span> <span class="p">[</span>
+<span class="linenos">248</span>          <span class="p">{</span>
+<span class="linenos">249</span>            <span class="nx">require</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">250</span>            <span class="nx">model</span><span class="o">:</span> <span class="nx">Profile</span><span class="p">,</span>
+<span class="linenos">251</span>          <span class="p">},</span>
+<span class="linenos">252</span>        <span class="p">],</span>
+<span class="linenos">253</span>      <span class="p">});</span>
+<span class="linenos">254</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+<span class="linenos">255</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">256</span>      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="linenos">257</span>      <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">258</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Hubo un problema al encontrar los usuarios&quot;</span><span class="p">,</span>
+<span class="linenos">259</span>      <span class="p">});</span>
+<span class="linenos">260</span>    <span class="p">}</span>
+<span class="linenos">261</span>  <span class="p">},</span>
+<span class="linenos">262</span>
+<span class="linenos">263</span>  <span class="cm">/**Método encargado de renovar el token del usuario</span>
+<span class="linenos">264</span><span class="cm">   * @param req - Argumento de solicitud HTTP </span>
+<span class="linenos">265</span><span class="cm">   * @param res - Argumento de respuesta HTTP</span>
+<span class="linenos">266</span><span class="cm">   * @function findOne - Función sequelize que permite buscar registros de un modelo mediante una columna</span>
+<span class="linenos">267</span><span class="cm">   * @function sign - Función de dependencia jwt que genera el token de logueo</span>
+<span class="linenos">268</span><span class="cm">   * @returns - Token de logueo renovado</span>
+<span class="linenos">269</span><span class="cm">   */</span>
+<span class="linenos">270</span>  <span class="k">async</span> <span class="nx">renewToken</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">271</span>    <span class="c1">//Del middleware &#39;jwt&#39; se obtiene el id de usuario en el payload del token JWT con req.userId</span>
+<span class="linenos">272</span>    <span class="c1">//el cual puede utilizarse para buscarlo en la tabla &#39;users&#39;</span>
+<span class="linenos">273</span>    <span class="k">try</span> <span class="p">{</span>
+<span class="linenos">274</span>      <span class="kd">const</span> <span class="nx">findUser</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">User</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span>
+<span class="linenos">275</span>        <span class="nx">where</span><span class="o">:</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">user_Id</span><span class="p">},</span>
+<span class="linenos">276</span>      <span class="p">});</span>
+<span class="linenos">277</span>      <span class="c1">//Al obtener el usuario se procede a generar de nuevo un token para el usuario</span>
+<span class="linenos">278</span>      <span class="kd">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="nx">id</span><span class="o">:</span> <span class="nx">findUser</span><span class="p">.</span><span class="nx">id</span> <span class="p">},</span> <span class="nx">jwt_secret</span><span class="p">,</span> <span class="p">{</span><span class="nx">expiresIn</span><span class="o">:</span> <span class="s2">&quot;24h&quot;</span><span class="p">});</span>
+<span class="linenos">279</span>      <span class="c1">//Respuesta exitosa del proceso</span>
+<span class="linenos">280</span>      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">200</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">281</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="linenos">282</span>        <span class="nx">user</span><span class="o">:</span> <span class="nx">findUser</span><span class="p">,</span>
+<span class="linenos">283</span>        <span class="nx">token</span><span class="o">:</span> <span class="nx">token</span><span class="p">,</span>
+<span class="linenos">284</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;Se ha renovado el token de la sesión&quot;</span><span class="p">,</span>
+<span class="linenos">285</span>      <span class="p">});</span>
+<span class="linenos">286</span>    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">287</span>      <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">status</span><span class="p">(</span><span class="mf">500</span><span class="p">).</span><span class="nx">send</span><span class="p">({</span>
+<span class="linenos">288</span>        <span class="nx">auth</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="linenos">289</span>        <span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;No se renovó el token del usuario&quot;</span><span class="p">,</span>
+<span class="linenos">290</span>      <span class="p">});</span>
+<span class="linenos">291</span>    <span class="p">}</span>
+<span class="linenos">292</span>  <span class="p">},</span>
+<span class="linenos">293</span><span class="p">};</span>
+<span class="linenos">294</span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">UserController</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="indexModel.html" class="btn btn-neutral float-left" title="Modelo: Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="userRoute.html" class="btn btn-neutral float-right" title="Ruta: Usuario" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

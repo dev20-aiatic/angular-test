@@ -20,7 +20,7 @@
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
     <link rel="next" title="Implementación de Wordpress" href="../wp/wordpress.html" />
-    <link rel="prev" title="Modelo: Usuario" href="../backend/userModel.html" /> 
+    <link rel="prev" title="Fichero: Server" href="../backend/serverFile.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -44,7 +44,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Frontend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuracion">Configuración</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ejecutar-localmente">Ejecutar localmente</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#documentacion">Documentación</a><ul class="simple">
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../wp/wordpress.html">Implementación de Wordpress</a></li>
@@ -82,8 +86,69 @@
 modulos, clases que conforman el aplicativo de angular que le permitirá comprender y compilar
 de manera correcta el código implementado.</p>
 </section>
-<section id="configuracion">
-<h2>Configuración<a class="headerlink" href="#configuracion" title="Enlazar permanentemente con este título"></a></h2>
+<section id="estructura-directorio">
+<h2>Estructura Directorio<a class="headerlink" href="#estructura-directorio" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├───Backend
+├───src
+│   ├───app
+│   │   ├───components
+│   │   │   ├───auth
+│   │   │   ├───dashboard
+│   │   │   ├───shared
+│   │   │   ├───wordpress
+│   │   ├───interfaces
+│   │   │   ├───Auth.ts
+│   │   │   ├───Blog.ts
+│   │   │   ├───Locations.ts
+│   │   │   ├───Media.ts
+│   │   │   ├───post.ts
+│   │   │   ├───Profile.ts
+│   │   │   ├───User.ts
+│   │   │   ├───WP_Category.ts
+│   │   │   ├───WP_Token.ts
+│   │   │   ├───WP_User.ts
+│   │   ├───services
+│   │   │   ├───dashgular
+│   │   │   │   ├───auth-guard.service.ts
+│   │   │   │   ├───auth.service.ts
+│   │   │   │   ├───skill.service.ts
+│   │   │   │   ├───web.service.ts
+│   │   │   ├───wordpress
+│   │   │   │   ├───blog-guard.service.ts
+│   │   │   │   ├───blog.service.ts
+│   │   │   │   ├───wpauth.service.ts
+│   │   │   ├───notification.service.ts
+│   │   │───app.routing.module.ts
+│   │   │───app.component.css
+│   │   │───app.component.html
+│   │   │───app.module.ts
+│   ├───assets
+│   ├───environments
+│   │   ├───environment.prod.ts
+│   │   ├───environment.ts
+│   ├───index.html
+│   ├───main.ts
+│   ├───polyfills.ts
+│   ├───test.ts
+│───angular.json
+│───package-lock.json
+│───package.json
+│───server.js
+│───tsconfig.json
+</pre></div>
+</div>
+</section>
+<section id="ejecutar-localmente">
+<h2>Ejecutar localmente<a class="headerlink" href="#ejecutar-localmente" title="Enlazar permanentemente con este título"></a></h2>
+<p>Seguir las instrucciones en el apartado Configuración Inicial descrita en el home de esta
+documentación <a class="reference external" href="../index.html#configuracion-inicial">ver aquí</a></p>
+</section>
+<section id="documentacion">
+<h2>Documentación<a class="headerlink" href="#documentacion" title="Enlazar permanentemente con este título"></a></h2>
+<p>Se procede a crear controladores, modelos, servicos, interfaces necesarias para el funcionamiento del
+Frontend:</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 </section>
 
@@ -91,7 +156,7 @@ de manera correcta el código implementado.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
-        <a href="../backend/userModel.html" class="btn btn-neutral float-left" title="Modelo: Usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="../backend/serverFile.html" class="btn btn-neutral float-left" title="Fichero: Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
         <a href="../wp/wordpress.html" class="btn btn-neutral float-right" title="Implementación de Wordpress" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

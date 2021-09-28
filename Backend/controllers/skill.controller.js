@@ -1,4 +1,4 @@
-const { Skill,Sequelize} = require('../models/indexModel.js');
+const { Skill,Sequelize} = require('../models/index.model');
 
 const Op = Sequelize.Op;
 

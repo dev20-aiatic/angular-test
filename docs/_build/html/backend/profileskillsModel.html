@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Modelo: PerfilHabilidades &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Modelo: Eventos" href="eventsModel.html" />
+    <link rel="prev" title="Modelo: Habilidades" href="skillsModel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Backend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#requerimientos">Requerimientos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejcutar-localmente">Ejcutar localmente</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#documentacion">Documentación</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="userModel.html">Modelo: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileModel.html">Modelo: Perfil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillsModel.html">Modelo: Habilidades</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Modelo: PerfilHabilidades</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-define">Método: Define</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-associate">Función: Associate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="eventsModel.html">Modelo: Eventos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="indexModel.html">Modelo: Index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userController.html">Controlador: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userRoute.html">Ruta: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillsRoute.html">Ruta: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="allRoute.html">Ruta: Todas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configurationJSON.html">JSON: Configuración</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jwtMiddleware.html">Middleware: JWT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="validationMiddleware.html">Middleware: Validación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serverFile.html">Fichero: Server</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wp/wordpress.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Backend</a> &raquo;</li>
+      <li>Modelo: PerfilHabilidades</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/backend/profileskillsModel.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="modelo-perfilhabilidades">
+<h1>Modelo: PerfilHabilidades<a class="headerlink" href="#modelo-perfilhabilidades" title="Enlazar permanentemente con este título"></a></h1>
+<p>Este modelo de mapeo relacional de objetos nos permite asignar un objeto a la tabla
+<strong>profileskills</strong> presente en la base de datos con el fin de que esta tabla sea de intermediaria
+de la relación entre las tablas <strong>profiles</strong> y <strong>skills</strong></p>
+<section id="metodo-define">
+<h2>Método: Define<a class="headerlink" href="#metodo-define" title="Enlazar permanentemente con este título"></a></h2>
+<p>En el método <code class="docutils literal notranslate"><span class="pre">.define()</span></code> de sequelize se definen todos los atributos correspondientes a la tabla
+intermediaria <strong>profileskills</strong> tales como: Profile_Id; Skill_Id; createdAt; updatedAt con su respectivos
+<code class="docutils literal notranslate"><span class="pre">DataTypes</span></code> que permiten definir el tipo de dato.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>  <span class="kd">const</span> <span class="nx">ProfileSkill</span> <span class="o">=</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;ProfileSkill&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">DataTypes</span><span class="p">.</span><span class="nx">INTEGER</span><span class="p">,</span>
+<span class="linenos"> 3</span>    <span class="nx">Skill_Id</span><span class="o">:</span> <span class="nx">DataTypes</span><span class="p">.</span><span class="nx">INTEGER</span><span class="p">,</span>
+<span class="linenos"> 4</span>    <span class="nx">createdAt</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 5</span>      <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;TIMESTAMP&quot;</span><span class="p">,</span>
+<span class="linenos"> 6</span>      <span class="nx">defaultValue</span><span class="o">:</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="s2">&quot;CURRENT_TIMESTAMP&quot;</span><span class="p">),</span>
+<span class="linenos"> 7</span>    <span class="p">},</span>
+<span class="linenos"> 8</span>    <span class="nx">updatedAt</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 9</span>      <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;TIMESTAMP&quot;</span><span class="p">,</span>
+<span class="linenos">10</span>      <span class="nx">defaultValue</span><span class="o">:</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="s2">&quot;CURRENT_TIMESTAMP&quot;</span><span class="p">),</span>
+<span class="linenos">11</span>    <span class="p">},</span>
+<span class="linenos">12</span>  <span class="p">},</span> 
+<span class="linenos">13</span>  <span class="p">{}</span>
+<span class="linenos">14</span>  <span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-associate">
+<h2>Función: Associate<a class="headerlink" href="#funcion-associate" title="Enlazar permanentemente con este título"></a></h2>
+<p>En la función <code class="docutils literal notranslate"><span class="pre">.associate</span></code> de sequelize se procede a dejarle en blanco debido a que este modelo
+sólo es el intermediario entre la relación existente de los Modelos Perfil y Habilidades</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">ProfileSkill</span><span class="p">.</span><span class="nx">associate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">models</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">2</span>    
+<span class="linenos">3</span>  <span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">(</span><span class="nx">sequelize</span><span class="p">,</span> <span class="nx">DataTypes</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos"> 3</span>  <span class="kd">const</span> <span class="nx">ProfileSkill</span> <span class="o">=</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;ProfileSkill&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="nx">Profile_Id</span><span class="o">:</span> <span class="nx">DataTypes</span><span class="p">.</span><span class="nx">INTEGER</span><span class="p">,</span>
+<span class="linenos"> 5</span>    <span class="nx">Skill_Id</span><span class="o">:</span> <span class="nx">DataTypes</span><span class="p">.</span><span class="nx">INTEGER</span><span class="p">,</span>
+<span class="linenos"> 6</span>    <span class="nx">createdAt</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos"> 7</span>      <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;TIMESTAMP&quot;</span><span class="p">,</span>
+<span class="linenos"> 8</span>      <span class="nx">defaultValue</span><span class="o">:</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="s2">&quot;CURRENT_TIMESTAMP&quot;</span><span class="p">),</span>
+<span class="linenos"> 9</span>    <span class="p">},</span>
+<span class="linenos">10</span>    <span class="nx">updatedAt</span><span class="o">:</span> <span class="p">{</span>
+<span class="linenos">11</span>      <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;TIMESTAMP&quot;</span><span class="p">,</span>
+<span class="linenos">12</span>      <span class="nx">defaultValue</span><span class="o">:</span> <span class="nx">sequelize</span><span class="p">.</span><span class="nx">literal</span><span class="p">(</span><span class="s2">&quot;CURRENT_TIMESTAMP&quot;</span><span class="p">),</span>
+<span class="linenos">13</span>    <span class="p">},</span>
+<span class="linenos">14</span>  <span class="p">},</span> 
+<span class="linenos">15</span>  <span class="p">{}</span>
+<span class="linenos">16</span>  <span class="p">);</span>
+<span class="linenos">17</span>  <span class="nx">ProfileSkill</span><span class="p">.</span><span class="nx">associate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">models</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">18</span>    
+<span class="linenos">19</span>  <span class="p">};</span>
+<span class="linenos">20</span>  <span class="k">return</span> <span class="nx">ProfileSkill</span><span class="p">;</span>
+<span class="linenos">21</span><span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="skillsModel.html" class="btn btn-neutral float-left" title="Modelo: Habilidades" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="eventsModel.html" class="btn btn-neutral float-right" title="Modelo: Eventos" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

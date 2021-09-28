@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
   /**
-   * Este modelo sequelize se encarga de definir los atributos de la tabla 'user' para el ORM
+   * Este modelo se encarga de definir los atributos de la tabla 'users'
    *
    * @module User
    *

@@ -1,4 +1,4 @@
-const {User} = require("../models/indexModel");
+const {User} = require("../models/index.model");
 const { validationResult} = require('express-validator');
 
         /**

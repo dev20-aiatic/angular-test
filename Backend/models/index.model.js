@@ -25,8 +25,8 @@ if (config.use_env_variable) {
 
 /**
  * Declaramos este método para retornar los nombres y objetos de los archivos en el directorio
- * @param {any} __dirname - nombre del directorio
- * @returns {any}
+ * @param  __dirname - nombre del directorio
+ * @returns - archivos correspondientes a los modelos existentens 
  */
 
 fs.readdirSync(__dirname)

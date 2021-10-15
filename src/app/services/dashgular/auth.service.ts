@@ -1,5 +1,4 @@
-import { ProfileDetails } from './../../interfaces/Profile';
-import { obtResponse, Profile, UserDetails } from './../../interfaces/Auth';
+import { obtResponse,  } from './../../interfaces/Auth';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -7,7 +6,7 @@ import { Router } from '@angular/router';
 import { SocialAuthService } from 'angularx-social-login';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
-import { User } from 'src/app/interfaces/User';
+import { User, Profile } from 'src/app/interfaces/User';
 
 @Injectable({
   providedIn: 'root',
@@ -49,6 +48,13 @@ export class AuthService {
   get isLoggedIn() {
     return this.loggedIn;
   }
+
+
+  //** Verificar si se encuentra logueado */
+  getIsAuth() {
+    return this.isAuthenticated;
+  }
+
   /**Metodo para cerrar sesión*/
   logout() {
     this.loggedIn = false;
@@ -56,10 +62,6 @@ export class AuthService {
     this.route.navigateByUrl('/login');
   }
 
-  //** Verificar si se encuentra logueado */
-  getIsAuth() {
-    return this.isAuthenticated;
-  }
 
   /**Metodo encargado de validar y renovar el token jwt*/
   validateToken(): Observable<boolean> {
@@ -81,11 +83,6 @@ export class AuthService {
     if (localStorage.getItem('token')) {
       this.isAuthenticated = true;
     }
-  }
-
-  /**Metodo  formulario user */
-  updateProfile(user: ProfileDetails, id: number): Observable<any> {
-    return this.httpClient.post(`${this.APP_API}/user/profile/${id}`, user);
   }
 
   /**Metodo para setear el usuario y token del logueo*/

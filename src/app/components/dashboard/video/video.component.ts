@@ -10,6 +10,9 @@ export class VideoComponent implements OnInit {
 
   constructor(private _sanitizer: DomSanitizer) {
    }
+
+   ngOnInit() {
+  }
     /**Métpdp que pasa url de video y genera una url para incrustarla con DomSanitizer
    * @param { string } url  -  link del video
    * @returns url de video listo para incrustar
@@ -25,9 +28,5 @@ export class VideoComponent implements OnInit {
  
     return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);   
 }
-
-
-  ngOnInit() {
-  }
 
 }

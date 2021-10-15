@@ -22,6 +22,8 @@ export class ProfileComponent implements OnInit {
   Msg;
   hideRequiredControl = new FormControl(false);
   breakpoint: number;
+  public skills;
+
 
   constructor( private fb: FormBuilder, private auth: AuthService, private webService: WebService, private router: Router, private route: ActivatedRoute) {
     this.profileForm = this.fb.group({
@@ -38,17 +40,16 @@ export class ProfileComponent implements OnInit {
       description: [''],
     });
   }
-  
-  public skills;
-  
-
+    
    async ngOnInit()  {
-    this.getProfile();
+    this.setProfile();
     this.departments = await this.webService.getDepartments();
 
   }
+
+  //Función para obtener los registros de perfil del usuario
   
-   getProfile() {
+   setProfile() {
    this.auth.getInfo()
     .subscribe(data => {
       this.details = data;
@@ -62,7 +63,7 @@ export class ProfileComponent implements OnInit {
         country:data.user.Profile.country,
         postalcode:data.user.Profile.postalcode,
         career:data.user.Profile.career,
-        skill_Id:data.user.Profile.skill_Id,
+        skill_Id:data.user.Profile.profile_skills,
         description:data.user.Profile.description,
         })
       },
@@ -89,7 +90,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   
-/**Metodo que me devuelve la información del usuario */
+/**Función que me devuelve la información del usuario */
 get userData() {
   return this.auth.userlogged;
 }

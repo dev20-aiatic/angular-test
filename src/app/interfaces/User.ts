@@ -6,15 +6,14 @@ export interface User {
 }
 
 export interface UserDetails {
-    Profile: Profile;
-    email: string;
     id: string;
     name: string;
+    email: string;
     social: string;
+    Profile: Profile;
 }
 
 export interface Profile {
-    id: number;
     lastname: string;
     natIdCard: number;
     DoB?: any;
@@ -23,14 +22,14 @@ export interface Profile {
     country: string;
     postalcode: string;
     career: string;
-    skill_Id?: any;
+    photo: any;
     description: string;
-    user_profile: UserProfile;
+    profile_skills: ProfileSkills;
 }
 
-export interface UserProfile {
-    user_Id: number;
-    profile_Id: number;
+export interface ProfileSkills {
+    Profile_Id: number;
+    Skill_Id: number;
 }
 
 

@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /**Funcion que trae el modal de login con google */
+  /**Método que trae el modal de login con google */
   loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
     this.socialAuthService.authState.subscribe((user) => {
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  /**Funcion que trae el modal de login con Facebook */
+  /**Método que trae el modal de login con Facebook */
   loginWithFacebook(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.socialAuthService.authState.subscribe((user) => {
@@ -100,6 +100,7 @@ export class LoginComponent implements OnInit {
     this.fieldTextType = !this.fieldTextType;
   }
 
+  /**Método encargado del login */
   login() {
     this.loading = true;
     const { email, password } = this.loginForm.value;

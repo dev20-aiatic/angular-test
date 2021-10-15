@@ -35,7 +35,7 @@ A continuación se listarán las tecnologias y librerias implementadas para el d
     * Git
 
 * **Documentación**
-    * Mkdocs
+    * Sphinx
 
 * **Bases de datos**
     * MYSQL
@@ -127,4 +127,4 @@ comandos:
    
    backend/index
    frontend/index
-   wp/wordpress
+   wordpress/index

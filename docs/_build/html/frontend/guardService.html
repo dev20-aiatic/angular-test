@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicio: AuthGuard &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Componente: Home" href="homeComponent.html" />
+    <link rel="prev" title="Servicio: Web" href="webService.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Frontend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejecutar-localmente">Ejecutar localmente</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#documentacion">Documentación</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="authInterface.html">Interface: Auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locationInterface.html">Interface: Ubicación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userInterface.html">Interface: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillService.html">Servicio: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webService.html">Servicio: Web</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Servicio: AuthGuard</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interfaz-can-activate-child">Interfaz: Can Activate Child</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="homeComponent.html">Componente: Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loginComponent.html">Componente: Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registerComponent.html">Componente: Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileComponent.html">Componente:  Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sidebarComponent.html">Componente: Sidebar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="videoComponent.html">Componente: Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="historyComponent.html">Componente: Registros de eventos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wordpress/index.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Frontend</a> &raquo;</li>
+      <li>Servicio: AuthGuard</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/frontend/guardService.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="servicio-authguard">
+<h1>Servicio: AuthGuard<a class="headerlink" href="#servicio-authguard" title="Enlazar permanentemente con este título"></a></h1>
+<p>Este servicio se encargará de efectuar la denegación o aprobación del acceso
+al usuario a los diferentes componentes en los que se requiera estar autenticado.</p>
+<figure class="align-center">
+<img alt="Vistazo al servicio Guard" src="../_images/GuardService.png" />
+</figure>
+<ul class="simple">
+<li><p>Se realiza la creación del servicio para la Rest Api de WordPress con
+el siguiente comando:</p></li>
+</ul>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">service</span> <span class="pre">services/auth-guard</span></code></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias y
+tipos requeridos en el servicio tal como se aprecia a continuación.
+Así mismo, se define las variables y endpoints de la API previamente
+definidos en el environment.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/dashgular/auth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@angular/core&quot;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">tap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span><span class="nx">RouterStateSnapshot</span><span class="p">,</span> <span class="nx">CanActivateChild</span><span class="p">,</span> <span class="nx">UrlTree</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">import</span> <span class="nx">Swal</span> <span class="kr">from</span> <span class="s1">&#39;sweetalert2&#39;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kd">@Injectable</span><span class="p">({</span>
+<span class="linenos">11</span>  <span class="nx">providedIn</span><span class="o">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="linenos">12</span><span class="p">})</span>
+<span class="linenos">13</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivateChild</span>  <span class="p">{</span>
+<span class="linenos">14</span>  
+<span class="linenos">15</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">authService</span>: <span class="kt">AuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">,</span> <span class="k">private</span> <span class="nx">socialAuthService</span>: <span class="kt">SocialAuthService</span><span class="p">)</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<section id="interfaz-can-activate-child">
+<h2>Interfaz: Can Activate Child<a class="headerlink" href="#interfaz-can-activate-child" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Se define esta interfaz que será la encargada de validar que se encuentra
+almacenado un token en la sesión local o que la función Verificar Logueo Usuario
+definida previamente en el servicio de autenticación retorne un booleano del tipo «true».
+En base a esta validación, el servicio denegará o permitirá el acceso del usuario a los
+componentes en los que se requiera estar autenticado.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">canActivateChild</span><span class="p">(</span><span class="nx">route</span>: <span class="kt">ActivatedRouteSnapshot</span><span class="p">,</span>
+<span class="linenos">2</span>    <span class="nx">state</span>: <span class="kt">RouterStateSnapshot</span><span class="p">)</span><span class="o">:</span> <span class="kt">boolean</span> <span class="p">{</span>
+<span class="linenos">3</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="linenos">4</span>      <span class="nx">Swal</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span><span class="s1">&#39;Debe iniciar sesión para acceder a este contenido&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">);</span>
+<span class="linenos">5</span>      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s2">&quot;login&quot;</span><span class="p">]);</span>
+<span class="linenos">6</span>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos">7</span>    <span class="p">}</span>
+<span class="linenos">8</span>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="linenos">9</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/dashgular/auth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@angular/core&quot;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">tap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">ActivatedRouteSnapshot</span><span class="p">,</span><span class="nx">RouterStateSnapshot</span><span class="p">,</span> <span class="nx">CanActivateChild</span><span class="p">,</span> <span class="nx">UrlTree</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="k">import</span> <span class="nx">Swal</span> <span class="kr">from</span> <span class="s1">&#39;sweetalert2&#39;</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="kd">@Injectable</span><span class="p">({</span>
+<span class="linenos">11</span>  <span class="nx">providedIn</span><span class="o">:</span> <span class="s2">&quot;root&quot;</span><span class="p">,</span>
+<span class="linenos">12</span><span class="p">})</span>
+<span class="linenos">13</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthGuard</span> <span class="k">implements</span> <span class="nx">CanActivateChild</span>  <span class="p">{</span>
+<span class="linenos">14</span>  
+<span class="linenos">15</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">private</span> <span class="nx">authService</span>: <span class="kt">AuthService</span><span class="p">,</span> <span class="k">private</span> <span class="nx">router</span>: <span class="kt">Router</span><span class="p">,</span> <span class="k">private</span> <span class="nx">socialAuthService</span>: <span class="kt">SocialAuthService</span><span class="p">)</span> <span class="p">{}</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span>  <span class="nx">canActivateChild</span><span class="p">(</span><span class="nx">route</span>: <span class="kt">ActivatedRouteSnapshot</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="nx">state</span>: <span class="kt">RouterStateSnapshot</span><span class="p">)</span><span class="o">:</span> <span class="kt">boolean</span> <span class="p">{</span>
+<span class="linenos">20</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="linenos">21</span>      <span class="nx">Swal</span><span class="p">.</span><span class="nx">fire</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span><span class="s1">&#39;Debe iniciar sesión para acceder a este contenido&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">);</span>
+<span class="linenos">22</span>      <span class="k">this</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">navigate</span><span class="p">([</span><span class="s2">&quot;login&quot;</span><span class="p">]);</span>
+<span class="linenos">23</span>      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos">24</span>    <span class="p">}</span>
+<span class="linenos">25</span>    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="linenos">26</span>  <span class="p">}</span>
+<span class="linenos">27</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="webService.html" class="btn btn-neutral float-left" title="Servicio: Web" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="homeComponent.html" class="btn btn-neutral float-right" title="Componente: Home" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

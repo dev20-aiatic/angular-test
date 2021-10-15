@@ -36,11 +36,13 @@ export class SidebarComponent implements OnInit {
     console.log(this.auth.getInfo)
   }
 
-  /**Metodo que valida login usuario */
+  /**Función que valida login usuario */
   checklogin() {
     return this.auth.getIsAuth()
   }
 
+
+/**Función encargada de cerrar sesión */
   logout(): void {
     this.auth.logout();
     this.socialAuthService.signOut();

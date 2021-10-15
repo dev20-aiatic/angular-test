@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Componente: Sidebar &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Componente: Video" href="videoComponent.html" />
+    <link rel="prev" title="Componente: Profile" href="profileComponent.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Frontend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejecutar-localmente">Ejecutar localmente</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#documentacion">Documentación</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="authInterface.html">Interface: Auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locationInterface.html">Interface: Ubicación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userInterface.html">Interface: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillService.html">Servicio: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webService.html">Servicio: Web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: AuthGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homeComponent.html">Componente: Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loginComponent.html">Componente: Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registerComponent.html">Componente: Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileComponent.html">Componente:  Profile</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Componente: Sidebar</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-obtener-info-usuario">Método: Obtener Info Usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-chequear-login">Función: Chequear Login</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-cerrar-sesion">Función: Cerrar Sesión</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="videoComponent.html">Componente: Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="historyComponent.html">Componente: Registros de eventos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wordpress/index.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Frontend</a> &raquo;</li>
+      <li>Componente: Sidebar</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/frontend/sidebarComponent.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="componente-sidebar">
+<h1>Componente: Sidebar<a class="headerlink" href="#componente-sidebar" title="Enlazar permanentemente con este título"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>El aspecto de este menú lateral se vera alterado de acuerdo al acceso (publicó/privado) en
+que se encuentre el usuario.</p>
+</div>
+<p>Este componente tiene como función servir de menú lateral en los diferentes componentes
+del aplicativo permitiendo que el usuario acceda fácilmente a cualquier componente y realizar
+el cierre de sesión respectivo.</p>
+<p>A continuación se puede previsualizar el aspecto del menú lateral de acuerdo a si se encuentrá
+autenticado o no el usuario:</p>
+<figure class="align-center">
+<img alt="Aspecto del menú lateral" src="../_images/Change.png" />
+</figure>
+<p>En el menú lateral izquierdo del aplicativo se incluirán nuevos vínculos que permite acceder a
+<code class="docutils literal notranslate"><span class="pre">Perfil</span></code>, <code class="docutils literal notranslate"><span class="pre">Registroa</span></code> y <code class="docutils literal notranslate"><span class="pre">Cerrar</span> <span class="pre">sesión</span></code>.</p>
+<ul class="simple">
+<li><p>Se procede a realizar la creación del componente ‘Sidebar’ con el siguiente
+comando:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">component</span> <span class="pre">components/dashboard/sidebar</span></code></p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias,
+servicios requeridos en el componente. Así mismo, se definen los parametros
+requeridos en el constructor y se implementan el método requerido en el inicializador de Angular tal
+como se aprecia a continuación:</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">ChangeDetectorRef</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnDestroy</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">MediaMatcher</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../../services/dashgular/auth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-sidebar&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./sidebar.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./sidebar.component.css&#39;</span><span class="p">],</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">SidebarComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+<span class="linenos">13</span>  <span class="nx">mobileQuery</span>: <span class="kt">MediaQueryList</span><span class="p">;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>  <span class="k">private</span> <span class="nx">_mobileQueryListener</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="ow">void</span><span class="p">;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>  <span class="kr">constructor</span><span class="p">(</span>
+<span class="linenos">18</span>    <span class="k">public</span> <span class="nx">auth</span>: <span class="kt">AuthService</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="k">private</span> <span class="nx">socialAuthService</span>: <span class="kt">SocialAuthService</span><span class="p">,</span>
+<span class="linenos">20</span>    <span class="k">private</span> <span class="nx">route</span>: <span class="kt">Router</span><span class="p">,</span>
+<span class="linenos">21</span>    <span class="nx">changeDetectorRef</span>: <span class="kt">ChangeDetectorRef</span><span class="p">,</span>
+<span class="linenos">22</span>    <span class="nx">media</span>: <span class="kt">MediaMatcher</span>
+<span class="linenos">23</span>  <span class="p">)</span> <span class="p">{</span>
+<span class="linenos">24</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span> <span class="o">=</span> <span class="nx">media</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;(max-width: 600px)&#39;</span><span class="p">);</span>
+<span class="linenos">25</span>    <span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">changeDetectorRef</span><span class="p">.</span><span class="nx">detectChanges</span><span class="p">();</span>
+<span class="linenos">26</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span><span class="p">);</span>
+<span class="linenos">27</span>  <span class="p">}</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">30</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span><span class="p">);</span>
+<span class="linenos">31</span>  <span class="p">}</span>
+</pre></div>
+</div>
+<section id="metodo-obtener-info-usuario">
+<h2>Método: Obtener Info Usuario<a class="headerlink" href="#metodo-obtener-info-usuario" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta se implementa para la posterior implementación de un header con la foto y nombre del
+usuario logueado en el aplicativo.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getuserData</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">;</span>
+<span class="linenos">3</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">)</span>
+<span class="linenos">4</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-chequear-login">
+<h2>Función: Chequear Login<a class="headerlink" href="#funcion-chequear-login" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta función se encarga de llamar a la función Verificar Logueo Usuario definida
+previamente en el Servicio Autenticación para retornar dicho boleano que
+permite corroborar el inicio de sesión.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">checklogin</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getIsAuth</span><span class="p">()</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-cerrar-sesion">
+<h2>Función: Cerrar Sesión<a class="headerlink" href="#funcion-cerrar-sesion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta función e encarga de llamar a la función Cerrar sesión definida previamente
+en el Servicio Autenticación para posteriormente, redigir al usuario al componente Login.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="linenos">3</span>    <span class="k">this</span><span class="p">.</span><span class="nx">socialAuthService</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
+<span class="linenos">4</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">ChangeDetectorRef</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">OnDestroy</span><span class="p">,</span> <span class="nx">OnInit</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">MediaMatcher</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/cdk/layout&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">AuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;../../../services/dashgular/auth.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-sidebar&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./sidebar.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./sidebar.component.css&#39;</span><span class="p">],</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">SidebarComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+<span class="linenos">13</span>  <span class="nx">mobileQuery</span>: <span class="kt">MediaQueryList</span><span class="p">;</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>  <span class="k">private</span> <span class="nx">_mobileQueryListener</span><span class="o">:</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="ow">void</span><span class="p">;</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span>  <span class="kr">constructor</span><span class="p">(</span>
+<span class="linenos">18</span>    <span class="k">public</span> <span class="nx">auth</span>: <span class="kt">AuthService</span><span class="p">,</span>
+<span class="linenos">19</span>    <span class="k">private</span> <span class="nx">socialAuthService</span>: <span class="kt">SocialAuthService</span><span class="p">,</span>
+<span class="linenos">20</span>    <span class="k">private</span> <span class="nx">route</span>: <span class="kt">Router</span><span class="p">,</span>
+<span class="linenos">21</span>    <span class="nx">changeDetectorRef</span>: <span class="kt">ChangeDetectorRef</span><span class="p">,</span>
+<span class="linenos">22</span>    <span class="nx">media</span>: <span class="kt">MediaMatcher</span>
+<span class="linenos">23</span>  <span class="p">)</span> <span class="p">{</span>
+<span class="linenos">24</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span> <span class="o">=</span> <span class="nx">media</span><span class="p">.</span><span class="nx">matchMedia</span><span class="p">(</span><span class="s1">&#39;(max-width: 600px)&#39;</span><span class="p">);</span>
+<span class="linenos">25</span>    <span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">changeDetectorRef</span><span class="p">.</span><span class="nx">detectChanges</span><span class="p">();</span>
+<span class="linenos">26</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span><span class="p">);</span>
+<span class="linenos">27</span>  <span class="p">}</span>
+<span class="linenos">28</span>
+<span class="linenos">29</span>  <span class="nx">ngOnInit</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">30</span>    <span class="k">this</span><span class="p">.</span><span class="nx">mobileQuery</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_mobileQueryListener</span><span class="p">);</span>
+<span class="linenos">31</span>  <span class="p">}</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span>  <span class="cm">/**Metodo que  devuelve la información del usuario */</span>
+<span class="linenos">34</span>  <span class="nx">getuserData</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">35</span>    <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">;</span>
+<span class="linenos">36</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getInfo</span><span class="p">)</span>
+<span class="linenos">37</span>  <span class="p">}</span>
+<span class="linenos">38</span>
+<span class="linenos">39</span>  <span class="cm">/**Función que valida login usuario */</span>
+<span class="linenos">40</span>  <span class="nx">checklogin</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">41</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">getIsAuth</span><span class="p">()</span>
+<span class="linenos">42</span>  <span class="p">}</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span><span class="cm">/**Función encargada de cerrar sesión */</span>
+<span class="linenos">46</span>  <span class="nx">logout</span><span class="p">()</span><span class="o">:</span> <span class="ow">void</span> <span class="p">{</span>
+<span class="linenos">47</span>    <span class="k">this</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">logout</span><span class="p">();</span>
+<span class="linenos">48</span>    <span class="k">this</span><span class="p">.</span><span class="nx">socialAuthService</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
+<span class="linenos">49</span>  <span class="p">}</span>
+<span class="linenos">50</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="profileComponent.html" class="btn btn-neutral float-left" title="Componente: Profile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="videoComponent.html" class="btn btn-neutral float-right" title="Componente: Video" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

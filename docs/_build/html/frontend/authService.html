@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicio: Autenticación &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Servicio: Habilidades" href="skillService.html" />
+    <link rel="prev" title="Interface: Usuario" href="userInterface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Frontend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduccion">Introducción</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#estructura-directorio">Estructura Directorio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#ejecutar-localmente">Ejecutar localmente</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#documentacion">Documentación</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="authInterface.html">Interface: Auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locationInterface.html">Interface: Ubicación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userInterface.html">Interface: Usuario</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Servicio: Autenticación</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-registrar-usuario">Método: Registrar Usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-loguear-usuario">Método: Loguear Usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-loguear-usuario-con-google">Método: Loguear Usuario con Google</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getters-sesion-iniciada">Getters Sesión Iniciada</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-cerrar-sesion">Método: Cerrar sesión</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-validar-y-renovar-token">Método: Validar y renovar token</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-mantener-logueo">Método: Mantener Logueo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-obtener-listado-de-usuarios">Método: Obtener listado de usuarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-obtener-perfil-de-usuario">Método: Obtener perfil de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-actualizar-perfil-de-usuario">Método: Actualizar perfil de usuario</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="skillService.html">Servicio: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webService.html">Servicio: Web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: AuthGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homeComponent.html">Componente: Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loginComponent.html">Componente: Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registerComponent.html">Componente: Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileComponent.html">Componente:  Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sidebarComponent.html">Componente: Sidebar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="videoComponent.html">Componente: Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="historyComponent.html">Componente: Registros de eventos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../wordpress/index.html">Implementación de Wordpress</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Frontend</a> &raquo;</li>
+      <li>Servicio: Autenticación</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/frontend/authService.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="servicio-autenticacion">
+<h1>Servicio: Autenticación<a class="headerlink" href="#servicio-autenticacion" title="Enlazar permanentemente con este título"></a></h1>
+<p>Este servicio se encargará de efectuar las peticiones a la Rest API
+relacionadas con la autenticación del usuario y administrar la sesión del mismo en el aplicativo.</p>
+<table class="colwidths-given docutils align-default" id="id1">
+<caption><span class="caption-text">Métodos de petición HTTP Utilizados</span><a class="headerlink" href="#id1" title="Enlace permanente a esta tabla"></a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 50%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Método</p></th>
+<th class="head"><p>Ruta recurso</p></th>
+<th class="head"><p>Acción</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>POST</p></td>
+<td><p>/auth/register</p></td>
+<td><p>Enviar datos para la creación de nuevo usuario</p></td>
+</tr>
+<tr class="row-odd"><td><p>POST</p></td>
+<td><p>/auth/login</p></td>
+<td><p>Enviar credenciales ingresadas por el usuario</p></td>
+</tr>
+<tr class="row-even"><td><p>POST</p></td>
+<td><p>/auth/google</p></td>
+<td><p>Enviar datos para obtener token de inicio de sesión con cuenta google</p></td>
+</tr>
+<tr class="row-odd"><td><p>GET</p></td>
+<td><p>/auth/renew</p></td>
+<td><p>Validar y renovar token jwt</p></td>
+</tr>
+<tr class="row-even"><td><p>GET</p></td>
+<td><p>/auth/users</p></td>
+<td><p>Obtener listado de usuarios registrados</p></td>
+</tr>
+<tr class="row-odd"><td><p>GET</p></td>
+<td><p>/auth/user/info</p></td>
+<td><p>Obtener información de usuario logueado</p></td>
+</tr>
+<tr class="row-even"><td><p>GET</p></td>
+<td><p>/auth/user/update</p></td>
+<td><p>Actualizar perfil del usuario logueado</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Se realiza la creación del servicio con el siguiente comando:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">service</span> <span class="pre">services/auth</span></code></p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias y
+tipos requeridos en el servicio tal como se aprecia a continuación.
+Así mismo, se define las variables y endpoints de la API previamente
+definidos en el environment.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">obtResponse</span><span class="p">,</span>  <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./../../interfaces/Auth&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos"> 7</span><span class="k">import</span> <span class="p">{</span> <span class="nx">catchError</span><span class="p">,</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">tap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="linenos"> 8</span><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/environments/environment.prod&#39;</span><span class="p">;</span>
+<span class="linenos"> 9</span><span class="k">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">Profile</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/User&#39;</span><span class="p">;</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span><span class="kd">@Injectable</span><span class="p">({</span>
+<span class="linenos">12</span>  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+<span class="linenos">13</span><span class="p">})</span>
+<span class="linenos">14</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthService</span> <span class="p">{</span>
+<span class="linenos">15</span>  <span class="k">private</span> <span class="nx">userin</span>: <span class="kt">obtResponse</span><span class="p">;</span>
+<span class="linenos">16</span>  <span class="nx">loggedIn</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos">17</span>  <span class="nx">isAuthenticated</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="linenos">18</span>  <span class="c1">//La ruta de autenticación del plugin wordpress</span>
+<span class="linenos">19</span>  <span class="nx">APP_API</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">APP_REST</span><span class="p">.</span><span class="nx">API</span><span class="p">;</span>
+<span class="linenos">20</span>  
+<span class="linenos">21</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">httpClient</span>: <span class="kt">HttpClient</span><span class="p">,</span> <span class="k">private</span> <span class="nx">route</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+</pre></div>
+</div>
+<section id="metodo-registrar-usuario">
+<h2>Método: Registrar Usuario<a class="headerlink" href="#metodo-registrar-usuario" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método manipula la petición encarga de mandar los datos ingresados
+por el usuario en el body de registo a la api rest, de acuerdo a la respuesta que se reciba de la
+api se cargará el dashboard o se mostrará mensaje un con la información al respecto. Así mismo,
+este método es el encargado de almacenar el token y alterar los boleanos implementados para la
+validación del inicio de sesión.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">signup</span><span class="p">(</span><span class="nx">name</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">email</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos">3</span>      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/register`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span>
+<span class="linenos">4</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">tap</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">)));</span>
+<span class="linenos">5</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-loguear-usuario">
+<h2>Método: Loguear Usuario<a class="headerlink" href="#metodo-loguear-usuario" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de manipular la petición designada para validar las credenciales de acceso
+ingresadas por el usuario en el body de login a la api rest, de acuerdo a la respuesta que se reciba
+de la api se cargará el dashboard o se mostrará un mensaje con la información al respecto. Así mismo,
+este método es el encargado de almacenar el token y alterar los boleanos implementados para la
+validación del inicio de sesión.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">login</span><span class="p">(</span><span class="nx">email</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos">3</span>      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/login`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span>
+<span class="linenos">4</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">tap</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">)));</span>
+<span class="linenos">5</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-loguear-usuario-con-google">
+<h2>Método: Loguear Usuario con Google<a class="headerlink" href="#metodo-loguear-usuario-con-google" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método manipula la petición encargada de mandar las credenciales de acceso
+ingresadas por el usuario en el body de login a la api rest, para su correspondiente validación
+en el backend con la función designada por Google para dicho fin, de acuerdo a la respuesta que
+se reciba de la api de Google se cargará el dashboard o se mostrará un mensaje con la información al respecto.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">loginSocial</span><span class="p">(</span><span class="nx">socialData</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/google`</span><span class="p">,</span> <span class="nx">socialData</span><span class="p">);</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="getters-sesion-iniciada">
+<h2>Getters Sesión Iniciada<a class="headerlink" href="#getters-sesion-iniciada" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>El primer getter se encarga de obtener el valor presente en el response <code class="docutils literal notranslate"><span class="pre">userlogged</span></code> con el fin de
+permitir validar el acceso del usuario en la plataforma.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">get</span> <span class="nx">userlogged</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">userin</span> <span class="p">};</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>El segundo getter se encarga de obtener el valor presente en el response <code class="docutils literal notranslate"><span class="pre">loggedIn</span></code> con el fin de
+permitir validar el acceso del usuario en la plataforma por medio del SocialAuthService.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">get</span> <span class="nx">isLoggedIn</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">loggedIn</span><span class="p">;</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>El tercer getter se encarga de obtener el valor presente en el boleano <code class="docutils literal notranslate"><span class="pre">isAuthenticated</span></code> que permite
+validar la sesión iniciada en la plataforma.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getIsAuth</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">;</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-cerrar-sesion">
+<h2>Método: Cerrar sesión<a class="headerlink" href="#metodo-cerrar-sesion" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de hacer llamado a la función Limpiar sesión y de cambiar a falso el estado de los boleanos
+implementados para verificar el inicio de sesión.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">this</span><span class="p">.</span><span class="nx">loggedIn</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos">3</span>    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="linenos">4</span>    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">navigateByUrl</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">);</span>
+<span class="linenos">5</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-validar-y-renovar-token">
+<h2>Método: Validar y renovar token<a class="headerlink" href="#metodo-validar-y-renovar-token" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método manipula la petición encargada de obtener, validar y renovar el token de autenticación del usuario
+si se es válido el token se procede a settear uno nuevo para mantener la sesión iniciada.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>  <span class="nx">validateToken</span><span class="p">()</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kt">boolean</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos"> 2</span>    <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span>  <span class="p">);</span>
+<span class="linenos"> 3</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos"> 4</span>      <span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/renew`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">headers</span> <span class="p">})</span>
+<span class="linenos"> 5</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+<span class="linenos"> 6</span>        <span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos"> 7</span>          <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+<span class="linenos"> 8</span>          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">auth</span><span class="p">;</span>
+<span class="linenos"> 9</span>        <span class="p">}),</span>
+<span class="linenos">10</span>        <span class="nx">catchError</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">of</span><span class="p">(</span><span class="kc">false</span><span class="p">))</span>
+<span class="linenos">11</span>      <span class="p">);</span>
+<span class="linenos">12</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-mantener-logueo">
+<h2>Método: Mantener Logueo<a class="headerlink" href="#metodo-mantener-logueo" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de verificar y mantener iniciada la sesión del usuario.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">autoAuthUser</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="linenos">3</span>      <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="linenos">4</span>    <span class="p">}</span>
+<span class="linenos">5</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-obtener-listado-de-usuarios">
+<h2>Método: Obtener listado de usuarios<a class="headerlink" href="#metodo-obtener-listado-de-usuarios" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de obtener el listado con los registros de los usuarios registrados
+en el aplicativo que es implementada en el apartado de registros.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getUsers</span><span class="p">()</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/users`</span><span class="p">);</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-obtener-perfil-de-usuario">
+<h2>Método: Obtener perfil de usuario<a class="headerlink" href="#metodo-obtener-perfil-de-usuario" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de obtener los registros presentes en la tabla de unión de <code class="docutils literal notranslate"><span class="pre">users</span></code> y <code class="docutils literal notranslate"><span class="pre">profiles</span></code>
+para el formulario del perfil de usuario.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getInfo</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="kd">let</span> <span class="nx">header</span>: <span class="kt">HttpHeaders</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/user/info`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">headers</span>: <span class="kt">header</span><span class="p">}).</span><span class="nx">pipe</span><span class="p">(</span>
+<span class="linenos">4</span>      <span class="nx">map</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos">5</span>        <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+<span class="linenos">6</span>      <span class="p">})</span>
+<span class="linenos">7</span>    <span class="p">);</span>
+<span class="linenos">8</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-actualizar-perfil-de-usuario">
+<h2>Método: Actualizar perfil de usuario<a class="headerlink" href="#metodo-actualizar-perfil-de-usuario" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de modificar los registros presentes en la tabla de unión de <code class="docutils literal notranslate"><span class="pre">users</span></code> y <code class="docutils literal notranslate"><span class="pre">profiles</span></code>
+para el formulario del perfil de usuario.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>   <span class="nx">update_profile</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="kd">let</span> <span class="nx">header</span>: <span class="kt">HttpHeaders</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="linenos">3</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/user/update`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">header</span><span class="p">});</span>
+<span class="linenos">4</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">obtResponse</span><span class="p">,</span>  <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;./../../interfaces/Auth&#39;</span><span class="p">;</span>
+<span class="linenos">  2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Injectable</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos">  3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Observable</span><span class="p">,</span> <span class="k">of</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs&#39;</span><span class="p">;</span>
+<span class="linenos">  4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">HttpClient</span><span class="p">,</span> <span class="nx">HttpHeaders</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/common/http&#39;</span><span class="p">;</span>
+<span class="linenos">  5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Router</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/router&#39;</span><span class="p">;</span>
+<span class="linenos">  6</span><span class="k">import</span> <span class="p">{</span> <span class="nx">SocialAuthService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;angularx-social-login&#39;</span><span class="p">;</span>
+<span class="linenos">  7</span><span class="k">import</span> <span class="p">{</span> <span class="nx">catchError</span><span class="p">,</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">tap</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;rxjs/operators&#39;</span><span class="p">;</span>
+<span class="linenos">  8</span><span class="k">import</span> <span class="p">{</span> <span class="nx">environment</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/environments/environment.prod&#39;</span><span class="p">;</span>
+<span class="linenos">  9</span><span class="k">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">Profile</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/User&#39;</span><span class="p">;</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="kd">@Injectable</span><span class="p">({</span>
+<span class="linenos"> 12</span>  <span class="nx">providedIn</span><span class="o">:</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+<span class="linenos"> 13</span><span class="p">})</span>
+<span class="linenos"> 14</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">AuthService</span> <span class="p">{</span>
+<span class="linenos"> 15</span>  <span class="k">private</span> <span class="nx">userin</span>: <span class="kt">obtResponse</span><span class="p">;</span>
+<span class="linenos"> 16</span>  <span class="nx">loggedIn</span>: <span class="kt">boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos"> 17</span>  <span class="nx">isAuthenticated</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="linenos"> 18</span>  <span class="c1">//La ruta de autenticación del plugin wordpress</span>
+<span class="linenos"> 19</span>  <span class="nx">APP_API</span>: <span class="kt">string</span> <span class="o">=</span> <span class="nx">environment</span><span class="p">.</span><span class="nx">APP_REST</span><span class="p">.</span><span class="nx">API</span><span class="p">;</span>
+<span class="linenos"> 20</span>  
+<span class="linenos"> 21</span>  <span class="kr">constructor</span><span class="p">(</span><span class="k">public</span> <span class="nx">httpClient</span>: <span class="kt">HttpClient</span><span class="p">,</span> <span class="k">private</span> <span class="nx">route</span>: <span class="kt">Router</span><span class="p">)</span> <span class="p">{}</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>  <span class="cm">/** Método registrar usuario */</span>
+<span class="linenos"> 24</span>  <span class="nx">signup</span><span class="p">(</span><span class="nx">name</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">email</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 25</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos"> 26</span>      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/register`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span>
+<span class="linenos"> 27</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">tap</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">)));</span>
+<span class="linenos"> 28</span>  <span class="p">}</span>
+<span class="linenos"> 29</span>
+<span class="linenos"> 30</span>  <span class="cm">/**Metodo  iniciar sesión*/</span>
+<span class="linenos"> 31</span>  <span class="nx">login</span><span class="p">(</span><span class="nx">email</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">password</span>: <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 32</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos"> 33</span>      <span class="p">.</span><span class="nx">post</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/login`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">password</span> <span class="p">})</span>
+<span class="linenos"> 34</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">tap</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">)));</span>
+<span class="linenos"> 35</span>  <span class="p">}</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span>  <span class="cm">/**Metodo  logueo con Google*/</span>
+<span class="linenos"> 38</span>  <span class="nx">loginSocial</span><span class="p">(</span><span class="nx">socialData</span>: <span class="kt">any</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 39</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/google`</span><span class="p">,</span> <span class="nx">socialData</span><span class="p">);</span>
+<span class="linenos"> 40</span>  <span class="p">}</span>
+<span class="linenos"> 41</span>
+<span class="linenos"> 42</span>  <span class="cm">/** Método que trae los datos del usuario logueado */</span>
+<span class="linenos"> 43</span>  <span class="nx">get</span> <span class="nx">userlogged</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 44</span>    <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="k">this</span><span class="p">.</span><span class="nx">userin</span> <span class="p">};</span>
+<span class="linenos"> 45</span>  <span class="p">}</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span>  <span class="cm">/**Getter status login google y facebook*/</span>
+<span class="linenos"> 48</span>  <span class="nx">get</span> <span class="nx">isLoggedIn</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 49</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">loggedIn</span><span class="p">;</span>
+<span class="linenos"> 50</span>  <span class="p">}</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span>
+<span class="linenos"> 53</span>  <span class="c1">//** Verificar si se encuentra logueado */</span>
+<span class="linenos"> 54</span>  <span class="nx">getIsAuth</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 55</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">;</span>
+<span class="linenos"> 56</span>  <span class="p">}</span>
+<span class="linenos"> 57</span>
+<span class="linenos"> 58</span>  <span class="cm">/**Metodo para cerrar sesión*/</span>
+<span class="linenos"> 59</span>  <span class="nx">logout</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 60</span>    <span class="k">this</span><span class="p">.</span><span class="nx">loggedIn</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="linenos"> 61</span>    <span class="nx">localStorage</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="linenos"> 62</span>    <span class="k">this</span><span class="p">.</span><span class="nx">route</span><span class="p">.</span><span class="nx">navigateByUrl</span><span class="p">(</span><span class="s1">&#39;/login&#39;</span><span class="p">);</span>
+<span class="linenos"> 63</span>  <span class="p">}</span>
+<span class="linenos"> 64</span>
+<span class="linenos"> 65</span>
+<span class="linenos"> 66</span>  <span class="cm">/**Metodo encargado de validar y renovar el token jwt*/</span>
+<span class="linenos"> 67</span>  <span class="nx">validateToken</span><span class="p">()</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="kt">boolean</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos"> 68</span>    <span class="kd">const</span> <span class="nx">headers</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span>  <span class="p">);</span>
+<span class="linenos"> 69</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span>
+<span class="linenos"> 70</span>      <span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">obtResponse</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/renew`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">headers</span> <span class="p">})</span>
+<span class="linenos"> 71</span>      <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span>
+<span class="linenos"> 72</span>        <span class="nx">map</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos"> 73</span>          <span class="k">this</span><span class="p">.</span><span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span><span class="p">);</span>
+<span class="linenos"> 74</span>          <span class="k">return</span> <span class="nx">res</span><span class="p">.</span><span class="nx">auth</span><span class="p">;</span>
+<span class="linenos"> 75</span>        <span class="p">}),</span>
+<span class="linenos"> 76</span>        <span class="nx">catchError</span><span class="p">((</span><span class="nx">err</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="k">of</span><span class="p">(</span><span class="kc">false</span><span class="p">))</span>
+<span class="linenos"> 77</span>      <span class="p">);</span>
+<span class="linenos"> 78</span>  <span class="p">}</span>
+<span class="linenos"> 79</span>
+<span class="linenos"> 80</span>  <span class="cm">/**Metodo encargado de mantener logueado el usuario*/</span>
+<span class="linenos"> 81</span>
+<span class="linenos"> 82</span>  <span class="nx">autoAuthUser</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 83</span>    <span class="k">if</span> <span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">))</span> <span class="p">{</span>
+<span class="linenos"> 84</span>      <span class="k">this</span><span class="p">.</span><span class="nx">isAuthenticated</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="linenos"> 85</span>    <span class="p">}</span>
+<span class="linenos"> 86</span>  <span class="p">}</span>
+<span class="linenos"> 87</span>
+<span class="linenos"> 88</span>  <span class="cm">/**Metodo para setear el usuario y token del logueo*/</span>
+<span class="linenos"> 89</span>  <span class="nx">setTokenAndUser</span><span class="p">(</span><span class="nx">res</span>: <span class="kt">obtResponse</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 90</span>    <span class="k">if</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">auth</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos"> 91</span>      <span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">token</span><span class="p">);</span>
+<span class="linenos"> 92</span>      <span class="k">this</span><span class="p">.</span><span class="nx">userin</span> <span class="o">=</span> <span class="nx">res</span><span class="p">;</span>
+<span class="linenos"> 93</span>      <span class="k">return</span><span class="p">;</span>
+<span class="linenos"> 94</span>    <span class="p">}</span>
+<span class="linenos"> 95</span>  <span class="p">}</span>
+<span class="linenos"> 96</span>
+<span class="linenos"> 97</span>  <span class="cm">/**Metodo para obtener listado de usuarios*/</span>
+<span class="linenos"> 98</span>
+<span class="linenos"> 99</span>  <span class="nx">getUsers</span><span class="p">()</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos">100</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/users`</span><span class="p">);</span>
+<span class="linenos">101</span>  <span class="p">}</span>
+<span class="linenos">102</span>
+<span class="linenos">103</span>
+<span class="linenos">104</span>  <span class="cm">/**</span>
+<span class="linenos">105</span><span class="cm">   * Método encargado de traer información del usuario autenticado</span>
+<span class="linenos">106</span><span class="cm">   * @returns Respuesta frente a petición get de la api</span>
+<span class="linenos">107</span><span class="cm">   */</span>
+<span class="linenos">108</span>  <span class="nx">getInfo</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">109</span>    <span class="kd">let</span> <span class="nx">header</span>: <span class="kt">HttpHeaders</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="linenos">110</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">get</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/user/info`</span><span class="p">,</span> <span class="p">{</span> <span class="nx">headers</span>: <span class="kt">header</span><span class="p">}).</span><span class="nx">pipe</span><span class="p">(</span>
+<span class="linenos">111</span>      <span class="nx">map</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos">112</span>        <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+<span class="linenos">113</span>      <span class="p">})</span>
+<span class="linenos">114</span>    <span class="p">);</span>
+<span class="linenos">115</span>  <span class="p">}</span>
+<span class="linenos">116</span>
+<span class="linenos">117</span>  
+<span class="linenos">118</span>  <span class="cm">/**</span>
+<span class="linenos">119</span><span class="cm">   * Método encargado de actualizar información de usuario</span>
+<span class="linenos">120</span><span class="cm">   * @returns Respuesta frente a petición put de la api</span>
+<span class="linenos">121</span><span class="cm">   */</span>
+<span class="linenos">122</span>
+<span class="linenos">123</span>   <span class="nx">update_profile</span><span class="p">(</span><span class="nx">data</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">Observable</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="linenos">124</span>    <span class="kd">let</span> <span class="nx">header</span>: <span class="kt">HttpHeaders</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">HttpHeaders</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">,</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;token&#39;</span><span class="p">)</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="linenos">125</span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">httpClient</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">APP_API</span><span class="si">}</span><span class="sb">/auth/user/update`</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">headers</span>: <span class="kt">header</span><span class="p">});</span>
+<span class="linenos">126</span>  <span class="p">}</span>
+<span class="linenos">127</span>
+<span class="linenos">128</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="userInterface.html" class="btn btn-neutral float-left" title="Interface: Usuario" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="skillService.html" class="btn btn-neutral float-right" title="Servicio: Habilidades" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

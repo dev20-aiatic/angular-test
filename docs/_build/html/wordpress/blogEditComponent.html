@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Componente: Blog Edit &mdash; documentación de Proyecto Angular - Práctica Profesional 2021-2 AIATIC - 0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" />
+    <link rel="next" title="Componente: Blog Login" href="blogLoginComponent.html" />
+    <link rel="prev" title="Componente: Blog Delete" href="blogDeleteComponent.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html">
+            <img src="../_static/logo.png" class="logo" alt="Logotipo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../backend/index.html">Backend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../frontend/index.html">Frontend</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Implementación de Wordpress</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#primer-paso">Primer Paso</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#segundo-paso">Segundo Paso</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#tercer-paso">Tercer Paso</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="postInterface.html">Interface: Post</a></li>
+<li class="toctree-l3"><a class="reference internal" href="categoryInterface.html">Interface: WP_Category</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userInterface.html">Interface: WP_User</a></li>
+<li class="toctree-l3"><a class="reference internal" href="postService.html">Servicio: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: BlogGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogComponent.html">Componente: Blog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDetailComponent.html">Componente: Blog Detail</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogDeleteComponent.html">Componente: Blog Delete</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Componente: Blog Edit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-obtener-detalles-post">Método: Obtener Detalles Post</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#metodo-obtener-categorias">Método: Obtener Categorias</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-guardar-evento">Función: Guardar Evento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#funcion-cerrar-evento">Función: Cerrar Evento</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#codigo-fuente-completo">Código Fuente completo</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="blogLoginComponent.html">Componente: Blog Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogNewComponent.html">Componente: Blog New</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blogFoteerComponent.html">Componente: Blog Footer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Proyecto Angular - Práctica Profesional 2021-2 AIATIC</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Implementación de Wordpress</a> &raquo;</li>
+      <li>Componente: Blog Edit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/wordpress/blogEditComponent.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="componente-blog-edit">
+<h1>Componente: Blog Edit<a class="headerlink" href="#componente-blog-edit" title="Enlazar permanentemente con este título"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Advertencia</p>
+<p>Este componente es sólo accesible cuando el usuario inicia sesion.</p>
+</div>
+<p>Este componente tiene como función mostrar la información detallada de
+una entrada del blog elegida por el usuario mediante el método previamente definido en el
+Servicio Blog.</p>
+<figure class="align-center">
+<img alt="Vistazo al modal Editar Post" src="../_images/BlogEditComponent.png" />
+</figure>
+<p>Una vez que el usuario modifique alguno de los campos relacionados con la entrada y
+de clic en (Confirmar), aparecerá una notificación para confirmar que los cambios
+efectuados han sido guardados exitosamente para posteriormente refrescar el componente
+Blog en el que podrá apreciar los cambios efectuados.</p>
+<figure class="align-center">
+<img alt="Notificación cambios efectuados exitosamente" src="../_images/BlogEditComponent1.png" />
+</figure>
+<ul class="simple">
+<li><p>Se procede a realizar la creación del componente ‘Blog Edit’ con el siguiente
+comando:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ng</span> <span class="pre">generate</span> <span class="pre">component</span> <span class="pre">components/wordpress/blogedit</span></code></p>
+<ul class="simple">
+<li><p>Se procede a efectuar la importación de las diferentes dependencias,
+servicios y tipos requeridos en el componente. Así mismo, se definen las variables,
+los parametros requeridos, inyección de los datos del dialogo y el formulario reactivo en el constructor  y se implementan los métodos: obtener detalles del post
+y listado de categorias el inicializador de Angular tal como se aprecia a continuación:</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Optional</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Post</span><span class="p">,</span> <span class="nx">Posteo</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/post&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">BlogService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/blog.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-blogedit&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./blogedit.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./blogedit.component.css&#39;</span><span class="p">]</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">BlogeditComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+<span class="linenos">15</span>  <span class="nx">categories</span>: <span class="kt">any</span><span class="o">=</span><span class="p">[];</span>
+<span class="linenos">16</span>  <span class="nx">editPost</span>:<span class="kt">FormGroup</span><span class="p">;</span>
+<span class="linenos">17</span>  <span class="nx">id</span>:<span class="kt">number</span><span class="p">;</span>
+<span class="linenos">18</span>  <span class="nx">Msg</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>  <span class="kr">constructor</span><span class="p">(</span>
+<span class="linenos">21</span>      <span class="k">private</span> <span class="nx">fb</span>: <span class="kt">FormBuilder</span><span class="p">,</span>
+<span class="linenos">22</span>      <span class="k">private</span> <span class="nx">blogService</span>: <span class="kt">BlogService</span><span class="p">,</span>
+<span class="linenos">23</span>      <span class="kd">@Optional</span><span class="p">()</span> <span class="k">public</span> <span class="nx">dialogRef</span>: <span class="kt">MatDialogRef</span><span class="o">&lt;</span><span class="nx">BlogeditComponent</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="linenos">24</span>      <span class="kd">@Inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">)</span>  <span class="nx">data</span>: <span class="kt">Posteo</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">25</span>          <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="linenos">26</span>          <span class="k">this</span><span class="p">.</span><span class="nx">editPost</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+<span class="linenos">27</span>            <span class="nx">id</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">28</span>            <span class="nx">date</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">29</span>            <span class="nx">modified</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">30</span>            <span class="nx">category</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">31</span>            <span class="nx">title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">32</span>            <span class="nx">excerpt</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">33</span>            <span class="nx">content</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]]</span>
+<span class="linenos">34</span>        <span class="p">});</span>
+<span class="linenos">35</span>      <span class="p">}</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">39</span>      <span class="k">this</span><span class="p">.</span><span class="nx">getPostDetails</span><span class="p">();</span>
+<span class="linenos">40</span>      <span class="k">this</span><span class="p">.</span><span class="nx">getAllCategories</span><span class="p">();</span>
+<span class="linenos">41</span>  <span class="p">}</span>
+</pre></div>
+</div>
+<section id="metodo-obtener-detalles-post">
+<h2>Método: Obtener Detalles Post<a class="headerlink" href="#metodo-obtener-detalles-post" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método usa la variable <code class="docutils literal notranslate"><span class="pre">id</span></code> como parámetro para obtener los detalles
+de una entrada especifica y hacerlos accesibles desde el componente asignandolos
+al formulario reactivo: <code class="docutils literal notranslate"><span class="pre">editPost</span></code></p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span> <span class="nx">getPostDetails</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos"> 2</span>  <span class="k">this</span><span class="p">.</span><span class="nx">blogService</span><span class="p">.</span><span class="nx">getPost</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="linenos"> 3</span>  <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos"> 4</span>    <span class="k">this</span><span class="p">.</span><span class="nx">editPost</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">({</span>
+<span class="linenos"> 5</span>      <span class="nx">id</span>: <span class="kt">data.id</span><span class="p">,</span>
+<span class="linenos"> 6</span>      <span class="nx">date</span>:<span class="kt">data.date</span><span class="p">,</span>
+<span class="linenos"> 7</span>      <span class="nx">modified</span>:<span class="kt">data.modified</span><span class="p">,</span>
+<span class="linenos"> 8</span>      <span class="nx">category</span>: <span class="kt">data._embedded</span><span class="p">[</span><span class="s1">&#39;wp:term&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">].</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos"> 9</span>      <span class="nx">title</span>:<span class="kt">data.title.rendered</span><span class="p">,</span>
+<span class="linenos">10</span>      <span class="nx">excerpt</span>:<span class="kt">data.excerpt.rendered</span><span class="p">,</span>
+<span class="linenos">11</span>      <span class="nx">content</span>:<span class="kt">data.content.rendered</span>
+<span class="linenos">12</span>      <span class="p">})</span>
+<span class="linenos">13</span>  <span class="p">});</span>
+<span class="linenos">14</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="metodo-obtener-categorias">
+<h2>Método: Obtener Categorias<a class="headerlink" href="#metodo-obtener-categorias" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Este método se encarga de obtener el listado de categorias existentes mediante el
+método correspondiente definido en el Servicio Blog y hacerlos accesibles desde el componente
+asignandolos a la variable: <code class="docutils literal notranslate"><span class="pre">categories</span></code></p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">getAllCategories</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>    <span class="k">this</span><span class="p">.</span><span class="nx">blogService</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span>  <span class="p">{</span>
+<span class="linenos">3</span>      <span class="k">this</span><span class="p">.</span><span class="nx">categories</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="linenos">4</span>    <span class="p">});</span>
+<span class="linenos">5</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-guardar-evento">
+<h2>Función: Guardar Evento<a class="headerlink" href="#funcion-guardar-evento" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta función se encarga de guardar los datos ingresados en el formulario reactivo para
+hacerlos accesibles en el evento Modal Edicción del componente Blog.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">save</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>      <span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">editPost</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="funcion-cerrar-evento">
+<h2>Función: Cerrar Evento<a class="headerlink" href="#funcion-cerrar-evento" title="Enlazar permanentemente con este título"></a></h2>
+<ul class="simple">
+<li><p>Esta función se encarga de notificar el cierre del evento para finalizar el
+evento Modal Edicción ubicado en el componente Blog.</p></li>
+</ul>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  <span class="nx">close</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">2</span>      <span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="linenos">3</span>  <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="codigo-fuente-completo">
+<h2>Código Fuente completo<a class="headerlink" href="#codigo-fuente-completo" title="Enlazar permanentemente con este título"></a></h2>
+<div class="highlight-typescript notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Inject</span><span class="p">,</span> <span class="nx">Input</span><span class="p">,</span> <span class="nx">OnInit</span><span class="p">,</span> <span class="nx">Optional</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/core&#39;</span><span class="p">;</span>
+<span class="linenos"> 2</span><span class="k">import</span> <span class="p">{</span> <span class="nx">FormBuilder</span><span class="p">,</span> <span class="nx">FormControl</span><span class="p">,</span> <span class="nx">FormGroup</span><span class="p">,</span> <span class="nx">Validators</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/forms&#39;</span><span class="p">;</span>
+<span class="linenos"> 3</span><span class="k">import</span> <span class="p">{</span> <span class="nx">MatDialogRef</span><span class="p">,</span> <span class="nx">MAT_DIALOG_DATA</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@angular/material/dialog&#39;</span><span class="p">;</span>
+<span class="linenos"> 4</span><span class="k">import</span> <span class="p">{</span> <span class="nx">Post</span><span class="p">,</span> <span class="nx">Posteo</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/interfaces/post&#39;</span><span class="p">;</span>
+<span class="linenos"> 5</span><span class="k">import</span> <span class="p">{</span> <span class="nx">BlogService</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;src/app/services/wordpress/blog.service&#39;</span><span class="p">;</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="kd">@Component</span><span class="p">({</span>
+<span class="linenos"> 8</span>  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;app-blogedit&#39;</span><span class="p">,</span>
+<span class="linenos"> 9</span>  <span class="nx">templateUrl</span><span class="o">:</span> <span class="s1">&#39;./blogedit.component.html&#39;</span><span class="p">,</span>
+<span class="linenos">10</span>  <span class="nx">styleUrls</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;./blogedit.component.css&#39;</span><span class="p">]</span>
+<span class="linenos">11</span><span class="p">})</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="k">export</span> <span class="kd">class</span> <span class="nx">BlogeditComponent</span> <span class="k">implements</span> <span class="nx">OnInit</span> <span class="p">{</span>
+<span class="linenos">15</span>  <span class="nx">categories</span>: <span class="kt">any</span><span class="o">=</span><span class="p">[];</span>
+<span class="linenos">16</span>  <span class="nx">editPost</span>:<span class="kt">FormGroup</span><span class="p">;</span>
+<span class="linenos">17</span>  <span class="nx">id</span>:<span class="kt">number</span><span class="p">;</span>
+<span class="linenos">18</span>  <span class="nx">Msg</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span>  <span class="kr">constructor</span><span class="p">(</span>
+<span class="linenos">21</span>      <span class="k">private</span> <span class="nx">fb</span>: <span class="kt">FormBuilder</span><span class="p">,</span>
+<span class="linenos">22</span>      <span class="k">private</span> <span class="nx">blogService</span>: <span class="kt">BlogService</span><span class="p">,</span>
+<span class="linenos">23</span>      <span class="kd">@Optional</span><span class="p">()</span> <span class="k">public</span> <span class="nx">dialogRef</span>: <span class="kt">MatDialogRef</span><span class="o">&lt;</span><span class="nx">BlogeditComponent</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="linenos">24</span>      <span class="kd">@Inject</span><span class="p">(</span><span class="nx">MAT_DIALOG_DATA</span><span class="p">)</span>  <span class="nx">data</span>: <span class="kt">Posteo</span><span class="p">)</span> <span class="p">{</span>
+<span class="linenos">25</span>          <span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="o">=</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="linenos">26</span>          <span class="k">this</span><span class="p">.</span><span class="nx">editPost</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">fb</span><span class="p">.</span><span class="nx">group</span><span class="p">({</span>
+<span class="linenos">27</span>            <span class="nx">id</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">28</span>            <span class="nx">date</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">29</span>            <span class="nx">modified</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">30</span>            <span class="nx">category</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">31</span>            <span class="nx">title</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">32</span>            <span class="nx">excerpt</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]],</span>
+<span class="linenos">33</span>            <span class="nx">content</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,[</span><span class="nx">Validators</span><span class="p">.</span><span class="nx">required</span><span class="p">]]</span>
+<span class="linenos">34</span>        <span class="p">});</span>
+<span class="linenos">35</span>      <span class="p">}</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>
+<span class="linenos">38</span>  <span class="nx">ngOnInit</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">39</span>      <span class="k">this</span><span class="p">.</span><span class="nx">getPostDetails</span><span class="p">();</span>
+<span class="linenos">40</span>      <span class="k">this</span><span class="p">.</span><span class="nx">getAllCategories</span><span class="p">();</span>
+<span class="linenos">41</span>  <span class="p">}</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span>
+<span class="linenos">44</span>
+<span class="linenos">45</span> <span class="cm">/**</span>
+<span class="linenos">46</span><span class="cm">  * Método que me devuelve y setea la información del post</span>
+<span class="linenos">47</span><span class="cm">  * @params Id - Variable que almacena el dato recibido del componente &#39;BlogComponent&#39;</span>
+<span class="linenos">48</span><span class="cm">  * @returns - Información de la publicación</span>
+<span class="linenos">49</span><span class="cm">  */</span>
+<span class="linenos">50</span> <span class="nx">getPostDetails</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">51</span>  <span class="k">this</span><span class="p">.</span><span class="nx">blogService</span><span class="p">.</span><span class="nx">getPost</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+<span class="linenos">52</span>  <span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="linenos">53</span>    <span class="k">this</span><span class="p">.</span><span class="nx">editPost</span><span class="p">.</span><span class="nx">patchValue</span><span class="p">({</span>
+<span class="linenos">54</span>      <span class="nx">id</span>: <span class="kt">data.id</span><span class="p">,</span>
+<span class="linenos">55</span>      <span class="nx">date</span>:<span class="kt">data.date</span><span class="p">,</span>
+<span class="linenos">56</span>      <span class="nx">modified</span>:<span class="kt">data.modified</span><span class="p">,</span>
+<span class="linenos">57</span>      <span class="nx">category</span>: <span class="kt">data._embedded</span><span class="p">[</span><span class="s1">&#39;wp:term&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;0&#39;</span><span class="p">].</span><span class="nx">name</span><span class="p">,</span>
+<span class="linenos">58</span>      <span class="nx">title</span>:<span class="kt">data.title.rendered</span><span class="p">,</span>
+<span class="linenos">59</span>      <span class="nx">excerpt</span>:<span class="kt">data.excerpt.rendered</span><span class="p">,</span>
+<span class="linenos">60</span>      <span class="nx">content</span>:<span class="kt">data.content.rendered</span>
+<span class="linenos">61</span>      <span class="p">})</span>
+<span class="linenos">62</span>  <span class="p">});</span>
+<span class="linenos">63</span><span class="p">}</span>
+<span class="linenos">64</span>
+<span class="linenos">65</span>  <span class="cm">/**</span>
+<span class="linenos">66</span><span class="cm">  * Metodo que me devuelve las categorias existentes</span>
+<span class="linenos">67</span><span class="cm">  * @returns - Listado de categorias</span>
+<span class="linenos">68</span><span class="cm">  */</span>
+<span class="linenos">69</span>  <span class="nx">getAllCategories</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">70</span>    <span class="k">this</span><span class="p">.</span><span class="nx">blogService</span><span class="p">.</span><span class="nx">getCategories</span><span class="p">().</span><span class="nx">subscribe</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span>  <span class="p">{</span>
+<span class="linenos">71</span>      <span class="k">this</span><span class="p">.</span><span class="nx">categories</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="linenos">72</span>    <span class="p">});</span>
+<span class="linenos">73</span>  <span class="p">}</span>
+<span class="linenos">74</span>
+<span class="linenos">75</span>  <span class="c1">//Función encargada de guardar la información del evento</span>
+<span class="linenos">76</span>  <span class="nx">save</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">77</span>      <span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">editPost</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="linenos">78</span>  <span class="p">}</span>
+<span class="linenos">79</span>
+<span class="linenos">80</span>  <span class="c1">//Función encargada de cerrar el dialogo</span>
+<span class="linenos">81</span>  <span class="nx">close</span><span class="p">()</span> <span class="p">{</span>
+<span class="linenos">82</span>      <span class="k">this</span><span class="p">.</span><span class="nx">dialogRef</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="linenos">83</span>  <span class="p">}</span>
+<span class="linenos">84</span>
+<span class="linenos">85</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="blogDeleteComponent.html" class="btn btn-neutral float-left" title="Componente: Blog Delete" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="blogLoginComponent.html" class="btn btn-neutral float-right" title="Componente: Blog Login" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2021, Daniel Pacheco.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

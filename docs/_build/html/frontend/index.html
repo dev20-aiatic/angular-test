@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Índice" href="../genindex.html" />
     <link rel="search" title="Búsqueda" href="../search.html" />
-    <link rel="next" title="Implementación de Wordpress" href="../wp/wordpress.html" />
+    <link rel="next" title="Interface: Auth" href="authInterface.html" />
     <link rel="prev" title="Fichero: Server" href="../backend/serverFile.html" /> 
 </head>
 
@@ -46,12 +46,26 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduccion">Introducción</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#estructura-directorio">Estructura Directorio</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#ejecutar-localmente">Ejecutar localmente</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#documentacion">Documentación</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="#documentacion">Documentación</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="authInterface.html">Interface: Auth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locationInterface.html">Interface: Ubicación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userInterface.html">Interface: Usuario</a></li>
+<li class="toctree-l3"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l3"><a class="reference internal" href="skillService.html">Servicio: Habilidades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="webService.html">Servicio: Web</a></li>
+<li class="toctree-l3"><a class="reference internal" href="guardService.html">Servicio: AuthGuard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="homeComponent.html">Componente: Home</a></li>
+<li class="toctree-l3"><a class="reference internal" href="loginComponent.html">Componente: Login</a></li>
+<li class="toctree-l3"><a class="reference internal" href="registerComponent.html">Componente: Register</a></li>
+<li class="toctree-l3"><a class="reference internal" href="profileComponent.html">Componente:  Profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sidebarComponent.html">Componente: Sidebar</a></li>
+<li class="toctree-l3"><a class="reference internal" href="videoComponent.html">Componente: Video</a></li>
+<li class="toctree-l3"><a class="reference internal" href="historyComponent.html">Componente: Registros de eventos</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../wp/wordpress.html">Implementación de Wordpress</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wordpress/index.html">Implementación de Wordpress</a></li>
 </ul>
 
         </div>
@@ -93,9 +107,93 @@ de manera correcta el código implementado.</p>
 │   ├───app
 │   │   ├───components
 │   │   │   ├───auth
+|   │   │   │   │   ├───login
+|   │   │   │   │   │   ├───login.component.css
+|   │   │   │   │   │   ├───login.component.html
+|   │   │   │   │   │   ├───login.component.ts
+|   │   │   │   │   ├───menu
+|   │   │   │   │   │   ├───menu.component.css
+|   │   │   │   │   │   ├───menu.component.html
+|   │   │   │   │   │   ├───menu.component.ts
+|   │   │   │   │   ├───register
+|   │   │   │   │   │   ├───register.component.css
+|   │   │   │   │   │   ├───register.component.html
+|   │   │   │   │   │   ├───register.component.ts
+|   │   │   │   │   │   │
+│   │   │   |   ├───auth-routing.module.ts
+│   │   │   │   ├───auth.component.css
+│   │   │   │   ├───auth.component.html
+│   │   │   │   ├───auth.component.ts
+|   │   │   │   ├───auth.module.ts
 │   │   │   ├───dashboard
+|   │   │   │   │   ├───history
+|   │   │   │   │   │   ├───history.component.css
+|   │   │   │   │   │   ├───history.component.html
+|   │   │   │   │   │   ├───history.component.ts
+|   │   │   │   │   ├───home
+|   │   │   │   │   │   ├───home.component.css
+|   │   │   │   │   │   ├───home.component.html
+|   │   │   │   │   │   ├───home.component.ts
+|   │   │   │   │   ├───profile
+|   │   │   │   │   │   ├───profile.component.css
+|   │   │   │   │   │   ├───profile.component.html
+|   │   │   │   │   │   ├───profile.component.ts
+|   │   │   │   │   ├───sidebar
+|   │   │   │   │   │   ├───sidebar.component.css
+|   │   │   │   │   │   ├───sidebar.component.html
+|   │   │   │   │   │   ├───sidebar.component.ts
+|   │   │   │   │   ├───video
+|   │   │   │   │   │   ├───video.component.css
+|   │   │   │   │   │   ├───video.component.html
+|   │   │   │   │   │   ├───video.component.ts
+|   │   │   │   │   │   │
+│   │   │   |   ├───dashboard-routing.module.ts
+│   │   │   │   ├───dashboard.component.css
+│   │   │   │   ├───dashboard.component.html
+│   │   │   │   ├───dashboard.component.ts
+|   │   │   │   ├───dashboard.module.ts
 │   │   │   ├───shared
+│   │   │   |   ├───shared.module.ts
+│   │   │   │   │
 │   │   │   ├───wordpress
+|   │   │   │   │   ├───blog
+|   │   │   │   │   │   ├───blog.component.css
+|   │   │   │   │   │   ├───blog.component.html
+|   │   │   │   │   │   ├───blog.component.ts
+|   │   │   │   │   ├───blogcategories
+|   │   │   │   │   │   ├───blogcategories.component.css
+|   │   │   │   │   │   ├───blogcategories.component.html
+|   │   │   │   │   │   ├───blogcategories.component.ts
+|   │   │   │   │   ├───blogdelete
+|   │   │   │   │   │   ├───blogdelete.component.css
+|   │   │   │   │   │   ├───blogdelete.component.html
+|   │   │   │   │   │   ├───blogdelete.component.ts
+|   │   │   │   │   ├───blogdetail
+|   │   │   │   │   │   ├───blogdetail.component.css
+|   │   │   │   │   │   ├───blogdetail.component.html
+|   │   │   │   │   │   ├───blogdetail.component.ts
+|   │   │   │   │   ├───blogedit
+|   │   │   │   │   │   ├───blogedit.component.css
+|   │   │   │   │   │   ├───blogedit.component.html
+|   │   │   │   │   │   ├───blogedit.component.ts
+|   │   │   │   │   ├───bloglogin
+|   │   │   │   │   │   ├───bloglogin.component.css
+|   │   │   │   │   │   ├───bloglogin.component.html
+|   │   │   │   │   │   ├───bloglogin.component.ts
+|   │   │   │   │   ├───blognew
+|   │   │   │   │   │   ├───blognew.component.css
+|   │   │   │   │   │   ├───blognew.component.html
+|   │   │   │   │   │   ├───blognew.component.ts
+|   │   │   │   │   ├───footer
+|   │   │   │   │   │   ├───footer.component.css
+|   │   │   │   │   │   ├───footer.component.html
+|   │   │   │   │   │   ├───footer.component.ts
+|   │   │   │   │   │   │
+│   │   │   |   ├───wordpress-routing.module.ts
+│   │   │   │   ├───wordpress.component.css
+│   │   │   │   ├───wordpress.component.html
+│   │   │   │   ├───wordpress.component.ts
+|   │   │   │   ├───wordpress.module.ts
 │   │   ├───interfaces
 │   │   │   ├───Auth.ts
 │   │   │   ├───Blog.ts
@@ -123,6 +221,14 @@ de manera correcta el código implementado.</p>
 │   │   │───app.component.html
 │   │   │───app.module.ts
 │   ├───assets
+│   │   │───img
+│   │   │   │───daniel.jpg
+│   │   │   │───imgnotfound.jpg
+│   │   │   │───logo.png
+│   │   │   │───logo_unab.png
+│   │   │   │───mauricio.jpg
+│   │   │   │───user.png
+│   │   │   │───wordpress.png
 │   ├───environments
 │   │   ├───environment.prod.ts
 │   │   ├───environment.ts
@@ -134,6 +240,7 @@ de manera correcta el código implementado.</p>
 │───package-lock.json
 │───package.json
 │───server.js
+│───tsconfig.app.json
 │───tsconfig.json
 </pre></div>
 </div>
@@ -148,6 +255,23 @@ documentación <a class="reference external" href="../index.html#configuracion-i
 <p>Se procede a crear controladores, modelos, servicos, interfaces necesarias para el funcionamiento del
 Frontend:</p>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contenido:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="authInterface.html">Interface: Auth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="locationInterface.html">Interface: Ubicación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userInterface.html">Interface: Usuario</a></li>
+<li class="toctree-l1"><a class="reference internal" href="authService.html">Servicio: Autenticación</a></li>
+<li class="toctree-l1"><a class="reference internal" href="skillService.html">Servicio: Habilidades</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webService.html">Servicio: Web</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guardService.html">Servicio: AuthGuard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homeComponent.html">Componente: Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="loginComponent.html">Componente: Login</a></li>
+<li class="toctree-l1"><a class="reference internal" href="registerComponent.html">Componente: Register</a></li>
+<li class="toctree-l1"><a class="reference internal" href="profileComponent.html">Componente:  Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sidebarComponent.html">Componente: Sidebar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="videoComponent.html">Componente: Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="historyComponent.html">Componente: Registros de eventos</a></li>
+</ul>
 </div>
 </section>
 </section>
@@ -157,7 +281,7 @@ Frontend:</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
         <a href="../backend/serverFile.html" class="btn btn-neutral float-left" title="Fichero: Server" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
-        <a href="../wp/wordpress.html" class="btn btn-neutral float-right" title="Implementación de Wordpress" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="authInterface.html" class="btn btn-neutral float-right" title="Interface: Auth" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
